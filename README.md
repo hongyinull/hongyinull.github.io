@@ -10,6 +10,7 @@
 ## 重要文件
 
 - [Apple App Site Association (AASA) 文件](https://hongyinull.github.io/.well-known/apple-app-site-association)
+- [AASA驗證](https://app-site-association.cdn-apple.com/a/v1/hongyinull.github.io)
 
 ## 開發資源
 
