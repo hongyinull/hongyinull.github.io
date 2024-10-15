@@ -1,71 +1,131 @@
+@font-face {
+    font-family: 'GenSenRounded';
+    src: url('resource/GenSenRounded-R.ttc') format('truetype');
+    font-weight: normal;
+}
+
+@font-face {
+    font-family: 'GenSenRounded';
+    src: url('resource/GenSenRounded-H.ttc') format('truetype');
+    font-weight: bold;
+}
+
 body {
-    font-family: 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'GenSenRounded', sans-serif;
+    font-weight: normal;
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    background-color: #f0f0f0;
+    background-color: #fff;
     color: #333;
 }
 
-header, main, footer {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-}
-
 header {
-    background-color: #4a90e2;
-    color: #fff;
-    text-align: center;
-    padding: 40px 20px;
-    border-radius: 0 0 10px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
 }
 
 h1 {
-    margin-bottom: 10px;
-    font-size: 2.5em;
-}
-
-header p {
-    font-size: 1.2em;
+    font-size: 2em;
+    font-weight: 700;
     margin: 0;
 }
 
-.tip {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+nav {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 600px;
 }
 
-.tip h2 {
-    color: #4a90e2;
-    margin-top: 0;
+.nav-group {
+    font-size: 1em;
 }
 
-.app-clip {
-    text-align: center;
-    margin-top: 40px;
-}
-
-.button {
-    display: inline-block;
-    background-color: #4a90e2;
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 5px;
+.nav-link {
     text-decoration: none;
-    font-weight: bold;
-    transition: background-color 0.3s;
+    color: #333;
+    font-weight: 400;
 }
 
-.button:hover {
-    background-color: #3a7bc8;
+main {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+#tag-filter {
+    margin-bottom: 20px;
+}
+
+#category-select {
+    padding: 5px 10px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-family: 'GenSenRounded', sans-serif;
+    font-weight: normal;
+}
+
+.project {
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr 2fr;
+    gap: 20px;
+    padding: 20px 0;
+    border-bottom: 1px solid #ddd;
+}
+
+.project-link {
+    display: contents;
+    text-decoration: none;
+    color: inherit;
+}
+
+.project-info {
+    grid-column: 1 / 2;
+}
+
+.project-title {
+    font-weight: 700;
+    margin-bottom: 5px;
+}
+
+.project-date {
+    color: #999;
+    font-size: 0.9em;
+    font-weight: 300;
+}
+
+.project-description {
+    grid-column: 2 / 3;
+    font-size: 0.95em;
+    font-weight: 400;
+}
+
+.project-tags {
+    grid-column: 3 / 4;
+    font-size: 0.9em;
+    color: #666;
+    font-weight: 500;
+}
+
+.project-thumbnail {
+    grid-column: 4 / 5;
+}
+
+.project-thumbnail img {
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
 }
 
 footer {
     text-align: center;
     color: #666;
-    margin-top: 40px;
+    padding: 20px;
+    border-top: 1px solid #ddd;
+    font-weight: 300;
 }
