@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yinull 的作品集</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>yinull</h1>
+        <nav>
+            <div class="nav-left">
+                <span class="nav-group">
+                    <a href="#" class="nav-link">About</a>,
+                    <a href="#" class="nav-link">CV</a>,
+                    <a href="mailto:your-email@example.com" class="nav-link">email</a>
+                </span>
+            </div>
+            <div class="nav-right">
+                <a href="https://instagram.com/your-ig" target="_blank" class="nav-link">Instagram↗</a>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div id="tag-filter">
+            <label for="category-select">篩選類別：</label>
+            <select id="category-select">
+                <option value="all">所有專案</option>
+                <option value="平面設計">平面設計</option>
+                <option value="人因工程">人因工程</option>
+            </select>
+        </div>
+        <div id="projects-container"></div>
+    </main>
+    <footer>
+        <p>&copy; 2024 yinull. 版權所有。</p>
+    </footer>
+    <script src="projects.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
