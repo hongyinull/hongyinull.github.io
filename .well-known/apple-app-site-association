@@ -3,5 +3,8 @@
     "apps": [
       "59Z35DMJ65.com.hongyinull.HakkaShopScanner2.Clip"
     ]
-  }
+  },
+  "paths": [
+    "/hakka"
+  ]
 }
