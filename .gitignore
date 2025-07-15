@@ -1,0 +1,30 @@
+# macOS
+.DS_Store
+
+# Node
+node_modules/
+dist/
+build/
+
+# 環境檔
+.env
+
+# IDE
+.idea/
+.vscode/
+*.code-workspace
+
+# Log 檔
+*.log
+
+# 系統垃圾
+Thumbs.db
+Desktop.ini
+
+# 暫存壓縮
+*.zip
+*.bak
+*.tmp
+
+# 不追蹤影片檔
+*.mp4
