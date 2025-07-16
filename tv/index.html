@@ -19,9 +19,21 @@
   </style>
 </head>
 <body>
-  <video autoplay muted loop playsinline>
-    <source src="video.MP4" type="video/mp4">
-    您的瀏覽器不支援影片播放。
-  </video>
+  <video id="timedVideo" autoplay muted loop playsinline preload="auto"></video>
+  <script>
+    const videoElement = document.getElementById("timedVideo");
+    const currentHour = new Date().getHours();
+    const videoSrc = currentHour < 17 ? "morning.mp4" : "night.mp4";
+    
+    const sourceElement = document.createElement("source");
+    sourceElement.src = videoSrc;
+    sourceElement.type = "video/mp4";
+    sourceElement.onerror = () => {
+      document.body.innerHTML = `<div style="color:white;text-align:center;margin-top:20%;">⚠ 無法載入影片 (${videoSrc})</div>`;
+    };
+    
+    videoElement.appendChild(sourceElement);
+    videoElement.load();
+  </script>
 </body>
 </html>
