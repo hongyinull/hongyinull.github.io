@@ -25,6 +25,3 @@ Desktop.ini
 *.zip
 *.bak
 *.tmp
-
-# 不追蹤影片檔
-*.mp4
