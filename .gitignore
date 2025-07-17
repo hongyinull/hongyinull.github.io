@@ -25,3 +25,4 @@ Desktop.ini
 *.zip
 *.bak
 *.tmp
+.DS_Store
