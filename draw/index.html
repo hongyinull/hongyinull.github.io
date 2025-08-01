@@ -4,85 +4,90 @@
   <meta charset="UTF-8">
   <title>幸運大轉盤</title>
   <style>
+    @keyframes pulsate {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
     body {
       margin: 0;
       padding: 0;
       font-family: "Helvetica Neue", sans-serif;
-      background: linear-gradient(180deg, #fcd39d, #f8b48d);
+      background: url("background.jpg") center/cover no-repeat;
       display: flex;
       justify-content: center;
       align-items: center;
       height: 100vh;
+      flex-direction: column;
     }
 
-    .container {
-      background: white;
-      border-radius: 20px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    .wheel-container {
+      position: relative;
+      width: 100%;
+      max-width: 500px;
       display: flex;
-      padding: 30px;
-      gap: 30px;
+      flex-direction: column;
       align-items: center;
     }
 
-    .wheel-wrapper {
-      position: relative;
-      width: 500px;
-      height: 500px;
+    .main-title {
+      /* position: absolute;
+      top: -40px;
+      left: 50%;
+      transform: translateX(-50%);
+      pointer-events: none; */
+      margin: 0 0 8px;
+      /* font-family: 'Times New Roman', serif; */
+      font-weight: 900;
+      color: #4e1418;
+      -webkit-text-stroke: 2px #6b4c3b;
+      text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
+      font-size: 5em;
+      white-space: nowrap;
+    }
+
+    .separator {
+      width: 80%;
+      height: 1px;
+      background: rgba(0, 0, 0, 0.5);
+      margin: 4px 0 12px;
     }
 
     canvas {
+      width: 100%;
+      height: auto;
+      aspect-ratio: 1;
       border-radius: 50%;
-      box-shadow: 0 0 20px rgba(0,0,0,0.1);
+      /* optional shadow if desired */
     }
 
-    .pointer {
-      position: absolute;
-      top: -15px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 0;
-      height: 0;
-      border-left: 15px solid transparent;
-      border-right: 15px solid transparent;
-      border-bottom: 25px solid #f44336;
-      z-index: 10;
-    }
-
-    .info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      height: 500px;
-    }
-
-    .info h2 {
-      color: #d32f2f;
-      margin-bottom: 10px;
-    }
-
-    .prize-list, .description {
-      background: #fff7f7;
-      border-radius: 12px;
-      padding: 20px;
-      box-shadow: inset 0 0 10px rgba(0,0,0,0.03);
-    }
-
-    .prize-list ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .prize-list li {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 6px;
-    }
-
-    .description {
+    .btn {
       margin-top: 20px;
-      background: #fffce6;
+      padding: 15px 40px;
+      font-size: 1.3em;
+      background: #e53935;
+      color: white;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: 0.2s;
+      animation: pulsate 1s infinite;
+    }
+
+    .btn:hover {
+      background: #d32f2f;
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    #result-panel img {
+      width: 80%;
+      height: auto;
+      margin: 0 auto;
+      object-fit: contain;
     }
 
     #result {
@@ -98,48 +103,315 @@
       margin: 15px auto 0;
     }
 
-    .btn {
-      margin-top: 20px;
-      padding: 10px 30px;
-      font-size: 1.1em;
-      background: #e53935;
-      color: white;
-      border: none;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: 0.2s;
+    .card {
+      background: rgba(255, 255, 255, 0.01);
+      border-radius: 20px;
+      max-width: 900px;
+      width: 100%;
+      padding: 30px;
+      /* box-shadow removed */
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
-    .btn:hover {
-      background: #d32f2f;
+    .main-content {
+      display: flex;
+      width: 100%;
+      gap: 40px;
+      align-items: stretch;
+    }
+
+    .right-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .prize-list {
+      background: #ffecec;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .prize-list h2 {
+      margin-top: 0;
+      color: #d14343;
+    }
+
+    .prize-list ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .prize-list li {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      font-size: 1em;
+    }
+
+    #result-panel {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+      justify-content: center;
+    }
+
+    .instructions {
+      background: #fffbea;
+      border-radius: 10px;
+      padding: 20px;
+    }
+
+    .instructions h2 {
+      margin-top: 0;
+      color: #d17000;
+    }
+
+    .button-wrapper {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+    }
+
+    #resultQrcode {
+      display: none;
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <div class="wheel-wrapper">
-      <div class="pointer"></div>
-      <canvas id="wheel" width="500" height="500"></canvas>
-      <div id="result"></div>
-      <img id="qrcode" src="">
-      <button class="btn" onclick="spinWheel()">開始抽獎</button>
-    </div>
-    <div class="info">
-      <div class="prize-list">
-        <h2>🎁 獎品列表</h2>
-        <ul>
-          <li><span>手工香皂</span><span>機率：10%</span></li>
-          <li><span>再抽一次</span><span>機率：10%</span></li>
-          <li><span>冬瓜檸檬茶</span><span>機率：25%</span></li>
-          <li><span>銘謝惠顧</span><span>機率：15%</span></li>
-          <li><span>燒肉丼兌換券</span><span>機率：25%</span></li>
-          <li><span>沙瓦清涼飲</span><span>機率：15%</span></li>
-        </ul>
+  <div class="card">
+    <div class="main-content">
+      <div class="wheel-container">
+        <h1 class="main-title">幸運轉盤</h1>
+        <div class="separator"></div>
+        <canvas id="wheel"></canvas>
       </div>
-      <div class="description">
-        <h3>📌 使用說明</h3>
-        <p>點擊「開始抽獎」按鈕，轉盤將開始旋轉。<br>
-          轉盤停止後，會顯示您獲得的獎品及領獎 QR Code。</p>
+      <div class="right-panel">
+        <div class="instructions">
+          <h2>使用說明</h2>
+          <p>點擊「開始抽獎」按鈕，轉盤將開始旋轉。轉盤停止後，會顯示您獲得的獎品及領獎 QR Code。</p>
+        </div>
+        <div class="prize-list" id="result-panel">
+          <h2 id="result-title">加入抽獎</h2>
+          <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
+          <img id="resultQrcode" src="" alt="獎品 QR Code">
+          <button id="spinBtn" class="btn" onclick="spinWheel()">開始抽獎</button>
+        </div>
       </div>
     </div>
   </div>
+
+  <script>
+    // Idle rotation settings
+    let isSpinning = false;
+    const idleSpeed = 0.002; // radians per frame
+
+
+    const prizes = [
+      { name: "手工香皂", area: 10, chance: 10, qrcode: "soap.png" },
+      { name: "再抽一次", area: 10, chance: 10, qrcode: "again.png" },
+      { name: "台灣啤酒", area: 20, chance: 20, qrcode: "beer.png" },
+      { name: "銘謝惠顧", area: 5, chance: 20, qrcode: "thanks.png" },
+      { name: "燒肉丼兌換券", area: 25, chance: 25, qrcode: "beef.png" },
+      { name: "現金折扣10元", area: 20, chance: 10, qrcode: "discount10.png" },
+      { name: "現金折扣50元", area: 15, chance: 5, qrcode: "discount50.png" }
+    ];
+
+    // Color palette for wheel slices (earthy, harmonious)
+    const sliceColors = [
+      "#5C4033", // dark brown
+      "#8B4513", // saddle brown
+      "#CD853F", // peru
+      "#D2B48C", // tan
+      "#A0522D", // sienna
+      "#F4A460", // sandy brown
+      "#800000"  // maroon
+    ];
+
+    const canvas = document.getElementById("wheel");
+    const ctx = canvas.getContext("2d");
+    // High DPI & responsive canvas
+    function setupCanvas() {
+      const dpr = window.devicePixelRatio || 1;
+      const rect = canvas.getBoundingClientRect();
+      canvas.width = rect.width * dpr;
+      canvas.height = rect.height * dpr;
+      ctx.scale(dpr, dpr);
+    }
+    setupCanvas();
+    window.addEventListener('resize', () => {
+      setupCanvas();
+      drawWheel(currentRotation || 0);
+    });
+    let currentRotation = 0;
+    let angleMap = [];
+
+    function drawWheel(rotation = 0) {
+      const rect = canvas.getBoundingClientRect();
+      const size = rect.width;
+      const center = size / 2;
+      const radius = center;
+      ctx.clearRect(0, 0, size, size);
+      let totalArea = prizes.reduce((sum, p) => sum + p.area, 0);
+      let startAngle = 0;
+      angleMap = [];
+
+      prizes.forEach((p, i) => {
+        const arc = (p.area / totalArea) * 2 * Math.PI;
+        ctx.beginPath();
+        ctx.moveTo(center, center);
+        ctx.fillStyle = sliceColors[i % sliceColors.length];
+        ctx.arc(center, center, radius, startAngle + rotation, startAngle + arc + rotation);
+        ctx.fill();
+
+        const angle = startAngle + arc / 2 + rotation;
+        const textRadius = radius * 0.75;
+        const textX = center + Math.cos(angle) * textRadius;
+        const textY = center + Math.sin(angle) * textRadius;
+        ctx.save();
+        ctx.translate(textX, textY);
+        ctx.rotate(angle);
+        ctx.textAlign = "center";
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold 24px sans-serif";
+        ctx.fillText(p.name, 0, 0);
+        ctx.restore();
+
+        angleMap.push({ start: startAngle, end: startAngle + arc, prize: p });
+        startAngle += arc;
+      });
+
+      ctx.beginPath();
+      ctx.arc(center, center, 30, 0, 2 * Math.PI);
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+      ctx.strokeStyle = "#ccc";
+      ctx.stroke();
+
+      // Draw pointer as part of canvas within wheel
+      ctx.save();
+      ctx.fillStyle = '#e53935';
+      // Add drop shadow
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 10;
+      const pointerLength = 40;
+      const pointerWidth = 28;
+      const bx = center + radius - pointerLength;
+      const by = center;
+      ctx.beginPath();
+      ctx.moveTo(bx, by - pointerWidth);
+      ctx.lineTo(bx + pointerLength, by);
+      ctx.lineTo(bx, by + pointerWidth);
+      ctx.closePath();
+      ctx.fill();
+      // Draw white border
+      ctx.lineWidth = 4;
+      ctx.strokeStyle = '#ffffff';
+      ctx.stroke();
+      ctx.restore();
+
+      currentRotation = rotation;
+    }
+
+    function spinWheel() {
+      isSpinning = true;
+
+      const rand = Math.random() * 100;
+      let sum = 0, selected = null;
+      for (let p of prizes) {
+        sum += p.chance;
+        if (rand <= sum) {
+          selected = p;
+          break;
+        }
+      }
+
+      let totalArea = prizes.reduce((sum, p) => sum + p.area, 0);
+      let selectedAngleInfo = angleMap.find(a => a.prize.name === selected.name);
+      let sliceAngle = (selected.area / totalArea) * 2 * Math.PI;
+
+      const finalAngle = - (selectedAngleInfo.start + sliceAngle / 2);
+      const totalRotation = (2 * Math.PI * 5) + finalAngle;
+
+      const duration = 4000;
+      const start = performance.now();
+
+      function animate(now) {
+        const t = (now - start) / duration;
+        if (t < 1) {
+          const eased = t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+          const a = eased * totalRotation;
+          drawWheel(a);
+          requestAnimationFrame(animate);
+        } else {
+          showResult(selected);
+        }
+      }
+
+      requestAnimationFrame(animate);
+    }
+
+    function showResult(prize) {
+      const title = document.getElementById("result-title");
+      const joinImg = document.getElementById("joinQrcode");
+      const resultImg = document.getElementById("resultQrcode");
+      const spinBtn = document.getElementById('spinBtn');
+      title.textContent = `🎉 恭喜你抽中：${prize.name}`;
+      joinImg.style.display = "none";
+      resultImg.src = prize.qrcode;
+      resultImg.style.display = "block";
+      // Disable further spins during countdown
+      spinBtn.disabled = true;
+      // Countdown on button
+      let countdown = 15;
+      spinBtn.textContent = countdown;
+      const intervalId = setInterval(() => {
+        countdown--;
+        if (countdown > 0) {
+          spinBtn.textContent = countdown;
+        } else {
+          clearInterval(intervalId);
+        }
+      }, 1000);
+      setTimeout(() => {
+        title.textContent = "加入抽獎";
+        joinImg.style.display = "block";
+        resultImg.style.display = "none";
+        spinBtn.textContent = '開始抽獎';
+        spinBtn.disabled = false;
+        isSpinning = false;
+      }, 15000);
+    }
+
+    drawWheel();
+
+    // Button click listener
+    const spinBtn = document.getElementById('spinBtn');
+    spinBtn.addEventListener('click', () => {
+      if (!isSpinning) spinWheel();
+    });
+
+    // Idle animation loop
+    function idleAnimate() {
+      if (!isSpinning) {
+        currentRotation += idleSpeed;
+        drawWheel(currentRotation);
+      }
+      requestAnimationFrame(idleAnimate);
+    }
+    idleAnimate();
+
+    // Start spin on any key press
+    window.addEventListener('keydown', () => {
+      if (!isSpinning) spinWheel();
+    });
+  </script>
+</body>
+</html>

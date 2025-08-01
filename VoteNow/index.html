@@ -1,0 +1,242 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VoteNow 即時開票</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: "Helvetica Neue", sans-serif;
+      background-image: url("Assets/paper.jpg");
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-position: center;
+      color: #000;
+    }
+    .container {
+      max-width: 600px;
+      margin: auto;
+      padding: 1rem;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.75rem;
+      font-weight: bold;
+    }
+    .subheader {
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+    }
+    .candidate {
+      background-color: rgba(255, 255, 255, 0.85);
+      border-radius: 10px;
+      padding: 1rem;
+      margin-bottom: 1rem;
+    }
+    /* 桌機三欄卡片排版 */
+    @media (min-width: 1024px) {
+      #list {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+      }
+      .candidate {
+        margin-bottom: 0; /* 由 grid 控制 */
+      }
+    }
+    .top {
+      display: flex;
+      align-items: center;
+    }
+    .avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-right: 0.75rem;
+      border: 3px solid gray;
+    }
+    .info {
+      flex-grow: 1;
+    }
+    .party {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      color: #fff;
+      font-size: 0.6rem;
+      text-align: center;
+      line-height: 20px;
+      margin-right: 0.5rem;
+    }
+    .pin {
+      cursor: pointer;
+      font-size: 1.2rem;
+    }
+    .bar-container {
+      background: #ddd;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 24px;
+      margin: 0.25rem 0;
+      position: relative;
+    }
+    .bar {
+      height: 100%;
+      line-height: 24px;
+      color: #fff;
+      padding-left: 8px;
+      font-size: 0.75rem;
+    }
+    .agree {
+      background-color: #007aff;
+    }
+    .disagree {
+      background-color: gray;
+    }
+    .stats {
+      font-size: 0.75rem;
+      margin-top: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <span>726罷免</span>
+      <img src="Assets/votingStamp.png" alt="stamp" style="height: 1.75rem" />
+    </div>
+    <div class="subheader">即時開票追蹤</div>
+    <div id="list"></div>
+  </div>
+
+  <script>
+    const voteURL = "https://gist.githubusercontent.com/hongyinull/d689142242788936e1d220ce4c6977cd/raw/vote_result.json";
+    const candidates = [
+      { id: "賴士葆", name: "賴士葆", party: "國民黨", position: "立委", district: "台北市第8選區", threshold726: 61189 },
+      { id: "徐巧芯", name: "徐巧芯", party: "國民黨", position: "立委", district: "台北市第7選區", threshold726: 57785 },
+      { id: "羅智強", name: "羅智強", party: "國民黨", position: "立委", district: "台北市第6選區", threshold726: 57246 },
+      { id: "李彥秀", name: "李彥秀", party: "國民黨", position: "立委", district: "台北市第4選區", threshold726: 77972 },
+      { id: "王鴻薇", name: "王鴻薇", party: "國民黨", position: "立委", district: "台北市第3選區", threshold726: 68578 },
+      { id: "廖先翔", name: "廖先翔", party: "國民黨", position: "立委", district: "新北市第12選區", threshold726: 66561 },
+      { id: "林德福", name: "林德福", party: "國民黨", position: "立委", district: "新北市第9選區", threshold726: 59345 },
+      { id: "張智倫", name: "張智倫", party: "國民黨", position: "立委", district: "新北市第8選區", threshold726: 72073 },
+      { id: "葉元之", name: "葉元之", party: "國民黨", position: "立委", district: "新北市第7選區", threshold726: 57761 },
+      { id: "洪孟楷", name: "洪孟楷", party: "國民黨", position: "立委", district: "新北市第1選區", threshold726: 101265 },
+      { id: "邱若華", name: "邱若華", party: "國民黨", position: "立委", district: "桃園市第6選區", threshold726: 71261 },
+      { id: "呂玉玲", name: "呂玉玲", party: "國民黨", position: "立委", district: "桃園市第5選區", threshold726: 70678 },
+      { id: "萬美玲", name: "萬美玲", party: "國民黨", position: "立委", district: "桃園市第4選區", threshold726: 76672 },
+      { id: "魯明哲", name: "魯明哲", party: "國民黨", position: "立委", district: "桃園市第3選區", threshold726: 77251 },
+      { id: "涂權吉", name: "涂權吉", party: "國民黨", position: "立委", district: "桃園市第2選區", threshold726: 79106 },
+      { id: "牛煦庭", name: "牛煦庭", party: "國民黨", position: "立委", district: "桃園市第1選區", threshold726: 88517 },
+      { id: "林沛祥", name: "林沛祥", party: "國民黨", position: "立委", district: "基隆市", threshold726: 75995 },
+      { id: "高虹安", name: "高虹安", party: "無黨籍", position: "市長", district: "新竹市", threshold726: 90078 },
+      { id: "鄭正鈐", name: "鄭正鈐", party: "國民黨", position: "立委", district: "新竹市", threshold726: 89266 },
+      { id: "羅廷瑋", name: "羅廷瑋", party: "國民黨", position: "立委", district: "台中市第6選區", threshold726: 69359 },
+      { id: "黃健豪", name: "黃健豪", party: "國民黨", position: "立委", district: "台中市第5選區", threshold726: 93587 },
+      { id: "廖偉翔", name: "廖偉翔", party: "國民黨", position: "立委", district: "台中市第4選區", threshold726: 84430 },
+      { id: "丁學忠", name: "丁學忠", party: "國民黨", position: "立委", district: "雲林縣第1選區", threshold726: 67916 },
+      { id: "傅崐萁", name: "傅崐萁", party: "國民黨", position: "立委", district: "花蓮縣", threshold726: 47842 },
+      { id: "黃建賓", name: "黃建賓", party: "國民黨", position: "立委", district: "台東縣", threshold726: 28347 },
+    ];
+
+    function getPartyColor(party) {
+      if (party.includes("國民黨")) return "#455BBA";
+      if (party.includes("民進黨")) return "#3AC23C";
+      return "#999";
+    }
+
+    function loadPinned() {
+      return JSON.parse(localStorage.getItem("pinned") || "[]");
+    }
+
+    function savePinned(pinned) {
+      localStorage.setItem("pinned", JSON.stringify(pinned));
+    }
+
+    function render(voteResults = []) {
+      const pinned = loadPinned();
+      const pinnedSet = new Set(pinned);
+      const list = document.getElementById("list");
+      list.innerHTML = "";
+
+      const sorted = [...candidates].sort((a, b) => {
+        return pinnedSet.has(a.id) === pinnedSet.has(b.id)
+          ? 0
+          : pinnedSet.has(a.id)
+          ? -1
+          : 1;
+      });
+
+      sorted.forEach((c) => {
+        const vote = voteResults.find((v) => v.id === c.id);
+        const agree = vote?.agree ?? 0;
+        const disagree = vote?.disagree ?? 0;
+        const turnout = vote ? `${(vote.turnout * 100).toFixed(1)}%` : "－";
+        const agreeRatio = Math.min(agree / c.threshold726, 1);
+        const disagreeRatio = Math.min(disagree / c.threshold726, 1);
+
+        const div = document.createElement("div");
+        div.className = "candidate";
+        div.innerHTML = `
+          <div class="top">
+            <img src="Assets/${c.name}.png" class="avatar" />
+            <div class="info">
+              <div><strong>${c.name}</strong></div>
+              <div>
+                <span class="party" style="background:${getPartyColor(c.party)}">${c.party[0]}</span>
+                ${c.position}/${c.district}
+              </div>
+            </div>
+            <div class="pin" onclick="togglePin('${c.id}')">
+              ${pinnedSet.has(c.id) ? "📌" : "📍"}
+            </div>
+          </div>
+
+          <div class="bar-container">
+            <div class="bar agree" style="width:${agreeRatio * 100}%">${agree}</div>
+          </div>
+          <div class="bar-container">
+            <div class="bar disagree" style="width:${disagreeRatio * 100}%">${disagree}</div>
+          </div>
+
+          <div class="stats">投票率：${turnout}</div>
+          <div class="stats">同意票門檻：${c.threshold726.toLocaleString()}</div>
+        `;
+        list.appendChild(div);
+      });
+    }
+
+    function togglePin(id) {
+      const pinned = loadPinned();
+      const idx = pinned.indexOf(id);
+      if (idx >= 0) pinned.splice(idx, 1);
+      else pinned.push(id);
+      savePinned(pinned);
+      fetchVotes(); // refresh
+    }
+
+    async function fetchVotes() {
+      try {
+        const res = await fetch(voteURL + "?t=" + Date.now());
+        const json = await res.json();
+        render(json);
+      } catch (e) {
+        console.error("票數載入錯誤", e);
+        render();
+      }
+    }
+
+    setInterval(fetchVotes, 5000);
+    fetchVotes();
+  </script>
+</body>
+</html>
