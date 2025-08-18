@@ -1,7 +1,31 @@
 {
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appIDs": [
+          "59Z35DMJ65.com.hongyinull.HakkaShopScanner2",
+          "59Z35DMJ65.com.hongyinull.HakkaShopScanner2.Clip"
+        ],
+        "components": [
+          { "/": "/scanner/*" }
+        ]
+      },
+      {
+        "appIDs": [
+          "59Z35DMJ65.com.hongyinull.votenow",
+          "59Z35DMJ65.com.hongyinull.votenow.Clip"
+        ],
+        "components": [
+          { "/": "/votenow/*" }
+        ]
+      }
+    ]
+  },
   "appclips": {
     "apps": [
-      "59Z35DMJ65.com.hongyinull.HakkaShopScanner2.Clip"
+      "59Z35DMJ65.com.hongyinull.HakkaShopScanner2.Clip",
+      "59Z35DMJ65.com.hongyinull.votenow.Clip"
     ]
   }
 }

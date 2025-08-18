@@ -39,8 +39,8 @@
       margin: 0 0 8px;
       /* font-family: 'Times New Roman', serif; */
       font-weight: 900;
-      color: #4e1418;
-      -webkit-text-stroke: 2px #6b4c3b;
+      color: #800000;
+      -webkit-text-stroke: 2px #800000;
       text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.4);
       font-size: 5em;
       white-space: nowrap;
@@ -189,17 +189,17 @@
   <div class="card">
     <div class="main-content">
       <div class="wheel-container">
-        <h1 class="main-title">幸運轉盤</h1>
+        <h1 class="main-title">免費抽大獎</h1>
         <div class="separator"></div>
         <canvas id="wheel"></canvas>
       </div>
       <div class="right-panel">
         <div class="instructions">
-          <h2>使用說明</h2>
-          <p>點擊「開始抽獎」按鈕，轉盤將開始旋轉。轉盤停止後，會顯示您獲得的獎品及領獎 QR Code。</p>
+          <!-- <h1>如何抽獎</h1> -->
+          <h1>Google評論五星   ：「狸小路和牛燒肉好吃」，即可抽獎。</h1>
         </div>
         <div class="prize-list" id="result-panel">
-          <h2 id="result-title">加入抽獎</h2>
+          <h2 id="result-title">免費抽大獎</h2>
           <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
           <img id="resultQrcode" src="" alt="獎品 QR Code">
           <button id="spinBtn" class="btn" onclick="spinWheel()">開始抽獎</button>
@@ -215,13 +215,23 @@
 
 
     const prizes = [
-      { name: "手工香皂", area: 10, chance: 10, qrcode: "soap.png" },
-      { name: "再抽一次", area: 10, chance: 10, qrcode: "again.png" },
-      { name: "台灣啤酒", area: 20, chance: 20, qrcode: "beer.png" },
-      { name: "銘謝惠顧", area: 5, chance: 20, qrcode: "thanks.png" },
-      { name: "燒肉丼兌換券", area: 25, chance: 25, qrcode: "beef.png" },
-      { name: "現金折扣10元", area: 20, chance: 10, qrcode: "discount10.png" },
-      { name: "現金折扣50元", area: 15, chance: 5, qrcode: "discount50.png" }
+      { name: "條子肉乾一條", area: 30, chance: 15, qrcode: "join.png" },
+      { name: "北海道濃豆乳", area: 20, chance: 5, qrcode: "join.png" },
+      { name: "手工香皂", area: 20, chance: 0, qrcode: "join.png" },
+      { name: "現金折價20元/現買現抵", area: 10, chance: 30, qrcode: "discount20.png" },
+      { name: "青春醋飲", area: 10, chance: 15, qrcode: "discount20.png" },
+      { name: "香炸芋頭丸", area: 10, chance: 35, qrcode: "discount20.png" }
+      // 以下為註解掉的獎項，可隨時恢復
+      // { name: "肉乾伴手禮", area: 8, chance: 8, qrcode: "join.png" },７
+      // { name: "再抽一次", area: 8, chance: 8, qrcode: "again.png" },
+      // { name: "章魚燒丸子", area: 12, chance: 4, qrcode: "join.png" },
+      // { name: "和牛咖哩mini杯", area: 10, chance: 0, qrcode: "join.png" },
+      // { name: "現炸章魚小丸子", area: 12, chance: 8, qrcod556589e: "join.png" },
+      // { name: "小菜三選一", area: 10, chance: 6, qrcode: "join.png" },
+      // { name: "銘謝惠顧", area: 4, chance: 3, qrcode: "thanks.png" },
+      // { name: "燒肉丼兌換券", area: 20, chance: 20, qrcode: "join.png" },
+      // { name: "現金折扣15元", area: 20, chance: 30, qrcode: "discount15.png" },
+      // { name: "現金折扣20元", area: 8, chance: 17, qrcode: "discount20.png" },
     ];
 
     // Color palette for wheel slices (earthy, harmonious)
@@ -232,7 +242,10 @@
       "#D2B48C", // tan
       "#A0522D", // sienna
       "#F4A460", // sandy brown
-      "#800000"  // maroon
+      "#800000", // maroon
+      "#8B7355", // dark khaki
+      "#DAA520", // goldenrod
+      "#B8860B"  // dark goldenrod
     ];
 
     const canvas = document.getElementById("wheel");
@@ -370,7 +383,7 @@
       // Disable further spins during countdown
       spinBtn.disabled = true;
       // Countdown on button
-      let countdown = 15;
+      let countdown = 4;
       spinBtn.textContent = countdown;
       const intervalId = setInterval(() => {
         countdown--;
@@ -387,7 +400,7 @@
         spinBtn.textContent = '開始抽獎';
         spinBtn.disabled = false;
         isSpinning = false;
-      }, 15000);
+      }, 4000);
     }
 
     drawWheel();
