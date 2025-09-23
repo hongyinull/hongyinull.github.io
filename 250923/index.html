@@ -5,62 +5,186 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>250923</title>
   <style>
-  html, body {
-    height: 100%;
-  }
-  body {
-    margin: 0;
-    padding: 0;
-    background: #000;
-  }
-  .page {
-    width: 100%;
-    min-height: 100%;
-  }
-  .half {
+  html, body { height: 100%; }
+  body { margin: 0; padding: 0; background: #000; color: #fff; }
+
+  .carousel {
+    position: relative;
+    width: 100vw;
     height: 100vh;
+    overflow: hidden;
+    touch-action: pan-y;
+    background: #000;
   }
-  .top {
+  .track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform 400ms ease;
+    will-change: transform;
+  }
+  .slide {
+    flex: 0 0 100vw;
+    height: 100vh;
     position: relative;
     background: #000;
   }
-  .top img {
+  .slide img, .slide video {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
   }
-  .bottom {
-    position: relative;
-    background: #000;
+
+  .unmute-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 5;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 10px 14px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    backdrop-filter: saturate(140%) blur(4px);
   }
-  .bottom video {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
+  .unmute-btn[hidden] { display: none; }
+
+  .dots {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 4;
   }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+  }
+  .dot.active { background: #fff; }
   </style>
   <meta name="color-scheme" content="dark light">
 </head>
 <body>
-  <div class="page">
-    <div class="half top">
-      <img src="250923menu.png" alt="Menu">
+  <div class="carousel" id="carousel">
+    <div class="track" id="track">
+      <section class="slide" aria-label="image slide">
+        <img src="250923menu.png" alt="Menu">
+      </section>
+      <section class="slide" aria-label="video slide">
+        <video id="video" src="250923video.mp4" autoplay muted loop playsinline></video>
+        <button class="unmute-btn" id="unmuteBtn">Tap to unmute</button>
+      </section>
     </div>
-    <div class="half bottom">
-      <video src="250923video.mp4" autoplay muted loop playsinline></video>
+    <div class="dots" aria-hidden="true">
+      <div class="dot" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
     </div>
   </div>
   <script>
-  // 防止行動裝置自動暫停，嘗試播放
-  (function ensurePlay(){
-    var v = document.querySelector('video');
-    if (!v) return;
-    var tryPlay = function(){ v.play && v.play().catch(function(){}); };
+  (function(){
+    var track = document.getElementById('track');
+    var carousel = document.getElementById('carousel');
+    var video = document.getElementById('video');
+    var unmuteBtn = document.getElementById('unmuteBtn');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+    var slideCount = 2;
+    var index = 0;
+    var autoTimer = null;
+    var isDragging = false;
+    var startX = 0;
+    var currentX = 0;
+    var deltaX = 0;
+    var width = function(){ return carousel.clientWidth; };
+
+    function updateDots(){
+      dots.forEach(function(d,i){ d.classList.toggle('active', i === index); });
+    }
+    function goTo(i){
+      index = (i + slideCount) % slideCount;
+      track.style.transition = 'transform 400ms ease';
+      track.style.transform = 'translateX(' + (-index * width()) + 'px)';
+      updateDots();
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    function startAuto(){
+      stopAuto();
+      autoTimer = setInterval(next, 4000);
+    }
+    function stopAuto(){ if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+
+    // Pointer/Touch swipe
+    function onDown(clientX){
+      isDragging = true;
+      startX = clientX;
+      currentX = clientX;
+      deltaX = 0;
+      stopAuto();
+      track.style.transition = 'none';
+    }
+    function onMove(clientX){
+      if (!isDragging) return;
+      currentX = clientX;
+      deltaX = currentX - startX;
+      var base = -index * width();
+      track.style.transform = 'translateX(' + (base + deltaX) + 'px)';
+    }
+    function onUp(){
+      if (!isDragging) return;
+      isDragging = false;
+      var threshold = Math.max(50, width() * 0.15);
+      if (deltaX > threshold) { prev(); }
+      else if (deltaX < -threshold) { next(); }
+      else { goTo(index); }
+      startAuto();
+    }
+
+    carousel.addEventListener('touchstart', function(e){ onDown(e.touches[0].clientX); }, { passive: true });
+    carousel.addEventListener('touchmove', function(e){ onMove(e.touches[0].clientX); }, { passive: true });
+    carousel.addEventListener('touchend', function(){ onUp(); }, { passive: true });
+
+    carousel.addEventListener('mousedown', function(e){ onDown(e.clientX); });
+    window.addEventListener('mousemove', function(e){ onMove(e.clientX); });
+    window.addEventListener('mouseup', function(){ onUp(); });
+
+    // Resize handling keeps slide aligned
+    window.addEventListener('resize', function(){ goTo(index); });
+
+    // Dots click
+    dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.getAttribute('data-index'), 10)); startAuto(); }); });
+
+    // Ensure video plays; allow unmute via user action
+    function tryPlay(){ if (video && video.play) video.play().catch(function(){}); }
     document.addEventListener('visibilitychange', tryPlay, { passive: true });
     window.addEventListener('touchstart', tryPlay, { passive: true, once: true });
+    window.addEventListener('click', tryPlay, { passive: true, once: true });
     tryPlay();
+
+    // Unmute control
+    function updateUnmuteVisibility(){
+      if (!video) return;
+      unmuteBtn.hidden = !video.muted;
+    }
+    updateUnmuteVisibility();
+    unmuteBtn.addEventListener('click', function(){
+      if (!video) return;
+      video.muted = false;
+      tryPlay();
+      updateUnmuteVisibility();
+    });
+
+    // Init
+    updateDots();
+    goTo(0);
+    startAuto();
   })();
   </script>
 </body>
