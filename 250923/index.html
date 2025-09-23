@@ -45,14 +45,39 @@
     background: rgba(0,0,0,0.55);
     color: #fff;
     border: 1px solid rgba(255,255,255,0.3);
-    padding: 10px 14px;
+    width: 56px;
+    height: 56px;
     border-radius: 999px;
     font-family: inherit;
     font-size: 14px;
     cursor: pointer;
     backdrop-filter: saturate(140%) blur(4px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
   }
   .unmute-btn[hidden] { display: none; }
+
+  .back-btn {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 5;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: saturate(140%) blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
 
   .dots {
     position: absolute;
@@ -68,6 +93,33 @@
     background: rgba(255,255,255,0.4);
   }
   .dot.active { background: #fff; }
+
+  .cta-watch {
+    position: absolute;
+    left: 50%;
+    bottom: 72px;
+    transform: translateX(-50%);
+    z-index: 5;
+    background: linear-gradient(135deg, #ff2d55 0%, #ff3b30 50%, #ff453a 100%);
+    color: #fff;
+    border: none;
+    padding: 20px 32px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(255, 59, 48, 0.45), 0 2px 6px rgba(0,0,0,0.25);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.06); }
+    100% { transform: translateX(-50%) scale(1); }
+  }
   </style>
   <meta name="color-scheme" content="dark light">
 </head>
@@ -76,10 +128,28 @@
     <div class="track" id="track">
       <section class="slide" aria-label="image slide">
         <img src="250923menu.png" alt="Menu">
+        <button class="cta-watch" id="ctaWatch" aria-label="觀看影片" title="觀看影片">
+          <span>觀看影片</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"></path>
+          </svg>
+        </button>
       </section>
       <section class="slide" aria-label="video slide">
         <video id="video" src="250923video.mp4" autoplay muted loop playsinline></video>
-        <button class="unmute-btn" id="unmuteBtn">Tap to unmute</button>
+        <button class="unmute-btn" id="unmuteBtn" aria-label="Unmute" title="Unmute">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+            <path d="M14 9.23v5.54c1.19-.69 2-1.98 2-3.27s-.81-2.58-2-3.27z" fill="currentColor"/>
+            <path d="M16.5 5.5v13c2.33-1.45 3.5-3.79 3.5-6.5s-1.17-5.05-3.5-6.5z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="back-btn" id="backBtn" aria-label="看看菜單" title="看看菜單">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+          </svg>
+          <span>看看菜單</span>
+        </button>
       </section>
     </div>
     <div class="dots" aria-hidden="true">
@@ -93,10 +163,13 @@
     var carousel = document.getElementById('carousel');
     var video = document.getElementById('video');
     var unmuteBtn = document.getElementById('unmuteBtn');
+    var backBtn = document.getElementById('backBtn');
     var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
     var slideCount = 2;
     var index = 0;
     var autoTimer = null;
+    var introDone = false;
+    var autoDisabled = false;
     var isDragging = false;
     var startX = 0;
     var currentX = 0;
@@ -116,8 +189,9 @@
     function prev(){ goTo(index - 1); }
 
     function startAuto(){
+      if (autoDisabled) return;
       stopAuto();
-      autoTimer = setInterval(next, 4000);
+      autoTimer = setInterval(next, 10000);
     }
     function stopAuto(){ if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
 
@@ -144,7 +218,7 @@
       if (deltaX > threshold) { prev(); }
       else if (deltaX < -threshold) { next(); }
       else { goTo(index); }
-      startAuto();
+      if (!autoDisabled) startAuto();
     }
 
     carousel.addEventListener('touchstart', function(e){ onDown(e.touches[0].clientX); }, { passive: true });
@@ -159,7 +233,7 @@
     window.addEventListener('resize', function(){ goTo(index); });
 
     // Dots click
-    dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.getAttribute('data-index'), 10)); startAuto(); }); });
+    dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.getAttribute('data-index'), 10)); if (!autoDisabled) startAuto(); }); });
 
     // Ensure video plays; allow unmute via user action
     function tryPlay(){ if (video && video.play) video.play().catch(function(){}); }
@@ -169,22 +243,62 @@
     tryPlay();
 
     // Unmute control
-    function updateUnmuteVisibility(){
+    function updateUnmuteIcon(){
       if (!video) return;
-      unmuteBtn.hidden = !video.muted;
+      // swap icon path to show mute/unmute state
+      var svg = unmuteBtn.querySelector('svg');
+      if (!svg) return;
+      svg.innerHTML = video.muted
+        ? '<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M14 9.23v5.54c1.19-.69 2-1.98 2-3.27s-.81-2.58-2-3.27z" fill="currentColor"/>'
+        : '<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M3 3l18 18-1.41 1.41L1.59 4.41 3 3z" fill="currentColor"/>';
     }
-    updateUnmuteVisibility();
+    updateUnmuteIcon();
     unmuteBtn.addEventListener('click', function(){
       if (!video) return;
-      video.muted = false;
+      video.muted = !video.muted;
       tryPlay();
-      updateUnmuteVisibility();
+      updateUnmuteIcon();
     });
 
-    // Init
+    // CTA watch: jump to video and unmute
+    var ctaWatch = document.getElementById('ctaWatch');
+    var ctaClickedOnce = false;
+    if (ctaWatch) {
+      ctaWatch.addEventListener('click', function(){
+        goTo(1);
+        if (video) {
+          if (!ctaClickedOnce) {
+            try { video.currentTime = 0; } catch(e) {}
+          }
+          video.muted = false;
+          tryPlay();
+          updateUnmuteIcon();
+        }
+        ctaClickedOnce = true;
+        autoDisabled = true;
+        stopAuto();
+      });
+    }
+
+    // Intro sequence: image(0) → 0.8s to video(1) → 0.8s back to image(0)
     updateDots();
     goTo(0);
-    startAuto();
+    setTimeout(function(){
+      if (!autoDisabled) goTo(1);
+      setTimeout(function(){
+        if (!autoDisabled) goTo(0);
+        introDone = true;
+        startAuto();
+      }, 800);
+    }, 800);
+
+    // Back button returns to image slide; does not re-enable auto if disabled
+    if (backBtn) {
+      backBtn.addEventListener('click', function(){
+        goTo(0);
+        if (!autoDisabled) startAuto();
+      });
+    }
   })();
   </script>
 </body>
