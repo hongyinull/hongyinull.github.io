@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>250923</title>
+  <meta name="description" content="想吃好肉又不想人擠人！狸小路中秋燒肉DIY，居家解凍即烤、解凍即烤、簡單上桌。份量澎湃，朋友家人聚會最對味，內含多部位肉品與醬料，宅配到府。">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="中秋冷凍燒肉組🔥自己在家烤，簡單又澎湃">
+  <meta property="og:description" content="想吃好肉又不想人擠人！狸小路中秋燒肉DIY，居家解凍即烤、解凍即烤、簡單上桌。份量澎湃，朋友家人聚會最對味，內含多部位肉品與醬料，宅配到府。">
+  <meta property="og:image" content="狸Line連結預覽縮圖.png">
+  <meta property="og:image:width" content="720">
+  <meta property="og:image:height" content="379">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="中秋冷凍燒肉組🔥自己在家烤，簡單又澎湃">
+  <meta name="twitter:description" content="想吃好肉又不想人擠人！狸小路中秋燒肉DIY，居家解凍即烤、簡單上桌！份量澎湃，朋友家人聚會最對味，內含多部位肉品與醬料，宅配到府。">
+  <meta name="twitter:image" content="狸Line連結預覽縮圖.png">
+
+  <!-- Favicon / Icons -->
+  <link rel="icon" type="image/svg+xml" href="狸小路完整LOGO-05.svg">
+  <link rel="mask-icon" href="狸小路完整LOGO-05.svg" color="#ff3b30">
+  <style>
+  html, body { height: 100%; }
+  body { margin: 0; padding: 0; background: #000; color: #fff; }
+
+  .carousel {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    touch-action: pan-y;
+    background: #000;
+  }
+  .track {
+    display: flex;
+    width: 200%;
+    height: 100%;
+    transform: translateX(0);
+    transition: transform 400ms ease;
+    will-change: transform;
+  }
+  .slide {
+    flex: 0 0 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+  }
+  .slide img, .slide video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .unmute-btn {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    z-index: 5;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    width: 56px;
+    height: 56px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    backdrop-filter: saturate(140%) blur(4px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .unmute-btn[hidden] { display: none; }
+
+  .back-btn {
+    position: absolute;
+    left: 16px;
+    bottom: 16px;
+    z-index: 5;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    border: 1px solid rgba(255,255,255,0.3);
+    height: 56px;
+    padding: 0 16px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    backdrop-filter: saturate(140%) blur(4px);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .dots {
+    position: absolute;
+    left: 50%;
+    bottom: 16px;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 8px;
+    z-index: 4;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: rgba(255,255,255,0.4);
+  }
+  .dot.active { background: #fff; }
+
+  .cta-watch {
+    position: absolute;
+    left: 50%;
+    bottom: 72px;
+    transform: translateX(-50%);
+    z-index: 5;
+    background: linear-gradient(135deg, #ff2d55 0%, #ff3b30 50%, #ff453a 100%);
+    color: #fff;
+    border: none;
+    padding: 20px 32px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 8px 24px rgba(255, 59, 48, 0.45), 0 2px 6px rgba(0,0,0,0.25);
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.06); }
+    100% { transform: translateX(-50%) scale(1); }
+  }
+  </style>
+  <meta name="color-scheme" content="dark light">
+</head>
+<body>
+  <div class="carousel" id="carousel">
+    <div class="track" id="track">
+      <section class="slide" aria-label="image slide">
+        <img src="250923menu.png" alt="Menu">
+        <button class="cta-watch" id="ctaWatch" aria-label="觀看影片" title="觀看影片">
+          <span>觀看影片</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M8 5v14l11-7z"></path>
+          </svg>
+        </button>
+      </section>
+      <section class="slide" aria-label="video slide">
+        <video id="video" src="250923video.mp4" autoplay muted loop playsinline></video>
+        <button class="unmute-btn" id="unmuteBtn" aria-label="Unmute" title="Unmute">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/>
+            <path d="M14 9.23v5.54c1.19-.69 2-1.98 2-3.27s-.81-2.58-2-3.27z" fill="currentColor"/>
+            <path d="M16.5 5.5v13c2.33-1.45 3.5-3.79 3.5-6.5s-1.17-5.05-3.5-6.5z" fill="currentColor"/>
+          </svg>
+        </button>
+        <button class="back-btn" id="backBtn" aria-label="看看菜單" title="看看菜單">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+            <path d="M15.41 7.41 14 6l-6 6 6 6 1.41-1.41L10.83 12z"></path>
+          </svg>
+          <span>看看菜單</span>
+        </button>
+      </section>
+    </div>
+    <div class="dots" aria-hidden="true">
+      <div class="dot" data-index="0"></div>
+      <div class="dot" data-index="1"></div>
+    </div>
+  </div>
+  <script>
+  (function(){
+    var track = document.getElementById('track');
+    var carousel = document.getElementById('carousel');
+    var video = document.getElementById('video');
+    var unmuteBtn = document.getElementById('unmuteBtn');
+    var backBtn = document.getElementById('backBtn');
+    var dots = Array.prototype.slice.call(document.querySelectorAll('.dot'));
+    var slideCount = 2;
+    var index = 0;
+    var autoTimer = null;
+    var introDone = false;
+    var autoDisabled = false;
+    var isDragging = false;
+    var startX = 0;
+    var currentX = 0;
+    var deltaX = 0;
+    var width = function(){ return carousel.clientWidth; };
+
+    function updateDots(){
+      dots.forEach(function(d,i){ d.classList.toggle('active', i === index); });
+    }
+    function goTo(i){
+      index = (i + slideCount) % slideCount;
+      track.style.transition = 'transform 400ms ease';
+      track.style.transform = 'translateX(' + (-index * width()) + 'px)';
+      updateDots();
+    }
+    function next(){ goTo(index + 1); }
+    function prev(){ goTo(index - 1); }
+
+    function startAuto(){
+      if (autoDisabled) return;
+      stopAuto();
+      autoTimer = setInterval(next, 10000);
+    }
+    function stopAuto(){ if (autoTimer) { clearInterval(autoTimer); autoTimer = null; } }
+
+    // Pointer/Touch swipe
+    function onDown(clientX){
+      isDragging = true;
+      startX = clientX;
+      currentX = clientX;
+      deltaX = 0;
+      stopAuto();
+      track.style.transition = 'none';
+    }
+    function onMove(clientX){
+      if (!isDragging) return;
+      currentX = clientX;
+      deltaX = currentX - startX;
+      var base = -index * width();
+      track.style.transform = 'translateX(' + (base + deltaX) + 'px)';
+    }
+    function onUp(){
+      if (!isDragging) return;
+      isDragging = false;
+      var threshold = Math.max(50, width() * 0.15);
+      if (deltaX > threshold) { prev(); }
+      else if (deltaX < -threshold) { next(); }
+      else { goTo(index); }
+      if (!autoDisabled) startAuto();
+    }
+
+    carousel.addEventListener('touchstart', function(e){ onDown(e.touches[0].clientX); }, { passive: true });
+    carousel.addEventListener('touchmove', function(e){ onMove(e.touches[0].clientX); }, { passive: true });
+    carousel.addEventListener('touchend', function(){ onUp(); }, { passive: true });
+
+    carousel.addEventListener('mousedown', function(e){ onDown(e.clientX); });
+    window.addEventListener('mousemove', function(e){ onMove(e.clientX); });
+    window.addEventListener('mouseup', function(){ onUp(); });
+
+    // Resize handling keeps slide aligned
+    window.addEventListener('resize', function(){ goTo(index); });
+
+    // Dots click
+    dots.forEach(function(d){ d.addEventListener('click', function(){ goTo(parseInt(d.getAttribute('data-index'), 10)); if (!autoDisabled) startAuto(); }); });
+
+    // Ensure video plays; allow unmute via user action
+    function tryPlay(){ if (video && video.play) video.play().catch(function(){}); }
+    document.addEventListener('visibilitychange', tryPlay, { passive: true });
+    window.addEventListener('touchstart', tryPlay, { passive: true, once: true });
+    window.addEventListener('click', tryPlay, { passive: true, once: true });
+    tryPlay();
+
+    // Unmute control
+    function updateUnmuteIcon(){
+      if (!video) return;
+      // swap icon path to show mute/unmute state
+      var svg = unmuteBtn.querySelector('svg');
+      if (!svg) return;
+      svg.innerHTML = video.muted
+        ? '<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M14 9.23v5.54c1.19-.69 2-1.98 2-3.27s-.81-2.58-2-3.27z" fill="currentColor"/>'
+        : '<path d="M4 9v6h4l5 4V5L8 9H4z" fill="currentColor"/><path d="M3 3l18 18-1.41 1.41L1.59 4.41 3 3z" fill="currentColor"/>';
+    }
+    updateUnmuteIcon();
+    unmuteBtn.addEventListener('click', function(){
+      if (!video) return;
+      video.muted = !video.muted;
+      tryPlay();
+      updateUnmuteIcon();
+    });
+
+    // CTA watch: jump to video and unmute
+    var ctaWatch = document.getElementById('ctaWatch');
+    var ctaClickedOnce = false;
+    if (ctaWatch) {
+      ctaWatch.addEventListener('click', function(){
+        goTo(1);
+        if (video) {
+          if (!ctaClickedOnce) {
+            try { video.currentTime = 0; } catch(e) {}
+          }
+          video.muted = false;
+          tryPlay();
+          updateUnmuteIcon();
+        }
+        ctaClickedOnce = true;
+        autoDisabled = true;
+        stopAuto();
+      });
+    }
+
+    // Intro sequence: image(0) → 0.8s to video(1) → 0.8s back to image(0)
+    updateDots();
+    goTo(0);
+    setTimeout(function(){
+      if (!autoDisabled) goTo(1);
+      setTimeout(function(){
+        if (!autoDisabled) goTo(0);
+        introDone = true;
+        startAuto();
+      }, 800);
+    }, 800);
+
+    // Back button returns to image slide; does not re-enable auto if disabled
+    if (backBtn) {
+      backBtn.addEventListener('click', function(){
+        goTo(0);
+        if (!autoDisabled) startAuto();
+      });
+    }
+  })();
+  </script>
+</body>
+</html>
