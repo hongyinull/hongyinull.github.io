@@ -1,6 +1,6 @@
 {
-  "name": "線上點餐",
-  "short_name": "點餐",
+  "name": "狸小路員工手機點餐",
+  "short_name": "員工點餐",
   "start_url": ".",
   "scope": ".",
   "display": "standalone",
