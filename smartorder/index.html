@@ -10,8 +10,10 @@
   <meta property="og:title" content="線上點餐｜選擇桌位">
   <meta property="og:description" content="請選擇您的桌位開始點餐。支援 A1–A4、B1–B7、K1–K4。">
 
-  <link rel="icon" type="image/svg+xml" href="狸小路完整LOGO-05.svg">
-  <link rel="mask-icon" href="狸小路完整LOGO-05.svg" color="#ff3b30">
+  <link rel="icon" type="image/svg+xml" href="../bbqDIY/狸小路完整LOGO-05.svg">
+  <link rel="mask-icon" href="../bbqDIY/狸小路完整LOGO-05.svg" color="#ff3b30">
+  <link rel="manifest" href="./manifest.webmanifest">
+  <meta name="theme-color" content="#000000">
   <meta name="color-scheme" content="dark light">
   <style>
   html, body { height: 100%; }
@@ -108,7 +110,7 @@
   <div class="app">
     <header class="header">
       <a class="brand" href="#" aria-label="首頁">
-        <img src="狸小路完整LOGO-05.svg" alt="brand">
+        <img src="../bbqDIY/狸小路完整LOGO-05.svg" alt="brand">
         <h1>線上點餐｜選擇桌位</h1>
       </a>
     </header>
@@ -209,6 +211,13 @@
 
     render();
   })();
+  </script>
+  <script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', function(){
+      navigator.serviceWorker.register('./sw.js').catch(function(){});
+    });
+  }
   </script>
 </body>
 </html>

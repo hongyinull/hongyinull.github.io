@@ -1,0 +1,14 @@
+{
+  "name": "線上點餐",
+  "short_name": "點餐",
+  "start_url": ".",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#000000",
+  "theme_color": "#000000",
+  "lang": "zh-Hant",
+  "icons": [
+    { "src": "../bbqDIY/狸小路完整LOGO-05.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
+
