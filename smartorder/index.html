@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>線上點餐｜選擇桌位</title>
+  <meta name="description" content="請選擇您的桌位開始點餐。支援 A1–A4、B1–B7、K1–K4。">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="線上點餐｜選擇桌位">
+  <meta property="og:description" content="請選擇您的桌位開始點餐。支援 A1–A4、B1–B7、K1–K4。">
+
+  <link rel="icon" type="image/svg+xml" href="狸小路完整LOGO-05.svg">
+  <link rel="mask-icon" href="狸小路完整LOGO-05.svg" color="#ff3b30">
+  <meta name="color-scheme" content="dark light">
+  <style>
+  html, body { height: 100%; }
+  body { margin: 0; padding: env(safe-area-inset-top) 0 env(safe-area-inset-bottom); background: #000; color: #fff; font-family: -apple-system, BlinkMacSystemFont, "Noto Sans TC", "PingFang TC", "Microsoft JhengHei", Segoe UI, Roboto, Arial, sans-serif; }
+
+  .app {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 20px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.6) 60%, rgba(0,0,0,0));
+    backdrop-filter: saturate(140%) blur(4px);
+  }
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: #fff;
+    text-decoration: none;
+  }
+  .brand img { width: 28px; height: 28px; display: block; }
+  .brand h1 { margin: 0; font-size: 20px; letter-spacing: 0.5px; }
+
+  .content { flex: 1; padding: 12px 16px 28px; }
+
+  .group {
+    margin: 8px auto 18px;
+    max-width: 980px;
+  }
+  .group-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 16px 4px 10px;
+    font-size: 16px;
+    color: rgba(255,255,255,0.9);
+  }
+  .group-title .badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px; height: 28px;
+    border-radius: 999px;
+    font-weight: 800;
+    color: #fff;
+    background: linear-gradient(135deg, #ff2d55 0%, #ff3b30 50%, #ff453a 100%);
+    box-shadow: 0 6px 18px rgba(255, 59, 48, 0.35), 0 1px 4px rgba(0,0,0,0.25);
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+  @media (min-width: 460px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+  @media (min-width: 720px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+  @media (min-width: 980px) { .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); } }
+
+  .card {
+    position: relative;
+    display: block;
+    padding: 18px 16px;
+    border-radius: 16px;
+    background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03));
+    border: 1px solid rgba(255,255,255,0.12);
+    color: #fff;
+    text-decoration: none;
+    overflow: hidden;
+    box-shadow: inset 0 1px 0 rgba(255,255,255,0.06), 0 8px 24px rgba(0,0,0,0.35);
+    transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+    will-change: transform;
+  }
+  .card:hover { transform: translateY(-2px); border-color: rgba(255,255,255,0.25); box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 12px 28px rgba(0,0,0,0.45); }
+  .card:active { transform: translateY(0); }
+
+  .card .label { font-size: 14px; opacity: 0.75; }
+  .card .table-id { display: block; margin-top: 6px; font-size: 24px; font-weight: 900; letter-spacing: 0.5px; }
+  .card .cta { position: absolute; right: 12px; bottom: 10px; font-size: 12px; opacity: 0.8; }
+  .card[aria-disabled="true"] { cursor: not-allowed; opacity: 0.7; }
+
+  .footer { padding: 20px 16px 28px; text-align: center; color: rgba(255,255,255,0.6); font-size: 12px; }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="header">
+      <a class="brand" href="#" aria-label="首頁">
+        <img src="狸小路完整LOGO-05.svg" alt="brand">
+        <h1>線上點餐｜選擇桌位</h1>
+      </a>
+    </header>
+    <main class="content" id="content">
+      <section class="group" id="group-A" aria-labelledby="label-A">
+        <div class="group-title" id="label-A"><span class="badge">A</span><span>區域 A</span></div>
+        <div class="grid" data-group="A"></div>
+      </section>
+      <section class="group" id="group-B" aria-labelledby="label-B">
+        <div class="group-title" id="label-B"><span class="badge">B</span><span>區域 B</span></div>
+        <div class="grid" data-group="B"></div>
+      </section>
+      <section class="group" id="group-K" aria-labelledby="label-K">
+        <div class="group-title" id="label-K"><span class="badge">K</span><span>區域 K</span></div>
+        <div class="grid" data-group="K"></div>
+      </section>
+    </main>
+    <footer class="footer">選擇您的桌位開始點餐</footer>
+  </div>
+
+  <script>
+  (function(){
+    var TABLES = {
+      A: ['A1','A2','A3','A4'],
+      B: ['B1','B2','B3','B4','B5','B6','B7'],
+      K: ['K1','K2','K3','K4']
+    };
+
+    // 之後收到各桌連結後，將此對照表填入即可。
+    // 例如： TABLE_LINKS.A1 = 'https://...';
+    var TABLE_LINKS = Object.create(null);
+    // 已設定桌位連結
+    TABLE_LINKS.A1 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QTE';
+    TABLE_LINKS.A2 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QTI';
+    TABLE_LINKS.A3 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QTM';
+    TABLE_LINKS.A4 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QTQ';
+    TABLE_LINKS.B1 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjE';
+    TABLE_LINKS.B2 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjI';
+    TABLE_LINKS.B3 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjM';
+    TABLE_LINKS.B4 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjQ';
+    TABLE_LINKS.B5 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjU';
+    TABLE_LINKS.B6 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=QjY';
+    TABLE_LINKS.B7 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=Qjc';
+    TABLE_LINKS.K1 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=SzE';
+    TABLE_LINKS.K2 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=SzI';
+    TABLE_LINKS.K3 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=SzM';
+    TABLE_LINKS.K4 = 'https://shop.ichefpos.com/store/XtjyIxBL/instore/qrcode?tableName=SzQ';
+
+    function createCard(tableId){
+      var hasLink = typeof TABLE_LINKS[tableId] === 'string' && TABLE_LINKS[tableId].length > 0;
+      var a = document.createElement('a');
+      a.className = 'card';
+      a.setAttribute('data-table', tableId);
+      a.href = hasLink ? TABLE_LINKS[tableId] : '#';
+      if (!hasLink) a.setAttribute('aria-disabled', 'true');
+
+      var label = document.createElement('span');
+      label.className = 'label';
+      label.textContent = '桌位';
+
+      var idEl = document.createElement('strong');
+      idEl.className = 'table-id';
+      idEl.textContent = tableId;
+
+      var cta = document.createElement('span');
+      cta.className = 'cta';
+      cta.textContent = hasLink ? '開始點餐' : '等待設定';
+
+      a.appendChild(label);
+      a.appendChild(idEl);
+      a.appendChild(cta);
+
+      if (!hasLink) {
+        a.addEventListener('click', function(e){
+          e.preventDefault();
+          alert('此桌位連結尚未設定，請稍後或聯絡服務人員。');
+        });
+      }
+      return a;
+    }
+
+    function render(){
+      ['A','B','K'].forEach(function(group){
+        var wrap = document.querySelector('.grid[data-group="' + group + '"]');
+        if (!wrap) return;
+        wrap.innerHTML = '';
+        TABLES[group].forEach(function(id){ wrap.appendChild(createCard(id)); });
+      });
+    }
+
+    // 對外介面：可在 console 呼叫以批量設定連結
+    // window.applyTableLinks({ A1: 'https://...', B3: 'https://...' })
+    window.applyTableLinks = function(map){
+      if (!map || typeof map !== 'object') return;
+      Object.keys(map).forEach(function(k){ TABLE_LINKS[k] = map[k]; });
+      render();
+    };
+
+    render();
+  })();
+  </script>
+</body>
+</html>
