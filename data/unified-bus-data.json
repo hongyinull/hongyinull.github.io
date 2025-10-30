@@ -1,6 +1,6 @@
 {
   "api_version": "1.0",
-  "last_updated": "2025-10-30T14:44:10.854276",
+  "last_updated": "2025-10-30T15:18:10.350512",
   "data_version": "2025-10-30",
   "routes": [
     {
@@ -238,27 +238,6 @@
             "weekday"
           ],
           "note": ""
-        },
-        {
-          "shift_id": "NTHU_MainToNanda_1240",
-          "departure_time": "12:40",
-          "departure_stop": "北校門口",
-          "destination_stop": "南大校門",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
         },
         {
           "shift_id": "NTHU_MainToNanda_1250",
@@ -501,27 +480,6 @@
           "note": ""
         },
         {
-          "shift_id": "NTHU_MainToNanda_1545",
-          "departure_time": "15:45",
-          "departure_stop": "北校門口",
-          "destination_stop": "南大校門",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
-        },
-        {
           "shift_id": "NTHU_MainToNanda_1630",
           "departure_time": "16:30",
           "departure_stop": "北校門口",
@@ -700,27 +658,6 @@
             "weekday"
           ],
           "note": ""
-        },
-        {
-          "shift_id": "NTHU_MainToNanda_1900",
-          "departure_time": "19:00",
-          "departure_stop": "北校門口",
-          "destination_stop": "南大校門",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
         },
         {
           "shift_id": "NTHU_MainToNanda_1910",
@@ -921,27 +858,6 @@
             "weekday"
           ],
           "note": "週五停駛"
-        },
-        {
-          "shift_id": "NTHU_MainToNanda_730",
-          "departure_time": "7:30",
-          "departure_stop": "北校門口",
-          "destination_stop": "南大校門",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
         },
         {
           "shift_id": "NTHU_MainToNanda_740",
@@ -1262,27 +1178,6 @@
           "note": " "
         },
         {
-          "shift_id": "NTHU_NandaToMain_1223",
-          "departure_time": "12:23",
-          "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
-        },
-        {
           "shift_id": "NTHU_NandaToMain_1235",
           "departure_time": "12:35",
           "departure_stop": "南大校門",
@@ -1523,27 +1418,6 @@
           "note": ""
         },
         {
-          "shift_id": "NTHU_NandaToMain_1518",
-          "departure_time": "15:18",
-          "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
-        },
-        {
           "shift_id": "NTHU_NandaToMain_1540",
           "departure_time": "15:40",
           "departure_stop": "南大校門",
@@ -1742,27 +1616,6 @@
             "weekday"
           ],
           "note": ""
-        },
-        {
-          "shift_id": "NTHU_NandaToMain_1843",
-          "departure_time": "18:43",
-          "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
         },
         {
           "shift_id": "NTHU_NandaToMain_1910",
@@ -1965,27 +1818,6 @@
           "note": ""
         },
         {
-          "shift_id": "NTHU_NandaToMain_733",
-          "departure_time": "7:33",
-          "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
-          "bus_number": "",
-          "operating_days": {
-            "monday": true,
-            "tuesday": true,
-            "wednesday": true,
-            "thursday": true,
-            "friday": true,
-            "saturday": false,
-            "sunday": false
-          },
-          "service_tags": [
-            "83",
-            "weekday"
-          ],
-          "note": "此為付費市區公車(83號公車直達兩校區)"
-        },
-        {
           "shift_id": "NTHU_NandaToMain_800",
           "departure_time": "8:00",
           "departure_stop": "南大校門",
@@ -2164,6 +1996,392 @@
             "weekday"
           ],
           "note": ""
+        }
+      ]
+    },
+    {
+      "route_id": "NTHU_83ToMain",
+      "school_id": "NTHU",
+      "school_name": "國立清華大學",
+      "route_name": "83線往清大",
+      "route_tags": [
+        "intercampus",
+        "83"
+      ],
+      "stops": [
+        {
+          "stop_id": "N83_01",
+          "name": "成德路",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_02",
+          "name": "南大校區",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_03",
+          "name": "南大食品路口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_04",
+          "name": "新竹國小",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_05",
+          "name": "西大路",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_06",
+          "name": "竹蓮街",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_07",
+          "name": "東南街口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_08",
+          "name": "警察宿舍",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_09",
+          "name": "新竹轉運站",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_10",
+          "name": "學園商場",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_11",
+          "name": "建華國中",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_12",
+          "name": "介壽山口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_13",
+          "name": "萬佛寺",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_14",
+          "name": "高峰植物園",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_15",
+          "name": "雞蛋面",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_16",
+          "name": "台積館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_17",
+          "name": "人社院/生科館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_18",
+          "name": "綜二館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83_19",
+          "name": "清大北校門",
+          "travel_time_to_next": null
+        }
+      ],
+      "shifts": [
+        {
+          "shift_id": "NTHU_83ToMain_1223",
+          "departure_time": "12:23",
+          "departure_stop": "成德路",
+          "destination_stop": "清大北校門",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToMain_1518",
+          "departure_time": "15:18",
+          "departure_stop": "成德路",
+          "destination_stop": "清大北校門",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToMain_1843",
+          "departure_time": "18:43",
+          "departure_stop": "成德路",
+          "destination_stop": "清大北校門",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToMain_733",
+          "departure_time": "7:33",
+          "departure_stop": "成德路",
+          "destination_stop": "清大北校門",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        }
+      ]
+    },
+    {
+      "route_id": "NTHU_83ToNanda",
+      "school_id": "NTHU",
+      "school_name": "國立清華大學",
+      "route_name": "83線往南大",
+      "route_tags": [
+        "intercampus",
+        "83"
+      ],
+      "stops": [
+        {
+          "stop_id": "N83R_01",
+          "name": "清大北校門",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_02",
+          "name": "綜二館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_03",
+          "name": "人社院/生科館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_04",
+          "name": "台積館",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_05",
+          "name": "雞蛋面",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_06",
+          "name": "高峰植物園",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_07",
+          "name": "萬佛寺",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_08",
+          "name": "介壽山口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_09",
+          "name": "建華國中",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_10",
+          "name": "學園商場",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_11",
+          "name": "新竹轉運站",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_12",
+          "name": "警察宿舍",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_13",
+          "name": "東南街口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_14",
+          "name": "竹蓮街",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_15",
+          "name": "西大路",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_16",
+          "name": "新竹國小",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_17",
+          "name": "南大食品路口",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_18",
+          "name": "南大校區",
+          "travel_time_to_next": 5
+        },
+        {
+          "stop_id": "N83R_19",
+          "name": "成德路",
+          "travel_time_to_next": null
+        }
+      ],
+      "shifts": [
+        {
+          "shift_id": "NTHU_83ToNanda_1240",
+          "departure_time": "12:40",
+          "departure_stop": "清大北校門",
+          "destination_stop": "成德路",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToNanda_1545",
+          "departure_time": "15:45",
+          "departure_stop": "清大北校門",
+          "destination_stop": "成德路",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToNanda_1900",
+          "departure_time": "19:00",
+          "departure_stop": "清大北校門",
+          "destination_stop": "成德路",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
+        },
+        {
+          "shift_id": "NTHU_83ToNanda_730",
+          "departure_time": "7:30",
+          "departure_stop": "清大北校門",
+          "destination_stop": "成德路",
+          "bus_number": "",
+          "operating_days": {
+            "monday": true,
+            "tuesday": true,
+            "wednesday": true,
+            "thursday": true,
+            "friday": true,
+            "saturday": false,
+            "sunday": false
+          },
+          "service_tags": [
+            "83",
+            "weekday"
+          ],
+          "note": "此為付費市區公車(83號公車直達兩校區)"
         }
       ]
     },
@@ -8074,14 +8292,14 @@
     }
   ],
   "metadata": {
-    "total_routes": 16,
+    "total_routes": 18,
     "total_shifts": 361,
     "total_schools": 2,
     "schools": [
       {
         "school_id": "NTHU",
         "school_name": "國立清華大學",
-        "route_count": 10,
+        "route_count": 12,
         "shift_count": 278
       },
       {
