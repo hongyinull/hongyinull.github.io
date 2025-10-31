@@ -1,7 +1,7 @@
 {
   "api_version": "1.0",
-  "last_updated": "2025-10-30T15:18:10.350512",
-  "data_version": "2025-10-30",
+  "last_updated": "2025-10-31T00:10:47.813213",
+  "data_version": "2025-10-31",
   "routes": [
     {
       "route_id": "NTHU_MainToNanda",
@@ -14,7 +14,7 @@
       "stops": [
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": 1
         },
         {
@@ -42,7 +42,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1025",
           "departure_time": "10:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -62,7 +62,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1055",
           "departure_time": "10:55",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -82,7 +82,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1130",
           "departure_time": "11:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -102,7 +102,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1205",
           "departure_time": "12:05",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -122,7 +122,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1210",
           "departure_time": "12:10",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -142,7 +142,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1215",
           "departure_time": "12:15",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -162,7 +162,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1220",
           "departure_time": "12:20",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -182,7 +182,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1225",
           "departure_time": "12:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -202,7 +202,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1230_weekend",
           "departure_time": "12:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -222,7 +222,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1235",
           "departure_time": "12:35",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -242,7 +242,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1250",
           "departure_time": "12:50",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -262,7 +262,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1300",
           "departure_time": "13:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -282,7 +282,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1310",
           "departure_time": "13:10",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -302,7 +302,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1320",
           "departure_time": "13:20",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -322,7 +322,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1400",
           "departure_time": "14:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -342,7 +342,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1425",
           "departure_time": "14:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -362,7 +362,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1430_weekend",
           "departure_time": "14:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -382,7 +382,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1500",
           "departure_time": "15:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -402,7 +402,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1510",
           "departure_time": "15:10",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -422,7 +422,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1515",
           "departure_time": "15:15",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -442,7 +442,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1520",
           "departure_time": "15:20",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -462,7 +462,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1525",
           "departure_time": "15:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -482,7 +482,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1630",
           "departure_time": "16:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -502,7 +502,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1650",
           "departure_time": "16:50",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -522,7 +522,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1700",
           "departure_time": "17:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -542,7 +542,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1730",
           "departure_time": "17:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -562,7 +562,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1730_weekend",
           "departure_time": "17:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -582,7 +582,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1800",
           "departure_time": "18:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -602,7 +602,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1815",
           "departure_time": "18:15",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -622,7 +622,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1830",
           "departure_time": "18:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -642,7 +642,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1850",
           "departure_time": "18:50",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -662,7 +662,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1910",
           "departure_time": "19:10",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -682,7 +682,7 @@
         {
           "shift_id": "NTHU_MainToNanda_1930",
           "departure_time": "19:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -702,7 +702,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2000",
           "departure_time": "20:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -722,7 +722,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2030",
           "departure_time": "20:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -742,7 +742,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2055",
           "departure_time": "20:55",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -762,7 +762,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2125",
           "departure_time": "21:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -782,7 +782,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2155",
           "departure_time": "21:55",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -802,7 +802,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2225",
           "departure_time": "22:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -822,7 +822,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2255",
           "departure_time": "22:55",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -842,7 +842,7 @@
         {
           "shift_id": "NTHU_MainToNanda_2325",
           "departure_time": "23:25",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -862,7 +862,7 @@
         {
           "shift_id": "NTHU_MainToNanda_740",
           "departure_time": "7:40",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -882,7 +882,7 @@
         {
           "shift_id": "NTHU_MainToNanda_820",
           "departure_time": "8:20",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -902,7 +902,7 @@
         {
           "shift_id": "NTHU_MainToNanda_900",
           "departure_time": "9:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -922,7 +922,7 @@
         {
           "shift_id": "NTHU_MainToNanda_900_weekend",
           "departure_time": "9:00",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -942,7 +942,7 @@
         {
           "shift_id": "NTHU_MainToNanda_930",
           "departure_time": "9:30",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -962,7 +962,7 @@
         {
           "shift_id": "NTHU_MainToNanda_940",
           "departure_time": "9:40",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -982,7 +982,7 @@
         {
           "shift_id": "NTHU_MainToNanda_955",
           "departure_time": "9:55",
-          "departure_stop": "北校門口",
+          "departure_stop": "清大北校門",
           "destination_stop": "南大校門",
           "bus_number": "",
           "operating_days": {
@@ -1032,7 +1032,7 @@
         },
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": null
         }
       ],
@@ -1041,7 +1041,7 @@
           "shift_id": "NTHU_NandaToMain_1000",
           "departure_time": "10:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1061,7 +1061,7 @@
           "shift_id": "NTHU_NandaToMain_1110",
           "departure_time": "11:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1081,7 +1081,7 @@
           "shift_id": "NTHU_NandaToMain_1130",
           "departure_time": "11:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1101,7 +1101,7 @@
           "shift_id": "NTHU_NandaToMain_1200_weekend",
           "departure_time": "12:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -1121,7 +1121,7 @@
           "shift_id": "NTHU_NandaToMain_1205",
           "departure_time": "12:05",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1141,7 +1141,7 @@
           "shift_id": "NTHU_NandaToMain_1215",
           "departure_time": "12:15",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1161,7 +1161,7 @@
           "shift_id": "NTHU_NandaToMain_1220",
           "departure_time": "12:20",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1181,7 +1181,7 @@
           "shift_id": "NTHU_NandaToMain_1235",
           "departure_time": "12:35",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1201,7 +1201,7 @@
           "shift_id": "NTHU_NandaToMain_1250",
           "departure_time": "12:50",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1221,7 +1221,7 @@
           "shift_id": "NTHU_NandaToMain_1300",
           "departure_time": "13:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1241,7 +1241,7 @@
           "shift_id": "NTHU_NandaToMain_1330",
           "departure_time": "13:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1261,7 +1261,7 @@
           "shift_id": "NTHU_NandaToMain_1400",
           "departure_time": "14:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1281,7 +1281,7 @@
           "shift_id": "NTHU_NandaToMain_1400_weekend",
           "departure_time": "14:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -1301,7 +1301,7 @@
           "shift_id": "NTHU_NandaToMain_1450",
           "departure_time": "14:50",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1321,7 +1321,7 @@
           "shift_id": "NTHU_NandaToMain_1500",
           "departure_time": "15:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1341,7 +1341,7 @@
           "shift_id": "NTHU_NandaToMain_1500_weekend",
           "departure_time": "15:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -1361,7 +1361,7 @@
           "shift_id": "NTHU_NandaToMain_1505",
           "departure_time": "15:05",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1381,7 +1381,7 @@
           "shift_id": "NTHU_NandaToMain_1510",
           "departure_time": "15:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1401,7 +1401,7 @@
           "shift_id": "NTHU_NandaToMain_1515",
           "departure_time": "15:15",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1421,7 +1421,7 @@
           "shift_id": "NTHU_NandaToMain_1540",
           "departure_time": "15:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1441,7 +1441,7 @@
           "shift_id": "NTHU_NandaToMain_1630",
           "departure_time": "16:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1461,7 +1461,7 @@
           "shift_id": "NTHU_NandaToMain_1655",
           "departure_time": "16:55",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1481,7 +1481,7 @@
           "shift_id": "NTHU_NandaToMain_1725",
           "departure_time": "17:25",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1501,7 +1501,7 @@
           "shift_id": "NTHU_NandaToMain_1730",
           "departure_time": "17:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1521,7 +1521,7 @@
           "shift_id": "NTHU_NandaToMain_1750",
           "departure_time": "17:50",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1541,7 +1541,7 @@
           "shift_id": "NTHU_NandaToMain_1810",
           "departure_time": "18:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1561,7 +1561,7 @@
           "shift_id": "NTHU_NandaToMain_1820",
           "departure_time": "18:20",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1581,7 +1581,7 @@
           "shift_id": "NTHU_NandaToMain_1830",
           "departure_time": "18:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1601,7 +1601,7 @@
           "shift_id": "NTHU_NandaToMain_1840",
           "departure_time": "18:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1621,7 +1621,7 @@
           "shift_id": "NTHU_NandaToMain_1910",
           "departure_time": "19:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1641,7 +1641,7 @@
           "shift_id": "NTHU_NandaToMain_1940",
           "departure_time": "19:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1661,7 +1661,7 @@
           "shift_id": "NTHU_NandaToMain_2015",
           "departure_time": "20:15",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1681,7 +1681,7 @@
           "shift_id": "NTHU_NandaToMain_2040",
           "departure_time": "20:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1701,7 +1701,7 @@
           "shift_id": "NTHU_NandaToMain_2110",
           "departure_time": "21:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1721,7 +1721,7 @@
           "shift_id": "NTHU_NandaToMain_2140",
           "departure_time": "21:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1741,7 +1741,7 @@
           "shift_id": "NTHU_NandaToMain_2210",
           "departure_time": "22:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1761,7 +1761,7 @@
           "shift_id": "NTHU_NandaToMain_2240",
           "departure_time": "22:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1781,7 +1781,7 @@
           "shift_id": "NTHU_NandaToMain_2310",
           "departure_time": "23:10",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1801,7 +1801,7 @@
           "shift_id": "NTHU_NandaToMain_720",
           "departure_time": "7:20",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1821,7 +1821,7 @@
           "shift_id": "NTHU_NandaToMain_800",
           "departure_time": "8:00",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1841,7 +1841,7 @@
           "shift_id": "NTHU_NandaToMain_830_weekend",
           "departure_time": "8:30",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -1861,7 +1861,7 @@
           "shift_id": "NTHU_NandaToMain_835",
           "departure_time": "8:35",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1881,7 +1881,7 @@
           "shift_id": "NTHU_NandaToMain_840",
           "departure_time": "8:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1901,7 +1901,7 @@
           "shift_id": "NTHU_NandaToMain_845",
           "departure_time": "8:45",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1921,7 +1921,7 @@
           "shift_id": "NTHU_NandaToMain_920",
           "departure_time": "9:20",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1941,7 +1941,7 @@
           "shift_id": "NTHU_NandaToMain_940",
           "departure_time": "9:40",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1961,7 +1961,7 @@
           "shift_id": "NTHU_NandaToMain_950",
           "departure_time": "9:50",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -1981,7 +1981,7 @@
           "shift_id": "NTHU_NandaToMain_955",
           "departure_time": "9:55",
           "departure_stop": "南大校門",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2010,97 +2010,97 @@
       ],
       "stops": [
         {
-          "stop_id": "N83_01",
+          "stop_id": "N2",
           "name": "成德路",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_02",
+          "stop_id": "N3",
           "name": "南大校區",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_03",
+          "stop_id": "N4",
           "name": "南大食品路口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_04",
+          "stop_id": "A4",
           "name": "新竹國小",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_05",
+          "stop_id": "A5",
           "name": "西大路",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_06",
+          "stop_id": "A6",
           "name": "竹蓮街",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_07",
+          "stop_id": "A7",
           "name": "東南街口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_08",
+          "stop_id": "A8",
           "name": "警察宿舍",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_09",
+          "stop_id": "A9",
           "name": "新竹轉運站",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_10",
+          "stop_id": "A10",
           "name": "學園商場",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_11",
+          "stop_id": "A11",
           "name": "建華國中",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_12",
+          "stop_id": "A12",
           "name": "介壽山口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_13",
+          "stop_id": "A13",
           "name": "萬佛寺",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_14",
+          "stop_id": "A14",
           "name": "高峰植物園",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_15",
+          "stop_id": "A15",
           "name": "雞蛋面",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_16",
+          "stop_id": "T5",
           "name": "台積館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_17",
+          "stop_id": "T4",
           "name": "人社院/生科館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_18",
+          "stop_id": "T2",
           "name": "綜二館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83_19",
+          "stop_id": "T1",
           "name": "清大北校門",
           "travel_time_to_next": null
         }
@@ -2203,97 +2203,97 @@
       ],
       "stops": [
         {
-          "stop_id": "N83R_01",
+          "stop_id": "T1",
           "name": "清大北校門",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_02",
+          "stop_id": "T2",
           "name": "綜二館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_03",
+          "stop_id": "T4",
           "name": "人社院/生科館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_04",
+          "stop_id": "T5",
           "name": "台積館",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_05",
+          "stop_id": "A15",
           "name": "雞蛋面",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_06",
+          "stop_id": "A14",
           "name": "高峰植物園",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_07",
+          "stop_id": "A13",
           "name": "萬佛寺",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_08",
+          "stop_id": "A12",
           "name": "介壽山口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_09",
+          "stop_id": "A11",
           "name": "建華國中",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_10",
+          "stop_id": "A10",
           "name": "學園商場",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_11",
+          "stop_id": "A9",
           "name": "新竹轉運站",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_12",
+          "stop_id": "A8",
           "name": "警察宿舍",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_13",
+          "stop_id": "A7",
           "name": "東南街口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_14",
+          "stop_id": "A6",
           "name": "竹蓮街",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_15",
+          "stop_id": "A5",
           "name": "西大路",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_16",
+          "stop_id": "A4",
           "name": "新竹國小",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_17",
+          "stop_id": "N4",
           "name": "南大食品路口",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_18",
+          "stop_id": "N3",
           "name": "南大校區",
           "travel_time_to_next": 5
         },
         {
-          "stop_id": "N83R_19",
+          "stop_id": "N2",
           "name": "成德路",
           "travel_time_to_next": null
         }
@@ -2397,7 +2397,7 @@
       "stops": [
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": 1
         },
         {
@@ -2455,7 +2455,7 @@
         },
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": null
         }
       ],
@@ -2464,7 +2464,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1002",
           "departure_time": "10:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2486,7 +2486,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1002",
           "departure_time": "10:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2507,7 +2507,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1007",
           "departure_time": "10:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2528,7 +2528,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1007",
           "departure_time": "10:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2549,7 +2549,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1012",
           "departure_time": "10:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2571,7 +2571,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1012",
           "departure_time": "10:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2592,7 +2592,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1017",
           "departure_time": "10:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2614,7 +2614,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1017",
           "departure_time": "10:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2635,7 +2635,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1027",
           "departure_time": "10:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2656,7 +2656,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1042",
           "departure_time": "10:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2677,7 +2677,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1102",
           "departure_time": "11:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2698,7 +2698,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1122",
           "departure_time": "11:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2719,7 +2719,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1142",
           "departure_time": "11:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2740,7 +2740,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1202",
           "departure_time": "12:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2761,7 +2761,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1202",
           "departure_time": "12:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2782,7 +2782,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1207",
           "departure_time": "12:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2804,7 +2804,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1207",
           "departure_time": "12:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2825,7 +2825,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1212",
           "departure_time": "12:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2847,7 +2847,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1212",
           "departure_time": "12:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2868,7 +2868,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1217",
           "departure_time": "12:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2890,7 +2890,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1217",
           "departure_time": "12:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2911,7 +2911,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1217_weekend",
           "departure_time": "12:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -2932,7 +2932,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1222",
           "departure_time": "12:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2953,7 +2953,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1237",
           "departure_time": "12:37",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2974,7 +2974,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1237",
           "departure_time": "12:37",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -2995,7 +2995,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1247",
           "departure_time": "12:47",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3017,7 +3017,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1247",
           "departure_time": "12:47",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3038,7 +3038,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1257",
           "departure_time": "12:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3060,7 +3060,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1257",
           "departure_time": "12:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3081,7 +3081,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1302",
           "departure_time": "13:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3102,7 +3102,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1307",
           "departure_time": "13:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3124,7 +3124,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1307",
           "departure_time": "13:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3145,7 +3145,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1312",
           "departure_time": "13:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3167,7 +3167,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1312",
           "departure_time": "13:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3188,7 +3188,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1317",
           "departure_time": "13:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3210,7 +3210,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1317",
           "departure_time": "13:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3231,7 +3231,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1317_weekend",
           "departure_time": "13:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -3252,7 +3252,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1322",
           "departure_time": "13:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3274,7 +3274,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1322",
           "departure_time": "13:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3295,7 +3295,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1327",
           "departure_time": "13:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3316,7 +3316,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1332",
           "departure_time": "13:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3337,7 +3337,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1342",
           "departure_time": "13:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3358,7 +3358,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1352",
           "departure_time": "13:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3379,7 +3379,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1352",
           "departure_time": "13:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3400,7 +3400,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1402",
           "departure_time": "14:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3421,7 +3421,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1402",
           "departure_time": "14:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3442,7 +3442,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1407",
           "departure_time": "14:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3463,7 +3463,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1412",
           "departure_time": "14:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3485,7 +3485,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1417",
           "departure_time": "14:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3506,7 +3506,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1422",
           "departure_time": "14:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3527,7 +3527,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1432",
           "departure_time": "14:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3548,7 +3548,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1442",
           "departure_time": "14:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3569,7 +3569,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1452",
           "departure_time": "14:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3590,7 +3590,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1502",
           "departure_time": "15:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3611,7 +3611,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1502",
           "departure_time": "15:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3632,7 +3632,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1507",
           "departure_time": "15:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3653,7 +3653,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1512",
           "departure_time": "15:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3674,7 +3674,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1512",
           "departure_time": "15:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3695,7 +3695,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1517",
           "departure_time": "15:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3717,7 +3717,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1517",
           "departure_time": "15:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3738,7 +3738,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1522",
           "departure_time": "15:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3760,7 +3760,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1522",
           "departure_time": "15:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3781,7 +3781,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1527",
           "departure_time": "15:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3802,7 +3802,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1527",
           "departure_time": "15:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3823,7 +3823,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1532",
           "departure_time": "15:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3845,7 +3845,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1532",
           "departure_time": "15:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3866,7 +3866,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1537",
           "departure_time": "15:37",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3887,7 +3887,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1542",
           "departure_time": "15:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3908,7 +3908,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1557",
           "departure_time": "15:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3929,7 +3929,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1617",
           "departure_time": "16:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3950,7 +3950,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1627",
           "departure_time": "16:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -3972,7 +3972,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1627_weekend",
           "departure_time": "16:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -3993,7 +3993,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1632",
           "departure_time": "16:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4014,7 +4014,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1642",
           "departure_time": "16:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4035,7 +4035,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1657",
           "departure_time": "16:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4056,7 +4056,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1712",
           "departure_time": "17:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4077,7 +4077,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1712",
           "departure_time": "17:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4098,7 +4098,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1722",
           "departure_time": "17:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4119,7 +4119,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1722",
           "departure_time": "17:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4140,7 +4140,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1727",
           "departure_time": "17:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4161,7 +4161,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1732",
           "departure_time": "17:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4182,7 +4182,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1732",
           "departure_time": "17:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4203,7 +4203,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1742",
           "departure_time": "17:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4224,7 +4224,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1752",
           "departure_time": "17:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4245,7 +4245,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1802",
           "departure_time": "18:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4266,7 +4266,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1807",
           "departure_time": "18:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4288,7 +4288,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1812",
           "departure_time": "18:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4309,7 +4309,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1817",
           "departure_time": "18:17",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4330,7 +4330,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1822",
           "departure_time": "18:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4352,7 +4352,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1822",
           "departure_time": "18:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4374,7 +4374,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1827",
           "departure_time": "18:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4395,7 +4395,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1832",
           "departure_time": "18:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4416,7 +4416,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1832",
           "departure_time": "18:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4437,7 +4437,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1837",
           "departure_time": "18:37",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4458,7 +4458,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1842",
           "departure_time": "18:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4480,7 +4480,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1857",
           "departure_time": "18:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4502,7 +4502,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1912",
           "departure_time": "19:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4523,7 +4523,7 @@
           "shift_id": "NTHU_T5ToT1_Red_1937",
           "departure_time": "19:37",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4544,7 +4544,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2002",
           "departure_time": "20:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4565,7 +4565,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2032",
           "departure_time": "20:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4586,7 +4586,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2057",
           "departure_time": "20:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4607,7 +4607,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2112",
           "departure_time": "21:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4628,7 +4628,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2132",
           "departure_time": "21:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4649,7 +4649,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2152",
           "departure_time": "21:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4670,7 +4670,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2207",
           "departure_time": "22:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4691,7 +4691,7 @@
           "shift_id": "NTHU_T5ToT1_Red_2227",
           "departure_time": "22:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4712,7 +4712,7 @@
           "shift_id": "NTHU_T5ToT1_Red_727",
           "departure_time": "7:27",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4733,7 +4733,7 @@
           "shift_id": "NTHU_T5ToT1_Red_752",
           "departure_time": "7:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4754,7 +4754,7 @@
           "shift_id": "NTHU_T5ToT1_Red_757",
           "departure_time": "7:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4775,7 +4775,7 @@
           "shift_id": "NTHU_T5ToT1_Red_812",
           "departure_time": "8:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4796,7 +4796,7 @@
           "shift_id": "NTHU_T5ToT1_Red_822",
           "departure_time": "8:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4817,7 +4817,7 @@
           "shift_id": "NTHU_T5ToT1_Red_832",
           "departure_time": "8:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4838,7 +4838,7 @@
           "shift_id": "NTHU_T5ToT1_Red_842",
           "departure_time": "8:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4859,7 +4859,7 @@
           "shift_id": "NTHU_T5ToT1_Red_842",
           "departure_time": "8:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4880,7 +4880,7 @@
           "shift_id": "NTHU_T5ToT1_Red_847",
           "departure_time": "8:47",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4903,7 +4903,7 @@
           "shift_id": "NTHU_T5ToT1_Red_852",
           "departure_time": "8:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4924,7 +4924,7 @@
           "shift_id": "NTHU_T5ToT1_Red_852",
           "departure_time": "8:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4945,7 +4945,7 @@
           "shift_id": "NTHU_T5ToT1_Red_857",
           "departure_time": "8:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4968,7 +4968,7 @@
           "shift_id": "NTHU_T5ToT1_Red_857",
           "departure_time": "8:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -4989,7 +4989,7 @@
           "shift_id": "NTHU_T5ToT1_Red_857_weekend",
           "departure_time": "8:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": false,
@@ -5011,7 +5011,7 @@
           "shift_id": "NTHU_T5ToT1_Red_902",
           "departure_time": "9:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5033,7 +5033,7 @@
           "shift_id": "NTHU_T5ToT1_Red_902",
           "departure_time": "9:02",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5054,7 +5054,7 @@
           "shift_id": "NTHU_T5ToT1_Red_907",
           "departure_time": "9:07",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5075,7 +5075,7 @@
           "shift_id": "NTHU_T5ToT1_Red_912",
           "departure_time": "9:12",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5096,7 +5096,7 @@
           "shift_id": "NTHU_T5ToT1_Red_922",
           "departure_time": "9:22",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5117,7 +5117,7 @@
           "shift_id": "NTHU_T5ToT1_Red_932",
           "departure_time": "9:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5138,7 +5138,7 @@
           "shift_id": "NTHU_T5ToT1_Red_932",
           "departure_time": "9:32",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5159,7 +5159,7 @@
           "shift_id": "NTHU_T5ToT1_Red_942",
           "departure_time": "9:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5181,7 +5181,7 @@
           "shift_id": "NTHU_T5ToT1_Red_942",
           "departure_time": "9:42",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5202,7 +5202,7 @@
           "shift_id": "NTHU_T5ToT1_Red_947",
           "departure_time": "9:47",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5224,7 +5224,7 @@
           "shift_id": "NTHU_T5ToT1_Red_947",
           "departure_time": "9:47",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5245,7 +5245,7 @@
           "shift_id": "NTHU_T5ToT1_Red_952",
           "departure_time": "9:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5266,7 +5266,7 @@
           "shift_id": "NTHU_T5ToT1_Red_952",
           "departure_time": "9:52",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5287,7 +5287,7 @@
           "shift_id": "NTHU_T5ToT1_Red_957",
           "departure_time": "9:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5309,7 +5309,7 @@
           "shift_id": "NTHU_T5ToT1_Red_957",
           "departure_time": "9:57",
           "departure_stop": "台積館",
-          "destination_stop": "北校門口",
+          "destination_stop": "清大北校門",
           "bus_number": "",
           "operating_days": {
             "monday": true,
@@ -5340,7 +5340,7 @@
       "stops": [
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": 1
         },
         {
@@ -5398,7 +5398,7 @@
         },
         {
           "stop_id": "T1",
-          "name": "北校門口",
+          "name": "清大北校門",
           "travel_time_to_next": null
         }
       ],
