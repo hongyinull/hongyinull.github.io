@@ -168,6 +168,13 @@
       padding: 20px;
     }
 
+    .remote-status {
+      margin-top: 10px;
+      font-size: 0.9em;
+      color: #4e3629;
+      text-align: center;
+    }
+
     .instructions h2 {
       margin-top: 0;
       color: #d17000;
@@ -203,11 +210,13 @@
           <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
           <img id="resultQrcode" src="" alt="獎品 QR Code">
           <button id="spinBtn" class="btn" onclick="spinWheel()">開始抽獎</button>
+          <p id="remoteStatus" class="remote-status">遠端連線準備中...</p>
         </div>
       </div>
     </div>
   </div>
 
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
   <script>
     // Idle rotation settings
     let isSpinning = false;
@@ -215,23 +224,13 @@
 
 
     const prizes = [
-      { name: "條子肉乾一條", area: 30, chance: 15, qrcode: "join.png" },
-      { name: "北海道濃豆乳", area: 5, chance: 5, qrcode: "join.png" },
-      { name: "手工香皂", area: 20, chance: 0, qrcode: "join.png" },
-      { name: "現金折價20元/現買現抵", area: 10, chance: 30, qrcode: "discount20.png" },
-      { name: "青春醋飲", area: 10, chance: 15, qrcode: "discount20.png" },
-      { name: "香炸芋頭丸", area: 25, chance: 35, qrcode: "discount20.png" }
-      // 以下為註解掉的獎項，可隨時恢復
-      // { name: "肉乾伴手禮", area: 8, chance: 8, qrcode: "join.png" },７
-      // { name: "再抽一次", area: 8, chance: 8, qrcode: "again.png" },
-      // { name: "章魚燒丸子", area: 12, chance: 4, qrcode: "join.png" },
-      // { name: "和牛咖哩mini杯", area: 10, chance: 0, qrcode: "join.png" },
-      // { name: "現炸章魚小丸子", area: 12, chance: 8, qrcod556589e: "join.png" },
-      // { name: "小菜三選一", area: 10, chance: 6, qrcode: "join.png" },
-      // { name: "銘謝惠顧", area: 4, chance: 3, qrcode: "thanks.png" },
-      // { name: "燒肉丼兌換券", area: 20, chance: 20, qrcode: "join.png" },
-      // { name: "現金折扣15元", area: 20, chance: 30, qrcode: "discount15.png" },
-      // { name: "現金折扣20元", area: 8, chance: 17, qrcode: "discount20.png" },
+      { name: "健康果醋飲", area: 28, chance: 38, qrcode: "join.png" },
+      { name: "迷你手工皂", area: 22, chance: 22, qrcode: "soap.png" },
+      { name: "海老炸蝦珠寶盒 兌換券", area: 8, chance: 4, qrcode: "join.png" },
+      { name: "狸小路御守", area: 14, chance: 12, qrcode: "join.png" },
+      { name: "芝麻心太軟兌換券", area: 12, chance: 10, qrcode: "join.png" },
+      { name: "現場消費88折！", area: 8, chance: 5, qrcode: "discount15.png" },
+      { name: "現場消費9折！", area: 8, chance: 9, qrcode: "discount10.png" }
     ];
 
     // Color palette for wheel slices (earthy, harmonious)
@@ -424,6 +423,33 @@
     // Start spin on any key press
     window.addEventListener('keydown', () => {
       if (!isSpinning) spinWheel();
+    });
+
+    // Remote trigger via PeerJS (remote page can connect with matching peerId)
+    const peerId = new URLSearchParams(window.location.search).get('peer') || 'draw-wheel-host';
+    const remoteStatus = document.getElementById('remoteStatus');
+    const peer = new Peer(peerId, {
+      host: '0.peerjs.com',
+      port: 443,
+      path: '/'
+    });
+    peer.on('open', () => {
+      remoteStatus.textContent = `遠端連線 ID：${peerId}`;
+    });
+    peer.on('connection', (conn) => {
+      remoteStatus.textContent = "遠端已連線，可透過手機控制抽獎";
+      conn.on('data', (data) => {
+        if (data === 'spin' && !isSpinning) {
+          spinWheel();
+        }
+      });
+      conn.on('close', () => {
+        remoteStatus.textContent = "遠端已斷線，等待再次連線...";
+      });
+    });
+    peer.on('error', (err) => {
+      console.error(err);
+      remoteStatus.textContent = `遠端連線錯誤：${err.type || err}`;
     });
   </script>
 </body>

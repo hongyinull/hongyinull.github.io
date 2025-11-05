@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <title>遠端抽獎控制器</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: "Helvetica Neue", sans-serif;
+      margin: 0;
+      padding: 30px 20px;
+      background: #fffbea;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    h1 {
+      margin: 0;
+      color: #d14343;
+      text-align: center;
+    }
+    .status {
+      font-size: 0.95em;
+      color: #4e3629;
+      text-align: center;
+    }
+    .control-card {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 24px;
+      width: min(420px, 100%);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    label {
+      font-weight: bold;
+      color: #4e3629;
+    }
+    input {
+      padding: 10px 14px;
+      border-radius: 10px;
+      border: 1px solid #d6a27f;
+      font-size: 1em;
+    }
+    button {
+      padding: 16px;
+      font-size: 1.4em;
+      font-weight: bold;
+      color: #ffffff;
+      background: linear-gradient(135deg, #e53935, #d32f2f);
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    button:active {
+      transform: scale(0.98);
+      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+  </style>
+</head>
+<body>
+  <h1>遠端抽獎控制器</h1>
+  <div class="control-card">
+    <p class="status" id="controllerStatus">初始化中...</p>
+    <label for="peerInput">螢幕端 ID</label>
+    <input id="peerInput" type="text" placeholder="draw-wheel-host">
+    <button id="spinRemoteBtn">抽獎</button>
+  </div>
+
+  <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
+  <script>
+    const statusEl = document.getElementById('controllerStatus');
+    const peerInput = document.getElementById('peerInput');
+    const spinBtn = document.getElementById('spinRemoteBtn');
+    const defaultTarget = new URLSearchParams(window.location.search).get('peer') || 'draw-wheel-host';
+    peerInput.value = defaultTarget;
+
+    const peer = new Peer(undefined, {
+      host: '0.peerjs.com',
+      port: 443,
+      path: '/'
+    });
+
+    let conn = null;
+    let retryTimer = null;
+
+    function updateStatus(message) {
+      statusEl.textContent = message;
+    }
+
+    function scheduleReconnect(targetId) {
+      if (retryTimer) return;
+      retryTimer = setTimeout(() => {
+        retryTimer = null;
+        connectToHost(targetId);
+      }, 2000);
+    }
+
+    function connectToHost(targetId) {
+      if (!peer.open) return;
+      if (conn && conn.open) {
+        conn.close();
+      }
+      updateStatus('嘗試連線至螢幕端...');
+      conn = peer.connect(targetId, { reliable: true });
+      conn.on('open', () => {
+        updateStatus(`已連線至螢幕端（ID：${targetId}）`);
+      });
+      conn.on('error', (err) => {
+        console.error(err);
+        updateStatus('連線錯誤，將自動重試...');
+        scheduleReconnect(targetId);
+      });
+      conn.on('close', () => {
+        updateStatus('連線中斷，將自動重試...');
+        scheduleReconnect(targetId);
+      });
+    }
+
+    peer.on('open', () => {
+      updateStatus('控制器已啟動，正在連線...');
+      connectToHost(peerInput.value.trim());
+    });
+
+    peer.on('error', (err) => {
+      console.error(err);
+      updateStatus(`控制器錯誤：${err.type || err}`);
+    });
+
+    peerInput.addEventListener('change', () => {
+      const targetId = peerInput.value.trim();
+      if (!targetId) {
+        updateStatus('請輸入有效的螢幕端 ID');
+        return;
+      }
+      connectToHost(targetId);
+    });
+
+    spinBtn.addEventListener('click', () => {
+      if (conn && conn.open) {
+        conn.send('spin');
+        updateStatus('已傳送抽獎指令');
+      } else {
+        updateStatus('尚未連線成功，請稍後再試');
+        connectToHost(peerInput.value.trim());
+      }
+    });
+  </script>
+</body>
+</html>
