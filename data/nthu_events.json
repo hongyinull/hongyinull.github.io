@@ -1,5 +1,13 @@
 [
   {
+    "title": "【2025清華大學圖書館月】AI上線中－探索×學習×實踐",
+    "description": "豐富活動等你來參加！ 關卡任務挑戰，集點抽大獎！",
+    "date_info": null,
+    "location": null,
+    "href": "https://www.lib.nthu.edu.tw/events/2025/libmonth/",
+    "image": "https://www.nthu.edu.tw/images/event_176223877452.png"
+  },
+  {
     "title": "華文所「潛園與新竹林恒茂家族學術研討會」",
     "description": "謹訂於11/7在人社院A202人文講堂 誠摯邀請您，一同走入竹塹在地歷史，見證家族與地方交織的記憶與光芒",
     "date_info": null,
@@ -24,22 +32,6 @@
     "image": "https://www.nthu.edu.tw/images/event_176051793141.jpg"
   },
   {
-    "title": "華文所「儒學的跨域傳佈與歷史流行國際學術研討會」",
-    "description": "10/25在人社院A202人文講堂舉辦 儒學思想跨越疆界的交流盛會，誠摯邀請您!!",
-    "date_info": null,
-    "location": null,
-    "href": "https://sinophone.site.nthu.edu.tw/p/406-1408-296505,r6386.php",
-    "image": "https://www.nthu.edu.tw/images/event_176051770153.jpg"
-  },
-  {
-    "title": "膠捲裡的台灣庶民史—電影大師王童週",
-    "description": "10/20至10/24，大師論壇x專題演講x電影放映 歡迎報名，重溫影史經典！",
-    "date_info": "10/20至10/24",
-    "location": null,
-    "href": "https://tl.site.nthu.edu.tw/p/406-1399-296672,r11.php",
-    "image": "https://www.nthu.edu.tw/images/event_175999895041.jpg"
-  },
-  {
     "title": "清華通識人物系列演講「新竹人，清華說」",
     "description": "五場精選講座，歡迎報名參加 主題書展10/30 ～11/30在總圖書館1樓弓形牆展出",
     "date_info": null,
@@ -62,5 +54,13 @@
     "location": null,
     "href": "https://cac.site.nthu.edu.tw/p/406-1549-294131,r9475.php",
     "image": "https://www.nthu.edu.tw/images/event_175740877155.png"
+  },
+  {
+    "title": "「捷英 蒔光-文物館從藍圖到新章」特展",
+    "description": "即日起至11/26(六)在旺宏館一樓文物館展覽廳 一起回顧文物館的經典展覽與最受歡迎的文物吧!!",
+    "date_info": null,
+    "location": null,
+    "href": "https://nthumuseum.wixsite.com/jieyingtakingroots",
+    "image": "https://www.nthu.edu.tw/images/event_175567642777.jpg"
   }
 ]
