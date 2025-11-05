@@ -35,16 +35,6 @@
       flex-direction: column;
       gap: 16px;
     }
-    label {
-      font-weight: bold;
-      color: #4e3629;
-    }
-    input {
-      padding: 10px 14px;
-      border-radius: 10px;
-      border: 1px solid #d6a27f;
-      font-size: 1em;
-    }
     button {
       padding: 16px;
       font-size: 1.4em;
@@ -70,18 +60,14 @@
   <h1>遠端抽獎控制器</h1>
   <div class="control-card">
     <p class="status" id="controllerStatus">初始化中...</p>
-    <label for="peerInput">螢幕端 ID</label>
-    <input id="peerInput" type="text" placeholder="draw-wheel-host">
     <button id="spinRemoteBtn">抽獎</button>
   </div>
 
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
   <script>
     const statusEl = document.getElementById('controllerStatus');
-    const peerInput = document.getElementById('peerInput');
     const spinBtn = document.getElementById('spinRemoteBtn');
-    const defaultTarget = new URLSearchParams(window.location.search).get('peer') || 'draw-wheel-host';
-    peerInput.value = defaultTarget;
+    const targetId = new URLSearchParams(window.location.search).get('peer') || 'draw-wheel-host';
 
     const peer = new Peer(undefined, {
       host: '0.peerjs.com',
@@ -126,22 +112,13 @@
     }
 
     peer.on('open', () => {
-      updateStatus('控制器已啟動，正在連線...');
-      connectToHost(peerInput.value.trim());
+      updateStatus(`控制器已啟動，正在連線至 ${targetId}...`);
+      connectToHost(targetId);
     });
 
     peer.on('error', (err) => {
       console.error(err);
       updateStatus(`控制器錯誤：${err.type || err}`);
-    });
-
-    peerInput.addEventListener('change', () => {
-      const targetId = peerInput.value.trim();
-      if (!targetId) {
-        updateStatus('請輸入有效的螢幕端 ID');
-        return;
-      }
-      connectToHost(targetId);
     });
 
     spinBtn.addEventListener('click', () => {
@@ -150,7 +127,7 @@
         updateStatus('已傳送抽獎指令');
       } else {
         updateStatus('尚未連線成功，請稍後再試');
-        connectToHost(peerInput.value.trim());
+        connectToHost(targetId);
       }
     });
   </script>
