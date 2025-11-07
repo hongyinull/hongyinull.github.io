@@ -1,7 +1,7 @@
 {
   "api_version": "1.0",
-  "last_updated": "2025-11-06T00:10:33.654862",
-  "data_version": "2025-11-06",
+  "last_updated": "2025-11-07T00:11:01.288351",
+  "data_version": "2025-11-07",
   "routes": [
     {
       "route_id": "NTHU_MainToNanda",
@@ -1338,26 +1338,6 @@
           "note": ""
         },
         {
-          "shift_id": "NTHU_NandaToMain_1500_weekend",
-          "departure_time": "15:00",
-          "departure_stop": "南大校門",
-          "destination_stop": "清大北校門",
-          "bus_number": "",
-          "operating_days": {
-            "monday": false,
-            "tuesday": false,
-            "wednesday": false,
-            "thursday": false,
-            "friday": false,
-            "saturday": true,
-            "sunday": true
-          },
-          "service_tags": [
-            "weekend"
-          ],
-          "note": ""
-        },
-        {
           "shift_id": "NTHU_NandaToMain_1505",
           "departure_time": "15:05",
           "departure_stop": "南大校門",
@@ -1474,6 +1454,26 @@
           },
           "service_tags": [
             "weekday"
+          ],
+          "note": ""
+        },
+        {
+          "shift_id": "NTHU_NandaToMain_1700_weekend",
+          "departure_time": "17:00",
+          "departure_stop": "南大校門",
+          "destination_stop": "清大北校門",
+          "bus_number": "",
+          "operating_days": {
+            "monday": false,
+            "tuesday": false,
+            "wednesday": false,
+            "thursday": false,
+            "friday": false,
+            "saturday": true,
+            "sunday": true
+          },
+          "service_tags": [
+            "weekend"
           ],
           "note": ""
         },
@@ -4897,7 +4897,7 @@
             "weekday",
             "weekend"
           ],
-          "note": "大型巴士, 11/8起週六有行駛"
+          "note": "大型巴士, 週六有行駛"
         },
         {
           "shift_id": "NTHU_T5ToT1_Red_852",
@@ -4953,16 +4953,15 @@
             "wednesday": true,
             "thursday": true,
             "friday": true,
-            "saturday": true,
+            "saturday": false,
             "sunday": false
           },
           "service_tags": [
             "bigbus",
             "red",
-            "weekday",
-            "weekend"
+            "weekday"
           ],
-          "note": "大型巴士、11/1週六有行駛"
+          "note": "大型巴士"
         },
         {
           "shift_id": "NTHU_T5ToT1_Red_857",
@@ -8283,7 +8282,7 @@
     {
       "school_id": "NTHU",
       "school_name": "國立清華大學",
-      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)影響導致誤點幾分鐘，敬請耐心等候。原週六8:50班次，將行駛至11月1日，自11月8日(六)起，週六8:50班次將調整為8:40發車。11月12日(三)本校運動會停課，當日校園公車行駛4班次，皆自校門口發車，行駛紅線，發車時間：8:00、12:00、13:20、17:30。"
+      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)影響導致誤點幾分鐘，敬請耐心等候。原週六8:50班次，自11月8日(六)起，調整為8:40發車。11月12日(三)本校運動會停課，當日校園公車行駛4班次，皆自校門口發車，行駛紅線，發車時間：8:00、12:00、13:20、17:30。"
     },
     {
       "school_id": "NTHU",
