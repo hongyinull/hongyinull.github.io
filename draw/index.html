@@ -204,12 +204,14 @@
         <div class="instructions">
           <!-- <h1>如何抽獎</h1> -->
           <h1>達成指定條件就可以免費抽獎！</h1>
+          <h1>----------------------------------------------------------------------------------------------</h1>
+          <h1>留言：狸小路燒肉讚</h1>
         </div>
         <div class="prize-list" id="result-panel">
-          <h2 id="result-title">免費抽大獎</h2>
+          <!-- <h2 id="result-title">免費抽大獎</h2> -->
           <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
           <img id="resultQrcode" src="" alt="獎品 QR Code">
-          <button id="spinBtn" class="btn" onclick="spinWheel()">開始抽獎</button>
+          <button id="spinBtn" class="btn" onclick="spinWheel()">掃描留言抽大獎</button>
           <p id="remoteStatus" class="remote-status">遠端連線準備中...</p>
         </div>
       </div>
@@ -396,7 +398,7 @@
         title.textContent = "加入抽獎";
         joinImg.style.display = "block";
         resultImg.style.display = "none";
-        spinBtn.textContent = '開始抽獎';
+        spinBtn.textContent = '點選幸運數字';
         spinBtn.disabled = false;
         isSpinning = false;
       }, 4000);
