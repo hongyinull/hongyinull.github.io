@@ -84,8 +84,8 @@
     }
 
     #result-panel img {
-      width: 70%;
-      max-width: 260px;
+      width: 60%;
+      max-width: 220px;
       height: auto;
       margin: 0 auto;
       object-fit: contain;
@@ -128,12 +128,20 @@
       display: flex;
       flex-direction: column;
       gap: 10px;
+      height: 100%;
+    }
+
+    .right-panel > * {
+      width: 100%;
     }
 
     .prize-list {
       background: #ffecec;
       border-radius: 10px;
-      padding: 16px 20px;
+      padding: 10px 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .prize-list h2 {
@@ -161,7 +169,14 @@
       text-align: center;
       justify-content: center;
       flex: 0;
-      align-self: flex-start;
+      align-self: stretch;
+    }
+
+    .result-message {
+      font-size: 1.1em;
+      color: #b03030;
+      margin: 10px 0 0;
+      min-height: 1.5em;
     }
 
     .instructions {
@@ -239,10 +254,9 @@
           <h1>留言：狸小路燒肉讚</h1>
         </div>
         <div class="prize-list" id="result-panel">
-          <!-- <h2 id="result-title">免費抽大獎</h2> -->
-          <h2 id="result-title">加入抽獎</h2>
           <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
           <img id="resultQrcode" src="" alt="獎品 QR Code">
+          <p id="resultMessage" class="result-message"></p>
           <p id="remoteStatus" class="remote-status">遠端連線準備中...</p>
         </div>
       </div>
@@ -407,11 +421,11 @@
     }
 
     function showResult(prize) {
-      const title = document.getElementById("result-title");
       const joinImg = document.getElementById("joinQrcode");
       const resultImg = document.getElementById("resultQrcode");
+      const resultMessage = document.getElementById("resultMessage");
       const spinBtn = document.getElementById('spinBtn');
-      title.textContent = `🎉 恭喜你抽中：${prize.name}`;
+      resultMessage.textContent = `🎉 恭喜你抽中：${prize.name}`;
       joinImg.style.display = "none";
       resultImg.src = prize.qrcode;
       resultImg.style.display = "block";
@@ -429,9 +443,9 @@
         }
       }, 1000);
       setTimeout(() => {
-        title.textContent = "加入抽獎";
         joinImg.style.display = "block";
         resultImg.style.display = "none";
+        resultMessage.textContent = "";
         spinBtn.textContent = '點選幸運數字';
         spinBtn.disabled = false;
         isSpinning = false;
