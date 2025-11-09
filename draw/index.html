@@ -84,7 +84,8 @@
     }
 
     #result-panel img {
-      width: 80%;
+      width: 70%;
+      max-width: 260px;
       height: auto;
       margin: 0 auto;
       object-fit: contain;
@@ -132,7 +133,7 @@
     .prize-list {
       background: #ffecec;
       border-radius: 10px;
-      padding: 20px;
+      padding: 16px 20px;
     }
 
     .prize-list h2 {
@@ -158,8 +159,9 @@
       flex-direction: column;
       align-items: center;
       text-align: center;
-      flex: 1;
       justify-content: center;
+      flex: 0;
+      align-self: flex-start;
     }
 
     .instructions {
@@ -190,6 +192,32 @@
     #resultQrcode {
       display: none;
     }
+
+    #keyOverlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(5rem, 25vw, 20rem);
+      font-weight: 900;
+      color: #fff;
+      text-shadow:
+        0 0 30px rgba(255, 0, 0, 0.75),
+        0 0 60px rgba(255, 0, 0, 0.45),
+        0 10px 30px rgba(0, 0, 0, 0.6);
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.15s ease;
+      z-index: 999;
+    }
+
+    #keyOverlay.visible {
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -199,6 +227,9 @@
         <h1 class="main-title">免費抽大獎</h1>
         <div class="separator"></div>
         <canvas id="wheel"></canvas>
+        <div class="button-wrapper">
+          <button id="spinBtn" class="btn" onclick="spinWheel()">點選幸運數字</button>
+        </div>
       </div>
       <div class="right-panel">
         <div class="instructions">
@@ -209,15 +240,18 @@
         </div>
         <div class="prize-list" id="result-panel">
           <!-- <h2 id="result-title">免費抽大獎</h2> -->
+          <h2 id="result-title">加入抽獎</h2>
           <img id="joinQrcode" src="join.png" alt="加入抽獎 QRCode">
           <img id="resultQrcode" src="" alt="獎品 QR Code">
-          <button id="spinBtn" class="btn" onclick="spinWheel()">掃描留言抽大獎</button>
           <p id="remoteStatus" class="remote-status">遠端連線準備中...</p>
         </div>
       </div>
     </div>
   </div>
 
+  <div id="keyOverlay"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
   <script src="https://unpkg.com/peerjs@1.5.2/dist/peerjs.min.js"></script>
   <script>
     // Idle rotation settings
@@ -402,6 +436,7 @@
         spinBtn.disabled = false;
         isSpinning = false;
       }, 4000);
+      launchConfetti();
     }
 
     drawWheel();
@@ -422,8 +457,77 @@
     }
     idleAnimate();
 
-    // Start spin on any key press
-    window.addEventListener('keydown', () => {
+    const keyOverlay = document.getElementById('keyOverlay');
+    let overlayTimeout;
+
+    function showKeyOverlay(label) {
+      if (!label) return;
+      keyOverlay.textContent = `${label}!!`;
+      keyOverlay.classList.add('visible');
+      clearTimeout(overlayTimeout);
+      overlayTimeout = setTimeout(() => {
+        keyOverlay.classList.remove('visible');
+      }, 900);
+    }
+
+    function formatKeyDisplay(key) {
+      if (!key) return "";
+      const aliases = {
+        ' ': 'SPACE',
+        'Enter': 'ENTER',
+        'Backspace': '⌫',
+        'Shift': 'SHIFT',
+        'Control': 'CTRL',
+        'Alt': 'ALT',
+        'Meta': '⌘'
+      };
+      if (aliases[key] !== undefined) return aliases[key];
+      if (key.startsWith('Arrow')) {
+        return `箭頭 ${key.slice(5).toUpperCase()}`;
+      }
+      if (key.length === 1) {
+        return key.toUpperCase();
+      }
+      return key.toUpperCase();
+    }
+
+    function launchConfetti() {
+      if (typeof confetti !== 'function') return;
+      const bursts = 8;
+      for (let i = 0; i < bursts; i++) {
+        setTimeout(() => {
+          confetti({
+            particleCount: 160,
+            spread: 88,
+            startVelocity: 55,
+            scalar: 1.4,
+            gravity: 0.7,
+            ticks: 250,
+            origin: {
+              x: 0.2 + Math.random() * 0.6,
+              y: Math.random() * 0.2
+            }
+          });
+        }, i * 120);
+      }
+      setTimeout(() => {
+        confetti({
+          particleCount: 240,
+          spread: 120,
+          startVelocity: 65,
+          scalar: 1.6,
+          gravity: 0.65,
+          origin: { x: 0.5, y: 0 }
+        });
+      }, bursts * 120);
+    }
+
+    // Start spin on any key press & show overlay
+    window.addEventListener('keydown', (event) => {
+      const displayKey = formatKeyDisplay(event.key || "");
+      if (displayKey) {
+        showKeyOverlay(displayKey);
+      }
       if (!isSpinning) spinWheel();
     });
 
