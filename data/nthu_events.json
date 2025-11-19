@@ -24,14 +24,6 @@
     "image": "https://www.nthu.edu.tw/images/event_176223877452.png"
   },
   {
-    "title": "【諾貝爾和平獎得主Tawakkol Karman】專題演講",
-    "description": "時間：11/17(一)14:00-16:00 地點：學習資源中心(旺宏館)1樓國際會議廳",
-    "date_info": "時間：11/17(一)14:00-16:00 地點：學習資源中心(旺宏館)1樓國際會議廳",
-    "location": "地點：學習資源中心(旺宏館)1樓國際會議廳",
-    "href": "https://forms.gle/Ds3xoZefisRnwjyP6",
-    "image": "https://www.nthu.edu.tw/images/event_176051803276.png"
-  },
-  {
     "title": "【乙未中的竹塹講座】即日起開放報名！",
     "description": "場次：11/1、11/22，地點：清大總圖(旺宏館)一樓 一起來聽1895的故事",
     "date_info": "場次：11/1、11/22",
@@ -62,5 +54,13 @@
     "location": null,
     "href": "https://nthumuseum.wixsite.com/jieyingtakingroots",
     "image": "https://www.nthu.edu.tw/images/event_175567642777.jpg"
+  },
+  {
+    "title": "【圖書館】穹頂映像：清大天文社攝影展",
+    "description": "6/13-12/8 在總圖書館4F-6F藝想空間 邀請您一同感受那份「初見繁星」的悸動",
+    "date_info": null,
+    "location": null,
+    "href": "https://www.lib.nthu.edu.tw/news/default.html#rss_news.xml!1617",
+    "image": "https://www.nthu.edu.tw/images/event_174979939984.jpg"
   }
 ]
