@@ -1,7 +1,7 @@
 {
   "api_version": "1.0",
-  "last_updated": "2025-11-19T00:10:57.210462",
-  "data_version": "2025-11-19",
+  "last_updated": "2025-11-20T00:10:56.733267",
+  "data_version": "2025-11-20",
   "routes": [
     {
       "route_id": "NTHU_MainToNanda",
@@ -97,7 +97,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1205",
@@ -117,7 +117,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1210",
@@ -177,7 +177,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1225",
@@ -277,7 +277,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1310",
@@ -337,7 +337,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1425",
@@ -477,7 +477,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1630",
@@ -517,7 +517,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1700",
@@ -537,7 +537,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1730",
@@ -657,7 +657,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_1910",
@@ -917,7 +917,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_900_weekend",
@@ -977,7 +977,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_MainToNanda_955",
@@ -1055,7 +1055,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1110",
@@ -1075,7 +1075,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1130",
@@ -1175,7 +1175,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": " "
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1235",
@@ -1255,7 +1255,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1400",
@@ -1375,7 +1375,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1515",
@@ -1435,7 +1435,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1655",
@@ -1495,7 +1495,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1730",
@@ -1575,7 +1575,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_1830",
@@ -1875,7 +1875,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_840",
@@ -1915,7 +1915,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_920",
@@ -1935,7 +1935,7 @@
           "service_tags": [
             "weekday"
           ],
-          "note": ""
+          "note": "路線二教育學院大樓"
         },
         {
           "shift_id": "NTHU_NandaToMain_940",
@@ -8282,12 +8282,12 @@
     {
       "school_id": "NTHU",
       "school_name": "國立清華大學",
-      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)影響導致誤點幾分鐘，敬請耐心等候。原週六8:50班次，自11月8日(六)起，調整為8:40發車。11月12日(三)本校運動會停課，當日校園公車行駛4班次，皆自校門口發車，行駛紅線，發車時間：8:00、12:00、13:20、17:30。"
+      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)影響導致誤點幾分鐘，敬請耐心等候。原週六8:50班次，自11/8(六)起，調整為8:40發車。11/20(四)上午 8:00起台積館前進行吊掛作業，故於藝術學院大樓工地圍籬前(「紫荊葉」雕塑品對面)的停車格設置台積館臨時站牌候車，至解除管制作業後即恢復正常候車。"
     },
     {
       "school_id": "NTHU",
       "school_name": "國立清華大學",
-      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)造成誤點，敬請耐心等候。11月12日(三)運動會停課，當日行駛行駛4班次，南大發車：8:00、12:00、14:00、17:00；校本部發車：8:30、12:30、14:30、17:30"
+      "content": "尖峰時間可能會因校內交通或天氣狀況(如下雨)造成誤點，敬請耐心等候。11/20(四)上午 8:00起台積館前進行吊掛作業，故於藝術學院大樓工地圍籬前(「紫荊葉」雕塑品對面)的停車格設置台積館臨時站牌候車，至解除管制作業後即恢復正常候車。"
     }
   ],
   "metadata": {
