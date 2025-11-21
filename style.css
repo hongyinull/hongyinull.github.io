@@ -10,6 +10,8 @@
     /* Final Font Stack */
     --font-main: 'Crimson Pro', 'Zen Old Mincho', 'Noto Serif TC', serif;
     --font-sans: 'Inter', sans-serif;
+    --font-mono: 'Courier New', Courier, monospace;
+    /* Added for code elements */
 
     --container-width: 900px;
 }
@@ -29,7 +31,19 @@ body.dark-theme {
     display: inline-block;
     transform: skewX(15deg);
     /* Tilts top-left to bottom-right like \ */
-    margin-right: 1px;
+    transition: transform 0.1s ease-out;
+}
+
+/* Scaled Chinese Characters */
+.cjk-char {
+    font-size: 0.85em;
+    display: inline-block;
+    /* Ensures transform/scaling works well if needed, though font-size works on inline too */
+}
+
+.slant-char.backslash {
+    transform: skewX(-15deg);
+    /* Default Vertical (Counter-skewed) */
 }
 
 * {
@@ -144,6 +158,20 @@ header {
 
 .info-label {
     color: var(--text-color);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.link-arrow {
+    font-family: var(--font-mono);
+    font-weight: bold;
+    font-size: 0.8em;
+    transition: transform 0.2s ease;
+}
+
+.info-label:hover .link-arrow {
+    transform: translateX(3px);
 }
 
 .info-value {

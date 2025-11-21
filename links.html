@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links - HongYinull</title>
+    <meta name="description" content="Connect with HongYinull (洪以諾)">
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;500;600&family=Zen+Old+Mincho:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+
+    <style>
+        /* Linktree-style Layout */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .back-home {
+            position: absolute;
+            top: 2rem;
+            left: 2rem;
+            font-family: var(--font-sans);
+            font-size: 0.9rem;
+            color: var(--meta-color);
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+
+        .back-home:hover {
+            color: var(--text-color);
+        }
+
+        .links-container {
+            width: 100%;
+            max-width: 480px;
+            /* Narrower container for mobile-first feel */
+            padding: 2rem;
+            /* text-align: center; Remove center alignment for list items */
+        }
+
+        .profile-section {
+            margin-bottom: 3rem;
+            text-align: center;
+            /* Keep profile centered */
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-bio {
+            font-family: var(--font-sans);
+            color: var(--meta-color);
+            font-size: 0.9rem;
+        }
+
+        .links-list {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            /* Gap between categories */
+        }
+
+        .link-category {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .category-title {
+            font-family: var(--font-sans);
+            font-size: 0.85rem;
+            color: var(--meta-color);
+            margin-bottom: 0.5rem;
+            text-align: center;
+            letter-spacing: 0.05em;
+        }
+
+        /* Reuse experiment-item style from style.css, but ensure it works here */
+        /* If style.css is loaded, .experiment-item should work. 
+           We might need to ensure borders work correctly. */
+
+        .experiment-item {
+            /* Ensure these are applied if not picked up from style.css or if we want to override */
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border-color);
+            font-size: 1rem;
+            text-decoration: none;
+            color: inherit;
+            transition: opacity 0.2s;
+        }
+
+        .experiment-item:last-child {
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .experiment-item:hover {
+            opacity: 0.7;
+        }
+
+        /* Footer */
+        .links-footer {
+            margin-top: 4rem;
+            font-size: 0.8rem;
+            color: var(--meta-color);
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Theme Toggle (Injected by JS) -->
+    <a href="/" class="back-home">← Back to Home</a>
+
+    <div class="links-container">
+        <div class="profile-section">
+            <div class="profile-name">HongYinull</div>
+            <div class="profile-bio">Art \ Tech \ Design</div>
+        </div>
+
+        <div id="links-list" class="links-list">
+            <!-- Links injected by JS -->
+        </div>
+
+        <footer class="links-footer">
+            &copy; 2025 HongYinull
+        </footer>
+    </div>
+
+    <script src="data.js"></script>
+    <script src="main.js"></script>
+    <script>
+        // Inline script for rendering links
+        document.addEventListener('DOMContentLoaded', () => {
+            const container = document.getElementById('links-list');
+            const linksData = window.siteData.links || [];
+
+            linksData.forEach(section => {
+                const categoryDiv = document.createElement('div');
+                categoryDiv.className = 'link-category';
+
+                // Category Title
+                if (section.category) {
+                    const title = document.createElement('div');
+                    title.className = 'category-title';
+                    title.textContent = section.category;
+                    categoryDiv.appendChild(title);
+                }
+
+                // Items
+                if (section.items) {
+                    section.items.forEach(link => {
+                        const a = document.createElement('a');
+                        a.href = link.url;
+                        a.className = 'experiment-item'; // Use media coverage class
+                        a.target = link.url.startsWith('/') ? '_self' : '_blank';
+
+                        // Mimic media coverage structure: Title + Arrow
+                        a.innerHTML = `
+                            <span class="experiment-title">${link.label}</span>
+                            <span class="experiment-category">-></span>
+                        `;
+                        categoryDiv.appendChild(a);
+                    });
+                }
+
+                container.appendChild(categoryDiv);
+            });
+        });
+        node.parentNode.replaceChild(fragment, node);
+            });
+        }
+    </script>
+</body>
+
+</html>

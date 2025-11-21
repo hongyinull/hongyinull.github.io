@@ -84,6 +84,62 @@ function loadProject() {
     }
 
     renderProjectDetail(project);
+    updateSEO(project);
+}
+
+function updateSEO(project) {
+    // 1. Update Title
+    document.title = `${project.title} - HongYinull`;
+
+    // 2. Update Meta Description
+    const description = project.description || `Details about ${project.title}`;
+    let metaDesc = document.querySelector('meta[name="description"]');
+    if (!metaDesc) {
+        metaDesc = document.createElement('meta');
+        metaDesc.name = "description";
+        document.head.appendChild(metaDesc);
+    }
+    metaDesc.content = description;
+
+    // 3. Update Open Graph
+    const updateMeta = (property, content) => {
+        let tag = document.querySelector(`meta[property="${property}"]`);
+        if (!tag) {
+            tag = document.createElement('meta');
+            tag.setAttribute('property', property);
+            document.head.appendChild(tag);
+        }
+        tag.content = content;
+    };
+
+    updateMeta('og:title', project.title);
+    updateMeta('og:description', description);
+    updateMeta('og:url', window.location.href);
+
+    // 4. Inject JSON-LD for AI (Schema.org/CreativeWork)
+    const schema = {
+        "@context": "https://schema.org",
+        "@type": "CreativeWork",
+        "name": project.title,
+        "headline": project.title,
+        "author": {
+            "@type": "Person",
+            "name": "HongYinull"
+        },
+        "description": description,
+        "dateCreated": project.year,
+        "genre": project.category,
+        "url": window.location.href
+    };
+
+    let script = document.querySelector('#project-jsonld');
+    if (!script) {
+        script = document.createElement('script');
+        script.id = 'project-jsonld';
+        script.type = 'application/ld+json';
+        document.head.appendChild(script);
+    }
+    script.textContent = JSON.stringify(schema, null, 2);
 }
 
 function renderProjectDetail(project) {

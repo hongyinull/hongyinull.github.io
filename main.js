@@ -5,16 +5,17 @@ document.addEventListener('DOMContentLoaded', () => {
         return;
     }
 
-    const { bio, projects, experiments } = window.siteData;
+    const { bio, projects } = window.siteData;
 
     renderHeader(bio);
     renderFilterMenu(projects);
     renderProjects(projects); // Initial render with all projects
-    renderExperiments(experiments);
+    renderMedia();
     initThemeToggle();
 
     // Apply special typography concept
     stylizeTypography(document.body);
+    initTypographyEffects();
 });
 
 function stylizeTypography(root) {
@@ -28,8 +29,8 @@ function stylizeTypography(root) {
     const nodesToReplace = [];
     let node;
     while (node = walker.nextNode()) {
-        // Process if contains l, L, I OR forward slash /
-        if ((/[lLI/]/.test(node.nodeValue)) &&
+        // Process if contains l, L, I, /, \, or ＼ (Fullwidth Backslash)
+        if ((/[lLI/\\\uFF3C]/.test(node.nodeValue)) &&
             node.parentElement.tagName !== 'SCRIPT' &&
             node.parentElement.tagName !== 'STYLE') {
             nodesToReplace.push(node);
@@ -41,8 +42,8 @@ function stylizeTypography(root) {
         const text = node.nodeValue;
         let lastIndex = 0;
 
-        // Regex to find l, L, I OR /
-        const regex = /[lLI/]/g;
+        // Regex to find l, L, I, /, \, or ＼
+        const regex = /[lLI/\\\uFF3C]/g;
         let match;
 
         while ((match = regex.exec(text)) !== null) {
@@ -51,9 +52,13 @@ function stylizeTypography(root) {
 
             const char = match[0];
 
-            if (char === '/') {
-                // Replace / with \ (no slant class needed, just char replacement)
-                fragment.appendChild(document.createTextNode('\\'));
+            if (char === '/' || char === '\\' || char === '\uFF3C') {
+                // Replace / with \ and wrap in span for animation
+                // Also wrap existing \ and ＼
+                const span = document.createElement('span');
+                span.className = 'slant-char backslash'; // Add specific class for backslash
+                span.textContent = '\\'; // Normalize to normal backslash
+                fragment.appendChild(span);
             } else {
                 // Stylize l, L, I
                 const span = document.createElement('span');
@@ -71,9 +76,184 @@ function stylizeTypography(root) {
     });
 }
 
+// Typography Effects
+let currentEffect = 'scroll'; // 'scroll' or 'skew-compass'
+let animationFrameId;
+
+function initTypographyEffects() {
+    // Check if toggle already exists
+    if (document.querySelector('.effect-toggle')) return;
+
+    // Create Toggle Button
+    const btn = document.createElement('button');
+    btn.className = 'effect-toggle';
+    btn.setAttribute('aria-label', 'Toggle Typography Effect');
+    btn.style.position = 'fixed';
+    btn.style.bottom = '6rem'; // Above theme toggle
+    btn.style.right = '2rem';
+    btn.style.zIndex = '1000';
+    btn.style.padding = '0.5rem';
+    btn.style.background = 'var(--bg-color)';
+    btn.style.border = '1px solid var(--border-color)';
+    btn.style.borderRadius = '50%';
+    btn.style.width = '40px';
+    btn.style.height = '40px';
+    btn.style.cursor = 'pointer';
+    btn.style.display = 'flex';
+    btn.style.alignItems = 'center';
+    btn.style.justifyContent = 'center';
+    btn.style.transition = 'all 0.3s ease';
+
+    // Icons
+    const scrollIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="7"></rect><line x1="12" y1="6" x2="12" y2="10"></line></svg>`;
+    const skewCompassIcon = `<span style="font-weight:bold; font-family:serif;">\\</span>`; // Custom icon for Skew Compass
+
+    const updateBtn = () => {
+        if (currentEffect === 'scroll') {
+            btn.innerHTML = scrollIcon;
+            btn.title = "Current: Scroll (Click for Skew Compass)";
+        } else {
+            btn.innerHTML = skewCompassIcon;
+            btn.title = "Current: Skew Compass (Click for Scroll)";
+        }
+    };
+    updateBtn();
+
+    btn.addEventListener('click', () => {
+        currentEffect = currentEffect === 'scroll' ? 'skew-compass' : 'scroll';
+        updateBtn();
+        resetEffects();
+    });
+
+    document.body.appendChild(btn);
+
+    // Start Loop
+    startEffectLoop();
+}
+
+function startEffectLoop() {
+    let mouseX = 0;
+    let mouseY = 0;
+
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
+    });
+
+    const lerp = (start, end, factor) => {
+        return start + (end - start) * factor;
+    };
+
+    const loop = () => {
+        const chars = document.querySelectorAll('.slant-char');
+
+        if (currentEffect === 'scroll') {
+            const scrollY = window.scrollY;
+            const maxScroll = document.body.scrollHeight - window.innerHeight;
+            const scrollProgress = Math.min(scrollY / maxScroll, 1); // 0 to 1
+
+            // Factor: 0 (Top) -> 1 (Bottom)
+            const factor = scrollProgress;
+
+            chars.forEach(char => {
+                let targetSkew = 0;
+                if (char.classList.contains('backslash')) {
+                    // Backslash: -15deg to 15deg
+                    targetSkew = -15 + (factor * 30);
+                } else {
+                    // l, L, I: 0deg to 15deg
+                    targetSkew = factor * 15;
+                }
+
+                // Initialize currentSkew if not present
+                if (typeof char.currentSkew === 'undefined') {
+                    char.currentSkew = targetSkew;
+                }
+
+                // Smoothly interpolate towards target
+                char.currentSkew = lerp(char.currentSkew, targetSkew, 0.1);
+
+                char.style.transform = `skewX(${char.currentSkew}deg)`;
+            });
+        } else if (currentEffect === 'skew-compass') {
+            chars.forEach(char => {
+                const rect = char.getBoundingClientRect();
+                const charX = rect.left + rect.width / 2;
+                const charY = rect.top + rect.height / 2;
+
+                // Calculate vector to mouse
+                const deltaX = mouseX - charX;
+                const deltaY = mouseY - charY;
+                const dist = Math.hypot(deltaX, deltaY);
+                const maxDist = 600; // Distance threshold
+
+                let targetSkew = 0;
+
+                // Only update target if within distance
+                if (dist < maxDist) {
+                    // Use atan(dx/dy) to get the slope angle relative to Vertical
+                    let angleDeg = Math.atan(deltaX / deltaY) * (180 / Math.PI);
+
+                    // Handle case where deltaY is 0
+                    if (deltaY === 0) {
+                        angleDeg = deltaX > 0 ? 90 : -90;
+                    }
+
+                    // Clamp to [-10, 20]
+                    let skew = Math.max(-10, Math.min(20, angleDeg));
+
+                    if (char.classList.contains('backslash')) {
+                        // Backslash has inherent slant (-15deg).
+                        // Applied skew = skew - 15
+                        targetSkew = skew - 15;
+                    } else {
+                        targetSkew = skew;
+                    }
+                } else {
+                    // If out of range, return to default (gracefully via lerp)
+                    // Default: l=0deg, \=-15deg
+                    targetSkew = char.classList.contains('backslash') ? -15 : 0;
+                }
+
+                // Store target for next frame (for the freeze effect)
+                char.targetSkew = targetSkew;
+
+                // Initialize currentSkew if not present
+                if (typeof char.currentSkew === 'undefined') {
+                    char.currentSkew = targetSkew;
+                }
+
+                // Smoothly interpolate towards target
+                // Using a slightly lower factor for a "heavier" feel if desired, but 0.1 is standard smooth.
+                char.currentSkew = lerp(char.currentSkew, targetSkew, 0.08);
+
+                char.style.transform = `skewX(${char.currentSkew}deg)`;
+            });
+        }
+
+        animationFrameId = requestAnimationFrame(loop);
+    };
+    loop();
+}
+
+function resetEffects() {
+    // Reset styles when switching
+    const chars = document.querySelectorAll('.slant-char');
+    chars.forEach(char => {
+        char.style.transform = 'none'; // Clear all transforms
+        // Reset to Default State (Vertical)
+        if (char.classList.contains('backslash')) {
+            char.style.transform = 'skewX(-15deg)';
+        } else {
+            char.style.transform = 'skewX(0deg)';
+        }
+    });
+}
+
 function renderFilterMenu(projects) {
     const container = document.querySelector('.projects-section');
     const list = document.querySelector('.project-list');
+    if (!container || !list) return;
 
     // Extract all unique tags
     const tags = new Set(['All']);
@@ -121,15 +301,18 @@ function renderFilterMenu(projects) {
 }
 
 function initThemeToggle() {
+    // Check if toggle already exists
+    if (document.querySelector('.theme-toggle')) return;
+
     const btn = document.createElement('button');
     btn.className = 'theme-toggle';
     btn.setAttribute('aria-label', 'Toggle Dark Mode');
     document.body.appendChild(btn);
 
     // Icons
-    const sunIcon = `<svg viewBox="0 0 24 24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zm1.41-13.78c-.39-.39-1.02-.39-1.41 0a.996.996 0 000 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29zM7.28 17.28c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.29 1.29c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.29-1.29z"/></svg>`;
+    const sunIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
 
-    const moonIcon = `<svg viewBox="0 0 24 24"><path d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z"/></svg>`;
+    const moonIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
     const updateIcon = (isDark) => {
         btn.innerHTML = isDark ? sunIcon : moonIcon;
@@ -157,12 +340,15 @@ function renderHeader(bio) {
     const bioEl = document.querySelector('.bio-intro');
     if (bioEl) {
         // Render English and Chinese with variants
+        const cnLines = bio.introCn.map((line) => {
+            // Uniform style for all lines
+            return `<div style="font-weight: 600; margin-bottom: 0.5rem;">${line}</div>`;
+        }).join('');
+
         bioEl.innerHTML = `
-            <div class="bio-en" style="margin-bottom: 1.5rem; font-weight: 400;">${bio.introEn}</div>
+            <div class="bio-en" style="margin-bottom: 2rem; font-weight: 600; font-size: 1.1em; white-space: pre-line;">${bio.introEn}</div>
             <div class="bio-cn" style="font-size: 1.1em; line-height: 1.8;">
-                <div style="font-weight: 400;">${bio.introCn[0]}</div>
-                <div style="font-weight: 600; margin-top: 0.5rem;">${bio.introCn[1]}</div>
-                <div style="font-weight: 300; margin-top: 0.5rem; opacity: 0.9;">${bio.introCn[2]}</div>
+                ${cnLines}
             </div>
         `;
     }
@@ -174,7 +360,7 @@ function renderHeader(bio) {
             const li = document.createElement('li');
             li.className = 'info-item';
             li.innerHTML = `
-                <a href="${item.url}" target="_blank" class="info-label">${item.label} ↗</a>
+                <a href="${item.url}" target="_blank" class="info-label">${item.label} <span class="link-arrow">-></span></a>
             `;
             contactList.appendChild(li);
         });
@@ -195,6 +381,27 @@ function renderHeader(bio) {
     }
 }
 
+const renderMedia = () => {
+    const container = document.getElementById('media-list');
+    if (!container) return;
+
+    const media = window.siteData.media || [];
+
+    media.forEach(item => {
+        const div = document.createElement('a');
+        div.href = item.url;
+        div.target = "_blank";
+        div.className = 'experiment-item'; // Keep same class for styling
+        div.style.textDecoration = 'none';
+        div.style.color = 'inherit';
+        div.innerHTML = `
+            <span class="experiment-title">${item.title}</span>
+            <span class="experiment-category">${item.source} \\ ${item.year}</span>
+        `;
+        container.appendChild(div);
+    });
+};
+
 function renderProjects(projects) {
     const container = document.querySelector('.project-list');
     if (!container) return;
@@ -203,7 +410,7 @@ function renderProjects(projects) {
 
     projects.forEach(project => {
         const item = document.createElement('a');
-        item.href = `project.html?id=${project.id}`; // Link to detail page
+        item.href = `projects/${project.id}.html`; // Link to static page
         item.className = 'project-item';
         item.style.textDecoration = 'none'; // Remove default underline
         item.style.cursor = 'pointer';
@@ -217,21 +424,6 @@ function renderProjects(projects) {
                 <span>${project.category}</span>
                 <span>${project.year}</span>
             </div>
-        `;
-        container.appendChild(item);
-    });
-}
-
-function renderExperiments(experiments) {
-    const container = document.querySelector('.experiment-list');
-    if (!container) return;
-
-    experiments.forEach(exp => {
-        const item = document.createElement('div');
-        item.className = 'experiment-item';
-        item.innerHTML = `
-            <span>${exp.title}</span>
-            <span style="color: var(--meta-color);">${exp.category}</span>
         `;
         container.appendChild(item);
     });

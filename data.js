@@ -1,16 +1,19 @@
 window.siteData = {
     bio: {
         name: "HongYinull",
-        introEn: "A practice of 'Escape' \\ — seeking alternative paths beyond conventional interfaces. Like the escape character that breaks the syntax, I use code, data, and critical design to disrupt the seamless surface of digital life. My work acts as a backslash against the grain: digging into the root directory of social phenomena, resisting the smooth flow of algorithms, and opening up new spaces for reflection.",
+        introEn: "Hong Yinull \\ Artist \\ Creator \\ Based in Keelung\nUsing online communities, behaviors, and interactive systems to reflect on the control logic behind structured daily life. I explore how systems silently operate and the displacements, disobedience, and micro-escapes that occur within them.\nIn interfaces \\ in processes \\ in social expectations — humor \\ glitches \\ failure \\ and 'lying flat' serve as strategies.\nBreaking rules \\ navigating boundaries \\ entering different layers.\nThe system opens up in unexpected places \\ loose positions \\ where new narratives begin to generate.",
         introCn: [
-            "一場關於「跳脫」\\ 的實踐 —— 在常規介面之外尋找替代路徑。",
-            "如同跳脫字元打破語法，我以程式碼、數據與批判性設計，擾動數位生活的平滑表面。",
-            "這是一道逆勢的反斜線：挖掘社會現象的根目錄，對抗演算法的順流，為反思開闢空間。"
+            "洪以諾 \\ 藝術家 \\ 創作者 \\ 扎根於基隆",
+            "網路社群 \\ 行為 \\ 互動系統及社群文化作為材料反思規則與結構化日常背後ㄉ控制邏輯 \\ 系統默默運作的方式及人在其中產生ㄉ錯置 \\ 不服從與微型逃逸",
+            "在介面裡 \\ 在流程裡 \ 在社會期待裡 \\ 幽默 \\ 故障 \\ 失敗 \\ 擺爛將作為策略",
+            "跳脫規則 \\ 控制邊界 \\ 進入不同的層級",
+            "系統在不可預期處開口 \\ 鬆動的位置 \\ 新ㄉ敘事開始生成"
         ],
         contact: [
             { label: "Email", url: "mailto:hongyinull@gmail.com" },
-            { label: "Instagram", url: "https://instagram.com/hongyinull" },
-            { label: "GitHub", url: "https://github.com/hongyinull" }
+            { label: "Instagram @hongyinull", url: "https://instagram.com/hongyinull" },
+            { label: "Instagram @yinullspace", url: "https://instagram.com/yinullspace" },
+            { label: "Telegram", url: "https://t.me/yinull" }
         ],
         experience: [
             { role: "Product Designer (Intern)", company: "Shopee", year: "2024" },
@@ -138,11 +141,47 @@ window.siteData = {
             `
         }
     ],
-    experiments: [
-        { id: "bbqdiy", title: "bbqDIY", category: "Interactive Web", url: "bbqDIY/index.html" },
-        { id: "smartorder", title: "SmartOrder", category: "UI Prototype", url: "smartorder/index.html" },
-        { id: "votemap", title: "VoteMap", category: "Data Viz", url: "votemap/index.html" },
-        { id: "draw", title: "Draw", category: "Canvas Experiment", url: "draw/index.html" },
-        { id: "tv", title: "TV", category: "CSS Art", url: "tv/index.html" }
+    media: [
+        { title: "「詞彙之境」10/11北客公園開展", source: "Taipei Hakka Park", url: "https://ssl.thcp.org.tw/news/1353", year: "2024" },
+        { title: "2024「詞彙之境」藝術作品徵件展", source: "Taipei Hakka Park", url: "https://ssl.thcp.org.tw/exhibitions/19", year: "2024" },
+        { title: "《反客為主》翻轉主流語境 展覽揭客家文化魅力", source: "NCCU UNEWS", url: "https://unews.nccu.edu.tw/unews/《反客為主》翻轉主流語境%E3%80%80展覽揭客家文化魅力", year: "2024" },
+        { title: "逃離疫情遷徙網際新世界 臺北數位藝術節《無邊庇護所》", source: "TC News", url: "https://www.tcnews.com.tw/culture/item/12294.html", year: "2021" },
+        { title: "庇護所如何無邊？「2021第十六屆臺北數位藝術節」", source: "ARTouch", url: "https://artouch.com/art-views/art-exhibition/content-55070.html", year: "2021" },
+        { title: "【無邊庇護所】2021 第十六屆臺北數位藝術節", source: "Art Emperor", url: "https://artemperor.tw/tidbits/12105", year: "2021" },
+        { title: "2021第十六屆臺北數位藝術節", source: "Museums of Taiwan", url: "https://museums.moc.gov.tw/MocEntrance/Detail?activityId=7c2e3345-9618-4ab8-9133-8379adb190ee&CurrentAction=ReviewIndex", year: "2021" },
+        { title: "根本沒改名！「洪鮭魚」揭發騙局：9張身分證都我P的", source: "ETtoday", url: "https://www.ettoday.net/news/20210414/1959786.htm", year: "2021" },
+        { title: "【超過一半的鮭魚身分證是我Ｐ的！洪鮭魚 - P圖鮭魚展】", source: "Art Emperor", url: "https://artemperor.tw/tidbits/11257", year: "2021" },
+        { title: "網路行為觀察家？藝術家？鮭魚之亂始作俑者？", source: "NTHU Tzaiwu College", url: "https://sites.google.com/view/tzaiwucollege/產業連結/網路行為觀察家藝術家鮭魚之亂始作俑者", year: "2021" },
+        { title: "臺北市政府新聞稿", source: "Taipei City Gov", url: "https://www.gov.taipei/News_Content.aspx?n=F0DDAF49B89E9413&s=76EC095D611A5FA2", year: "2021" },
+        { title: "NTHU IPTA News Coverage I", source: "NTHU IPTA", url: "https://ipta.nthu.edu.tw/?p=10025", year: "2021" },
+        { title: "NTHU IPTA News Coverage II", source: "NTHU IPTA", url: "https://ipta.nthu.edu.tw/?p=10014", year: "2021" }
+    ],
+    links: [
+        {
+            category: "✦ InstaFilter ✦",
+            items: [
+                { label: "Download InstaFilter", url: "https://apple.co/4fZZsV1" }
+            ]
+        },
+        {
+            category: "ϟ TapWallet ϟ",
+            items: [
+                { label: "Join Alpha Test Group", url: "https://line.me/ti/g2/NNRlE3iBmhR36rYfKzQlqAo9lIXgYJqDcZE0ow" }
+            ]
+        },
+        {
+            category: "CONTACT",
+            items: [
+                { label: "HONGYINULL on Instagram", url: "https://instagram.com/hongyinull" },
+                { label: "YINULLSPACE on Instagram", url: "https://instagram.com/yinullspace" },
+                { label: "Email", url: "mailto:hongyinull@gmail.com" },
+                { label: "Telegram", url: "https://t.me/yinull" }
+            ]
+        }
     ]
 };
+
+// Export for Node.js build script
+if (typeof module !== 'undefined' && module.exports) {
+    module.exports = window.siteData;
+}

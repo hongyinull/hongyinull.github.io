@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://hongyinull.github.io/sitemap.xml

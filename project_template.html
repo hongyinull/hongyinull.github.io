@@ -4,13 +4,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Project - HongYinull</title>
-    <link rel="stylesheet" href="style.css">
+    <title>{{TITLE}} - HongYinull</title>
+    <meta name="description" content="{{DESCRIPTION}}">
+    <meta name="author" content="HongYinull">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="{{URL}}">
+    <meta property="og:title" content="{{TITLE}} - HongYinull">
+    <meta property="og:description" content="{{DESCRIPTION}}">
+    <meta property="og:image" content="https://hongyinull.github.io/assets/og-image.jpg">
+
+    <!-- JSON-LD -->
+    <script type="application/ld+json">
+    {{JSON_LD}}
+    </script>
+
+    <link rel="stylesheet" href="../style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;500;600&family=Zen+Old+Mincho:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
         rel="stylesheet">
+
     <style>
         /* Project Detail Specific Styles */
         .project-header {
@@ -24,6 +40,11 @@
             font-size: 0.9rem;
             color: var(--meta-color);
             cursor: pointer;
+            text-decoration: none;
+        }
+
+        .back-link:hover {
+            color: var(--text-color);
         }
 
         .project-detail-title {
@@ -68,12 +89,19 @@
 
 <body>
     <div class="container">
-        <!-- Theme Toggle will be injected here by JS -->
+        <!-- Theme Toggle will be injected by main.js (if loaded) or we can inline it script -->
 
         <header class="project-header">
-            <a href="index.html" class="back-link">← Back to Home</a>
+            <a href="../index.html" class="back-link">← Back to Home</a>
             <div id="project-container">
-                <!-- Content injected via JS -->
+                <h1 class="project-detail-title">{{TITLE}}</h1>
+                <div class="project-detail-meta">
+                    <span>{{CATEGORY}}</span>
+                    <span>{{YEAR}}</span>
+                </div>
+                <div class="project-content">
+                    {{CONTENT}}
+                </div>
             </div>
         </header>
 
@@ -82,8 +110,9 @@
         </footer>
     </div>
 
-    <script src="data.js"></script>
-    <script src="project.js"></script>
+    <!-- Load main.js for Theme Toggle & Typography Script -->
+    <script src="../data.js"></script>
+    <script src="../main.js"></script>
 </body>
 
 </html>
