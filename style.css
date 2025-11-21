@@ -168,6 +168,10 @@ header {
     white-space: pre-line;
 }
 
+.bio-cn {
+    white-space: pre-line;
+}
+
 /* Contact Section */
 .contact-section {
     margin-bottom: 6rem;

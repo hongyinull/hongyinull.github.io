@@ -20,15 +20,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Bio Animations (Requested by User)
     // initBioAnimations(); // Debug panel removed
 
-    // Trigger Default Animation (Pixelate)
-    const bioEl = document.querySelector('.bio-intro');
-    if (bioEl) {
-        const target = bioEl.querySelector(currentLang === 'en' ? '.bio-en' : '.bio-cn');
-        if (target) {
-            // Small delay to ensure font loading and layout stability
-            setTimeout(() => animatePixelate(target), 100);
-        }
-    }
+    // Default Animation (Pixelate) is now triggered by renderHeader()
+    // Removed redundant setTimeout call here to prevent double-triggering bug.
 
     // Handle Deep Linking (Hash Scroll)
     handleHashScroll();
@@ -52,13 +45,29 @@ function handleHashScroll() {
 function animatePixelate(element) {
     if (!element) return;
 
-    const text = element.innerText;
+    // Prevent Double Animation & Dirty Reads
+    // 1. Clear existing interval if running
+    if (element.dataset.animInterval) {
+        clearInterval(parseInt(element.dataset.animInterval));
+        element.dataset.animInterval = '';
+    }
+
+    // 2. Get Clean Text
+    // If we already saved the original text, use it. Otherwise, save current innerText.
+    // This prevents reading "████" as the text if animation is re-triggered mid-way.
+    if (!element.dataset.originalText) {
+        element.dataset.originalText = element.innerText;
+    }
+    const text = element.dataset.originalText;
+
     const blocks = ['█', '▓', '▒', '░'];
     const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
     const slantRegex = /[lLI/\\\uFF3C]/;
 
     // 1. Prepare Container
-    // We need to preserve the final text layout to measure it.
+    // Ensure white-space is handled correctly for newlines
+    element.style.whiteSpace = 'pre-wrap';
+
     // Hide element content visually but keep it in layout for measurement.
     element.style.visibility = 'hidden';
     element.innerHTML = '';
@@ -74,7 +83,7 @@ function animatePixelate(element) {
             continue;
         }
 
-        // Normalize slashes for Slant effect (match stylizeSlant behavior)
+        // Normalize slashes for Slant effect
         if (/[/\\\uFF3C]/.test(char)) {
             char = '\\';
         }
@@ -88,7 +97,7 @@ function animatePixelate(element) {
             span.classList.add('cjk-char');
         }
 
-        // Apply Slant class immediately for dynamic physics
+        // Apply Slant class immediately
         if (slantRegex.test(char) || char === '\\') {
             span.classList.add('slant-char');
             if (char === '\\') {
@@ -101,16 +110,19 @@ function animatePixelate(element) {
     }
 
     // 3. Measure and Lock Widths
-    // Force layout update is automatic when reading dimensions
     spans.forEach(span => {
         const rect = span.getBoundingClientRect();
-        span.style.width = `${rect.width}px`;
-        span.style.height = `${rect.height}px`; // Lock height too just in case
+        // Fallback if width is 0 (e.g. hidden parent), though visibility:hidden should work.
+        // If 0, let it be auto (don't lock) to prevent invisible text.
+        if (rect.width > 0) {
+            span.style.width = `${rect.width}px`;
+        }
+        span.style.height = `${rect.height}px`;
         span.style.display = 'inline-block';
         span.style.textAlign = 'center';
-        span.style.overflow = 'hidden'; // Clip the wide block
-        span.style.verticalAlign = 'bottom'; // Align baseline
-        span.style.lineHeight = '1'; // Ensure block doesn't expand line height
+        span.style.overflow = 'hidden';
+        span.style.verticalAlign = 'bottom';
+        span.style.lineHeight = '1';
 
         // Set initial block state
         span.textContent = blocks[0];
@@ -122,49 +134,71 @@ function animatePixelate(element) {
 
     let steps = 12;
     let currentStep = 0;
+    let isFinished = false;
 
-    const interval = setInterval(() => {
-        spans.forEach(span => {
-            // Randomly update some blocks
-            if (Math.random() > 0.3) {
-                const progress = currentStep / steps;
+    const cleanup = () => {
+        if (isFinished) return;
+        isFinished = true;
 
-                if (progress >= 1) {
-                    span.textContent = span.dataset.final;
-                    // Optional: Unlock width here? 
-                    // Keeping it locked prevents final jump, but might affect kerning.
-                    // For this effect, stability is key.
-                } else {
-                    const blockIndex = Math.floor(progress * blocks.length);
-                    if (Math.random() < progress * 0.5) {
-                        span.textContent = span.dataset.final;
-                    } else {
-                        span.textContent = blocks[Math.min(blockIndex, blocks.length - 1)];
-                    }
-                }
-            }
+        if (element.dataset.animInterval) {
+            clearInterval(parseInt(element.dataset.animInterval));
+            element.dataset.animInterval = '';
+        }
+
+        // Restore natural text flow
+        spans.forEach(s => {
+            s.textContent = s.dataset.final;
+            s.style.width = '';
+            s.style.height = '';
+            s.style.display = '';
+            s.style.textAlign = '';
+            s.style.overflow = '';
+            s.style.verticalAlign = '';
+            s.style.lineHeight = '';
         });
 
-        currentStep++;
-        if (currentStep > steps + 5) {
-            clearInterval(interval);
+        // Re-apply global styles safely
+        try {
+            applyGlobalStyles(element);
+        } catch (e) {
+            console.error("Error applying global styles:", e);
+        }
+    };
 
-            // Final Cleanup: Restore natural text flow
-            // This ensures text selection and kerning work normally after animation
-            spans.forEach(s => {
-                s.textContent = s.dataset.final;
-                s.style.width = '';
-                s.style.height = '';
-                s.style.display = '';
-                s.style.textAlign = '';
-                s.style.overflow = '';
-                s.style.verticalAlign = '';
-                s.style.lineHeight = '';
+    const interval = setInterval(() => {
+        try {
+            spans.forEach(span => {
+                if (Math.random() > 0.3) {
+                    const progress = currentStep / steps;
+
+                    if (progress >= 1) {
+                        span.textContent = span.dataset.final;
+                    } else {
+                        const blockIndex = Math.floor(progress * blocks.length);
+                        if (Math.random() < progress * 0.5) {
+                            span.textContent = span.dataset.final;
+                        } else {
+                            span.textContent = blocks[Math.min(blockIndex, blocks.length - 1)];
+                        }
+                    }
+                }
             });
 
-            applyGlobalStyles(element);
+            currentStep++;
+            if (currentStep > steps + 5) {
+                cleanup();
+            }
+        } catch (e) {
+            console.error("Animation error:", e);
+            cleanup(); // Force cleanup on error
         }
     }, 80);
+
+    // Store interval ID to allow cancellation
+    element.dataset.animInterval = interval;
+
+    // Safety Timeout: Force cleanup if interval hangs or logic fails
+    setTimeout(cleanup, (steps + 10) * 80 + 500);
 }
 
 let currentLang = localStorage.getItem('lang') || 'en'; // Load saved lang
