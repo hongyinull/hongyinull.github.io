@@ -12,16 +12,185 @@ document.addEventListener('DOMContentLoaded', () => {
     renderProjects(projects); // Initial render with all projects
     renderMedia();
     initThemeToggle();
+    initLanguageToggle();
 
-    // Apply special typography concept
-    stylizeTypography(document.body);
-    // Initialize Typography Effects
+    // Apply global styles (CJK scaling + Slant effects)
+    applyGlobalStyles(document.body);
+
+    // Initialize Typography Effects Animation Loop
     initTypographyEffects();
 });
 
+// --- Animation Implementations ---
 
+function animatePixelate(element) {
+    if (!element) return;
+    // Block reveal effect
+    const text = element.innerText;
+    const blocks = ['█', '▓', '▒', '░'];
+    element.innerHTML = '';
 
-function stylizeTypography(root) {
+    const spans = [];
+    const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
+
+    for (let i = 0; i < text.length; i++) {
+        const char = text[i];
+
+        if (char === '\n') {
+            element.appendChild(document.createTextNode('\n'));
+            continue;
+        }
+
+        const span = document.createElement('span');
+
+        // Check if CJK and apply class immediately to prevent size jump
+        if (cjkRegex.test(char)) {
+            span.className = 'cjk-char';
+        }
+
+        span.innerText = blocks[0];
+        span.dataset.final = char;
+        span.style.color = 'var(--text-color)';
+
+        element.appendChild(span);
+        spans.push(span);
+    }
+
+    let steps = 12; // Slightly more steps
+    let currentStep = 0;
+
+    const interval = setInterval(() => {
+        spans.forEach(span => {
+            // Randomly update some blocks
+            if (Math.random() > 0.3) {
+                // Calculate progress
+                const progress = currentStep / steps;
+
+                if (progress >= 1) {
+                    span.innerText = span.dataset.final;
+                } else {
+                    // Choose block based on progress
+                    const blockIndex = Math.floor(progress * blocks.length);
+                    // Sometimes show final char early for "decoding" feel
+                    if (Math.random() < progress * 0.5) {
+                        span.innerText = span.dataset.final;
+                    } else {
+                        span.innerText = blocks[Math.min(blockIndex, blocks.length - 1)];
+                    }
+                }
+            }
+        });
+
+        currentStep++;
+        if (currentStep > steps + 5) { // Give a bit of buffer for randomness
+            clearInterval(interval);
+            // Ensure all are final
+            spans.forEach(s => s.innerText = s.dataset.final);
+            // Re-apply global styles to catch any missed things (like Slant)
+            // But CJK size should be stable now
+            applyGlobalStyles(element);
+        }
+    }, 80);
+}
+
+let currentLang = 'en'; // Default Language
+
+function initLanguageToggle() {
+    // Check if toggle already exists
+    if (document.querySelector('.lang-toggle')) return;
+
+    const btn = document.createElement('button');
+    btn.className = 'control-btn lang-toggle'; // Use shared class
+    // Initial Text
+    btn.textContent = currentLang === 'en' ? '中' : 'EN';
+
+    // Removed inline styles, handled in CSS
+
+    btn.addEventListener('click', () => {
+        currentLang = currentLang === 'en' ? 'cn' : 'en';
+        btn.textContent = currentLang === 'en' ? '中' : 'EN';
+        updateContent();
+    });
+
+    // Append to Header Controls
+    const controls = document.querySelector('.header-controls');
+    if (controls) {
+        controls.appendChild(btn);
+    } else {
+        // Fallback
+        const headerTitle = document.querySelector('.site-title');
+        if (headerTitle) headerTitle.appendChild(btn);
+    }
+}
+
+function updateContent() {
+    const { bio, projects } = window.siteData;
+    renderHeader(bio);
+    renderProjects(projects);
+    // Re-apply global styles
+    applyGlobalStyles(document.body);
+}
+
+function applyGlobalStyles(root) {
+    if (!root) return;
+    // 1. Scale CJK characters
+    stylizeCJK(root);
+    // 2. Apply Slant effects
+    stylizeSlant(root);
+}
+
+function stylizeCJK(root) {
+    const walker = document.createTreeWalker(
+        root,
+        NodeFilter.SHOW_TEXT,
+        null,
+        false
+    );
+
+    const nodesToReplace = [];
+    let node;
+    // Regex for CJK characters (Hanzi + Common CJK Punctuation)
+    // \u4E00-\u9FFF: Common Hanzi
+    // \u3000-\u303F: CJK Symbols and Punctuation
+    // \uFF00-\uFFEF: Halfwidth and Fullwidth Forms
+    const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
+
+    while (node = walker.nextNode()) {
+        if (cjkRegex.test(node.nodeValue) &&
+            node.parentElement.tagName !== 'SCRIPT' &&
+            node.parentElement.tagName !== 'STYLE' &&
+            !node.parentElement.classList.contains('cjk-char')) { // Avoid double wrapping
+            nodesToReplace.push(node);
+        }
+    }
+
+    nodesToReplace.forEach(node => {
+        const fragment = document.createDocumentFragment();
+        const text = node.nodeValue;
+        let lastIndex = 0;
+        const regex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]+/g; // Match sequences
+        let match;
+
+        while ((match = regex.exec(text)) !== null) {
+            // Text before
+            fragment.appendChild(document.createTextNode(text.substring(lastIndex, match.index)));
+
+            // Wrapped CJK
+            const span = document.createElement('span');
+            span.className = 'cjk-char';
+            span.textContent = match[0];
+            fragment.appendChild(span);
+
+            lastIndex = regex.lastIndex;
+        }
+
+        // Remaining text
+        fragment.appendChild(document.createTextNode(text.substring(lastIndex)));
+        node.parentNode.replaceChild(fragment, node);
+    });
+}
+
+function stylizeSlant(root) {
     const walker = document.createTreeWalker(
         root,
         NodeFilter.SHOW_TEXT,
@@ -35,7 +204,8 @@ function stylizeTypography(root) {
         // Process if contains l, L, I, /, \, or ＼ (Fullwidth Backslash)
         if ((/[lLI/\\\uFF3C]/.test(node.nodeValue)) &&
             node.parentElement.tagName !== 'SCRIPT' &&
-            node.parentElement.tagName !== 'STYLE') {
+            node.parentElement.tagName !== 'STYLE' &&
+            !node.parentElement.classList.contains('slant-char')) {
             nodesToReplace.push(node);
         }
     }
@@ -212,7 +382,7 @@ function renderFilterMenu(projects) {
             }
 
             // Re-apply typography to new content
-            stylizeTypography(list);
+            applyGlobalStyles(list);
         });
 
         menu.appendChild(btn);
@@ -227,21 +397,23 @@ function initThemeToggle() {
     if (document.querySelector('.theme-toggle')) return;
 
     const btn = document.createElement('button');
-    btn.className = 'theme-toggle';
+    btn.className = 'control-btn theme-toggle'; // Use shared class
     btn.setAttribute('aria-label', 'Toggle Dark Mode');
 
-    // Append to Header Title row
-    const headerTitle = document.querySelector('.site-title');
-    if (headerTitle) {
-        headerTitle.appendChild(btn);
+    // Append to Header Controls
+    const controls = document.querySelector('.header-controls');
+    if (controls) {
+        controls.insertBefore(btn, controls.firstChild); // Theme toggle first
     } else {
-        document.body.appendChild(btn);
+        // Fallback
+        const headerTitle = document.querySelector('.site-title');
+        if (headerTitle) headerTitle.appendChild(btn);
     }
 
-    // Icons
-    const sunIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
+    // Icons - Refined
+    const sunIcon = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg>`;
 
-    const moonIcon = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
+    const moonIcon = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>`;
 
     const updateIcon = (isDark) => {
         btn.innerHTML = isDark ? sunIcon : moonIcon;
@@ -268,45 +440,75 @@ function renderHeader(bio) {
     // Bio
     const bioEl = document.querySelector('.bio-intro');
     if (bioEl) {
-        // Render English and Chinese with variants
-        const cnLines = bio.introCn.map((line) => {
-            // Uniform style for all lines, handled by CSS now
-            return `<div>${line}</div>`;
-        }).join('');
+        if (currentLang === 'en') {
+            bioEl.innerHTML = `<div class="bio-en">${bio.introEn}</div>`;
+        } else {
+            const cnLines = bio.introCn.map(line => `<div>${line}</div>`).join('');
+            bioEl.innerHTML = `<div class="bio-cn">${cnLines}</div>`;
+        }
 
-        bioEl.innerHTML = `
-            <div class="bio-en">${bio.introEn}</div>
-            <div class="bio-cn">
-                ${cnLines}
-            </div>
-        `;
+        // Trigger Animation
+        const target = bioEl.querySelector(currentLang === 'en' ? '.bio-en' : '.bio-cn');
+        if (target) {
+            animatePixelate(target);
+        }
     }
 
-    // Contact
+    // Contact (Separate Section)
     const contactList = document.querySelector('.contact-list');
     if (contactList) {
+        contactList.innerHTML = '';
         bio.contact.forEach(item => {
             const li = document.createElement('li');
             li.className = 'info-item';
+            // Removed inline styles to let CSS handle flex/justify
             li.innerHTML = `
-                <a href="${item.url}" target="_blank" class="info-label">${item.label} <span class="link-arrow">-></span></a>
-            `;
+            <a href="${item.url}" target="_blank" class="info-label">${item.label} <span class="link-arrow">-></span></a>
+        `;
             contactList.appendChild(li);
         });
     }
 
-    // Experience
-    const expList = document.querySelector('.exp-list');
-    if (expList) {
-        bio.experience.forEach(item => {
-            const li = document.createElement('li');
-            li.className = 'info-item';
-            li.innerHTML = `
-                <span class="info-label">${item.role}</span>
-                <span class="info-value">${item.company} ${item.year}</span>
-            `;
-            expList.appendChild(li);
-        });
+    // Experience & Exhibitions (Split Columns)
+    const expColumn = document.querySelector('.info-column:nth-child(1)'); // Left Column
+    const exhColumn = document.querySelector('.info-column:nth-child(2)'); // Right Column
+
+    if (expColumn && exhColumn) {
+        expColumn.innerHTML = '';
+        exhColumn.innerHTML = '';
+
+        const createSection = (container, title, data) => {
+            const h3 = document.createElement('h3');
+            h3.textContent = title;
+            container.appendChild(h3);
+
+            const ul = document.createElement('ul');
+            ul.className = 'info-list';
+
+            const items = data[currentLang] || data['en'];
+
+            items.forEach(group => {
+                group.items.forEach(text => {
+                    const li = document.createElement('li');
+                    li.className = 'info-item';
+                    li.style.marginBottom = '0.5rem';
+                    li.innerHTML = `
+                        <span class="info-label" style="flex: 1;">${text}</span>
+                        <span class="info-value" style="margin-left: 1rem; color: var(--meta-color);">${group.year}</span>
+                    `;
+                    ul.appendChild(li);
+                });
+            });
+            container.appendChild(ul);
+        };
+
+        if (bio.cv_experience) {
+            createSection(expColumn, 'Experience & Awards', bio.cv_experience);
+        }
+
+        if (bio.cv_exhibitions) {
+            createSection(exhColumn, 'Group Exhibitions', bio.cv_exhibitions);
+        }
     }
 }
 
@@ -344,10 +546,14 @@ function renderProjects(projects) {
         item.style.textDecoration = 'none'; // Remove default underline
         item.style.cursor = 'pointer';
 
+        // Dynamic Content based on Language
+        const title = currentLang === 'en' ? (project.title_en || project.title) : (project.title_cn || project.title);
+        const desc = currentLang === 'en' ? (project.description_en || project.description) : (project.description_cn || project.description);
+
         item.innerHTML = `
             <div class="project-main">
-                <div class="project-title">${project.title}</div>
-                <div class="project-desc">${project.description}</div>
+                <div class="project-title">${title}</div>
+                <div class="project-desc">${desc}</div>
             </div>
             <div class="project-meta">
                 <span>${project.category}</span>

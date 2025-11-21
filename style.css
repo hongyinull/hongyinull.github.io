@@ -80,32 +80,7 @@ a:hover {
     position: relative;
 }
 
-/* Theme Toggle Icon */
-.theme-toggle {
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0;
-    color: var(--text-color);
-    opacity: 0.6;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    /* Removed fixed positioning */
-}
-
-.theme-toggle:hover {
-    opacity: 1;
-    transform: rotate(15deg);
-}
-
-.theme-toggle svg {
-    width: 20px;
-    /* Smaller icon to match title height */
-    height: 20px;
-    fill: currentColor;
-}
+/* Theme Toggle Icon - Handled by .control-btn now */
 
 /* Header / Bio */
 header {
@@ -114,28 +89,77 @@ header {
 
 .site-title {
     font-size: 1.5rem;
-    /* Increased from 1.2rem */
     font-weight: 600;
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    /* Align toggle with text */
+}
+
+/* Header Controls */
+.header-controls {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    /* Increased gap for cleaner look */
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    color: var(--text-color);
+    opacity: 0.5;
+    /* Start more subtle */
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 24px;
+    /* Fixed height for alignment */
+}
+
+.control-btn:hover {
+    opacity: 1;
+}
+
+.theme-toggle svg {
+    width: 20px;
+    height: 20px;
+    fill: none;
+    /* Ensure clean stroke */
+    stroke: currentColor;
+    stroke-width: 1.5;
+    /* Thinner, more elegant stroke */
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg);
+}
+
+.lang-toggle {
+    font-family: var(--font-main);
+    /* Serif */
+    font-weight: 500;
+    font-size: 1.1rem;
+    /* Slightly larger to match icon visual weight */
+    line-height: 1;
+    letter-spacing: 0.05em;
 }
 
 .bio-intro {
-    /* font-size: 1.5rem; Removed to use specific sizes */
     font-weight: 400;
     max-width: 800px;
     margin-bottom: 4rem;
-    /* line-height: 1.5; Removed to use specific line-height */
 }
 
 .bio-en,
 .bio-cn {
-    font-size: 25px;
-    line-height: 1.2;
-    letter-spacing: -1px;
+    font-size: 32px;
+    /* Increased from 25px to restore size */
+    line-height: 1.3;
+    letter-spacing: -0.5px;
     font-weight: 500;
 }
 
@@ -144,12 +168,38 @@ header {
     white-space: pre-line;
 }
 
-.bio-cn {
-    font-size: 22.5px;
-    /* 0.9 * 25px = 22.5px */
+/* Contact Section */
+.contact-section {
+    margin-bottom: 6rem;
+    /* Increased spacing */
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
 }
 
-/* Info Grid (Contact / Experience) */
+.contact-section h3 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-color);
+}
+
+.contact-list {
+    list-style: none;
+    display: flex;
+    /* Changed from grid to flex for space-between */
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.contact-list .info-item {
+    display: block;
+    margin-bottom: 0;
+}
+
+/* Info Grid (Experience / Exhibitions) */
 .info-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -180,9 +230,11 @@ header {
 
 .info-label {
     color: var(--text-color);
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
+    /* display: inline-flex; REMOVED: Causes layout issues with text spans */
+    /* align-items: center; */
+    /* gap: 0.3rem; */
+    display: block;
+    /* Ensure it takes width but allows text wrap */
 }
 
 .link-arrow {
@@ -199,6 +251,11 @@ header {
 .info-value {
     color: var(--meta-color);
     text-align: right;
+    flex-shrink: 0;
+    /* Prevent year from shrinking */
+    white-space: nowrap;
+    /* Keep year on one line */
+}
 }
 
 /* Projects Section */
@@ -311,6 +368,17 @@ header {
         gap: 3rem;
     }
 
+    .contact-list {
+        flex-direction: column;
+        /* Stack vertically on mobile */
+        align-items: flex-start;
+        gap: 1rem;
+    }
+
+    .contact-list .info-item {
+        text-align: left;
+    }
+
     .project-item {
         grid-template-columns: 1fr;
         gap: 0.5rem;
@@ -321,5 +389,49 @@ header {
         flex-direction: row;
         gap: 1rem;
         margin-top: 0.5rem;
+    }
+}
+
+@keyframes glitch-anim {
+    0% {
+        clip-path: inset(50% 0 30% 0);
+        transform: translate(-5px, 0);
+    }
+
+    20% {
+        clip-path: inset(10% 0 60% 0);
+        transform: translate(5px, 0);
+    }
+
+    40% {
+        clip-path: inset(40% 0 40% 0);
+        transform: translate(-5px, 0);
+    }
+
+    60% {
+        clip-path: inset(80% 0 5% 0);
+        transform: translate(5px, 0);
+    }
+
+    80% {
+        clip-path: inset(10% 0 70% 0);
+        transform: translate(-5px, 0);
+    }
+
+    100% {
+        clip-path: inset(30% 0 50% 0);
+        transform: translate(5px, 0);
+    }
+}
+
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
     }
 }
