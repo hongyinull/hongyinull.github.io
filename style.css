@@ -82,17 +82,17 @@ a:hover {
 
 /* Theme Toggle Icon */
 .theme-toggle {
-    position: fixed;
-    top: 2rem;
-    right: 2rem;
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 0;
     color: var(--text-color);
     opacity: 0.6;
     transition: opacity 0.2s ease, transform 0.2s ease;
-    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Removed fixed positioning */
 }
 
 .theme-toggle:hover {
@@ -101,8 +101,9 @@ a:hover {
 }
 
 .theme-toggle svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    /* Smaller icon to match title height */
+    height: 20px;
     fill: currentColor;
 }
 
@@ -112,11 +113,14 @@ header {
 }
 
 .site-title {
-    font-size: 1.2rem;
+    font-size: 1.5rem;
+    /* Increased from 1.2rem */
     font-weight: 600;
     margin-bottom: 2rem;
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    /* Align toggle with text */
 }
 
 .bio-intro {
@@ -141,8 +145,8 @@ header {
 }
 
 .bio-cn {
-    /* font-size: 1.1em; Removed */
-    /* line-height: 1.8; Removed */
+    font-size: 22.5px;
+    /* 0.9 * 25px = 22.5px */
 }
 
 /* Info Grid (Contact / Experience) */
