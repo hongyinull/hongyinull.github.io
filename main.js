@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Apply special typography concept
     stylizeTypography(document.body);
+    // Initialize Typography Effects
     initTypographyEffects();
 });
+
+
 
 function stylizeTypography(root) {
     const walker = document.createTreeWalker(
@@ -77,57 +80,10 @@ function stylizeTypography(root) {
 }
 
 // Typography Effects
-let currentEffect = 'scroll'; // 'scroll' or 'skew-compass'
 let animationFrameId;
 
 function initTypographyEffects() {
-    // Check if toggle already exists
-    if (document.querySelector('.effect-toggle')) return;
-
-    // Create Toggle Button
-    const btn = document.createElement('button');
-    btn.className = 'effect-toggle';
-    btn.setAttribute('aria-label', 'Toggle Typography Effect');
-    btn.style.position = 'fixed';
-    btn.style.bottom = '6rem'; // Above theme toggle
-    btn.style.right = '2rem';
-    btn.style.zIndex = '1000';
-    btn.style.padding = '0.5rem';
-    btn.style.background = 'var(--bg-color)';
-    btn.style.border = '1px solid var(--border-color)';
-    btn.style.borderRadius = '50%';
-    btn.style.width = '40px';
-    btn.style.height = '40px';
-    btn.style.cursor = 'pointer';
-    btn.style.display = 'flex';
-    btn.style.alignItems = 'center';
-    btn.style.justifyContent = 'center';
-    btn.style.transition = 'all 0.3s ease';
-
-    // Icons
-    const scrollIcon = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="2" width="14" height="20" rx="7"></rect><line x1="12" y1="6" x2="12" y2="10"></line></svg>`;
-    const skewCompassIcon = `<span style="font-weight:bold; font-family:serif;">\\</span>`; // Custom icon for Skew Compass
-
-    const updateBtn = () => {
-        if (currentEffect === 'scroll') {
-            btn.innerHTML = scrollIcon;
-            btn.title = "Current: Scroll (Click for Skew Compass)";
-        } else {
-            btn.innerHTML = skewCompassIcon;
-            btn.title = "Current: Skew Compass (Click for Scroll)";
-        }
-    };
-    updateBtn();
-
-    btn.addEventListener('click', () => {
-        currentEffect = currentEffect === 'scroll' ? 'skew-compass' : 'scroll';
-        updateBtn();
-        resetEffects();
-    });
-
-    document.body.appendChild(btn);
-
-    // Start Loop
+    // Start Loop directly, no toggle button
     startEffectLoop();
 }
 
@@ -135,10 +91,21 @@ function startEffectLoop() {
     let mouseX = 0;
     let mouseY = 0;
 
+    const updateMouse = (x, y) => {
+        mouseX = x;
+        mouseY = y;
+    };
+
     document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
+        updateMouse(e.clientX, e.clientY);
     });
+
+    // Add touch support for mobile
+    document.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 0) {
+            updateMouse(e.touches[0].clientX, e.touches[0].clientY);
+        }
+    }, { passive: true });
 
     const lerp = (start, end, factor) => {
         return start + (end - start) * factor;
@@ -147,107 +114,62 @@ function startEffectLoop() {
     const loop = () => {
         const chars = document.querySelectorAll('.slant-char');
 
-        if (currentEffect === 'scroll') {
-            const scrollY = window.scrollY;
-            const maxScroll = document.body.scrollHeight - window.innerHeight;
-            const scrollProgress = Math.min(scrollY / maxScroll, 1); // 0 to 1
+        chars.forEach(char => {
+            const rect = char.getBoundingClientRect();
+            const charX = rect.left + rect.width / 2;
+            const charY = rect.top + rect.height / 2;
 
-            // Factor: 0 (Top) -> 1 (Bottom)
-            const factor = scrollProgress;
+            // Calculate vector to mouse
+            const deltaX = mouseX - charX;
+            const deltaY = mouseY - charY;
+            const dist = Math.hypot(deltaX, deltaY);
+            const maxDist = 600; // Distance threshold
 
-            chars.forEach(char => {
-                let targetSkew = 0;
+            let targetSkew = 0;
+
+            // Only update target if within distance
+            if (dist < maxDist) {
+                // Use atan(dx/dy) to get the slope angle relative to Vertical
+                let angleDeg = Math.atan(deltaX / deltaY) * (180 / Math.PI);
+
+                // Handle case where deltaY is 0
+                if (deltaY === 0) {
+                    angleDeg = deltaX > 0 ? 90 : -90;
+                }
+
+                // Clamp to [-10, 20]
+                let skew = Math.max(-10, Math.min(20, angleDeg));
+
                 if (char.classList.contains('backslash')) {
-                    // Backslash: -15deg to 15deg
-                    targetSkew = -15 + (factor * 30);
+                    // Backslash has inherent slant (-15deg).
+                    // Applied skew = skew - 15
+                    targetSkew = skew - 15;
                 } else {
-                    // l, L, I: 0deg to 15deg
-                    targetSkew = factor * 15;
+                    targetSkew = skew;
                 }
+            } else {
+                // If out of range, return to default (gracefully via lerp)
+                // Default: l=15deg (Brand Slant), \=0deg (Natural Slant)
+                targetSkew = char.classList.contains('backslash') ? 0 : 15;
+            }
 
-                // Initialize currentSkew if not present
-                if (typeof char.currentSkew === 'undefined') {
-                    char.currentSkew = targetSkew;
-                }
+            // Store target for next frame (for the freeze effect)
+            char.targetSkew = targetSkew;
 
-                // Smoothly interpolate towards target
-                char.currentSkew = lerp(char.currentSkew, targetSkew, 0.1);
+            // Initialize currentSkew if not present
+            if (typeof char.currentSkew === 'undefined') {
+                char.currentSkew = targetSkew;
+            }
 
-                char.style.transform = `skewX(${char.currentSkew}deg)`;
-            });
-        } else if (currentEffect === 'skew-compass') {
-            chars.forEach(char => {
-                const rect = char.getBoundingClientRect();
-                const charX = rect.left + rect.width / 2;
-                const charY = rect.top + rect.height / 2;
+            // Smoothly interpolate towards target
+            char.currentSkew = lerp(char.currentSkew, targetSkew, 0.08);
 
-                // Calculate vector to mouse
-                const deltaX = mouseX - charX;
-                const deltaY = mouseY - charY;
-                const dist = Math.hypot(deltaX, deltaY);
-                const maxDist = 600; // Distance threshold
-
-                let targetSkew = 0;
-
-                // Only update target if within distance
-                if (dist < maxDist) {
-                    // Use atan(dx/dy) to get the slope angle relative to Vertical
-                    let angleDeg = Math.atan(deltaX / deltaY) * (180 / Math.PI);
-
-                    // Handle case where deltaY is 0
-                    if (deltaY === 0) {
-                        angleDeg = deltaX > 0 ? 90 : -90;
-                    }
-
-                    // Clamp to [-10, 20]
-                    let skew = Math.max(-10, Math.min(20, angleDeg));
-
-                    if (char.classList.contains('backslash')) {
-                        // Backslash has inherent slant (-15deg).
-                        // Applied skew = skew - 15
-                        targetSkew = skew - 15;
-                    } else {
-                        targetSkew = skew;
-                    }
-                } else {
-                    // If out of range, return to default (gracefully via lerp)
-                    // Default: l=0deg, \=-15deg
-                    targetSkew = char.classList.contains('backslash') ? -15 : 0;
-                }
-
-                // Store target for next frame (for the freeze effect)
-                char.targetSkew = targetSkew;
-
-                // Initialize currentSkew if not present
-                if (typeof char.currentSkew === 'undefined') {
-                    char.currentSkew = targetSkew;
-                }
-
-                // Smoothly interpolate towards target
-                // Using a slightly lower factor for a "heavier" feel if desired, but 0.1 is standard smooth.
-                char.currentSkew = lerp(char.currentSkew, targetSkew, 0.08);
-
-                char.style.transform = `skewX(${char.currentSkew}deg)`;
-            });
-        }
+            char.style.transform = `skewX(${char.currentSkew}deg)`;
+        });
 
         animationFrameId = requestAnimationFrame(loop);
     };
     loop();
-}
-
-function resetEffects() {
-    // Reset styles when switching
-    const chars = document.querySelectorAll('.slant-char');
-    chars.forEach(char => {
-        char.style.transform = 'none'; // Clear all transforms
-        // Reset to Default State (Vertical)
-        if (char.classList.contains('backslash')) {
-            char.style.transform = 'skewX(-15deg)';
-        } else {
-            char.style.transform = 'skewX(0deg)';
-        }
-    });
 }
 
 function renderFilterMenu(projects) {
@@ -341,13 +263,13 @@ function renderHeader(bio) {
     if (bioEl) {
         // Render English and Chinese with variants
         const cnLines = bio.introCn.map((line) => {
-            // Uniform style for all lines
-            return `<div style="font-weight: 600; margin-bottom: 0.5rem;">${line}</div>`;
+            // Uniform style for all lines, handled by CSS now
+            return `<div>${line}</div>`;
         }).join('');
 
         bioEl.innerHTML = `
-            <div class="bio-en" style="margin-bottom: 2rem; font-weight: 600; font-size: 1.1em; white-space: pre-line;">${bio.introEn}</div>
-            <div class="bio-cn" style="font-size: 1.1em; line-height: 1.8;">
+            <div class="bio-en">${bio.introEn}</div>
+            <div class="bio-cn">
                 ${cnLines}
             </div>
         `;

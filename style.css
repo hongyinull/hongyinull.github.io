@@ -120,11 +120,29 @@ header {
 }
 
 .bio-intro {
-    font-size: 1.5rem;
+    /* font-size: 1.5rem; Removed to use specific sizes */
     font-weight: 400;
     max-width: 800px;
     margin-bottom: 4rem;
-    line-height: 1.5;
+    /* line-height: 1.5; Removed to use specific line-height */
+}
+
+.bio-en,
+.bio-cn {
+    font-size: 25px;
+    line-height: 1.2;
+    letter-spacing: -1px;
+    font-weight: 500;
+}
+
+.bio-en {
+    margin-bottom: 2rem;
+    white-space: pre-line;
+}
+
+.bio-cn {
+    /* font-size: 1.1em; Removed */
+    /* line-height: 1.8; Removed */
 }
 
 /* Info Grid (Contact / Experience) */
