@@ -14,86 +14,160 @@ document.addEventListener('DOMContentLoaded', () => {
     initThemeToggle();
     initLanguageToggle();
 
-    // Apply global styles (CJK scaling + Slant effects)
-    applyGlobalStyles(document.body);
-
     // Initialize Typography Effects Animation Loop
     initTypographyEffects();
+
+    // Bio Animations (Requested by User)
+    // initBioAnimations(); // Debug panel removed
+
+    // Trigger Default Animation (Pixelate)
+    const bioEl = document.querySelector('.bio-intro');
+    if (bioEl) {
+        const target = bioEl.querySelector(currentLang === 'en' ? '.bio-en' : '.bio-cn');
+        if (target) {
+            // Small delay to ensure font loading and layout stability
+            setTimeout(() => animatePixelate(target), 100);
+        }
+    }
+
+    // Handle Deep Linking (Hash Scroll)
+    handleHashScroll();
 });
+
+function handleHashScroll() {
+    const hash = window.location.hash;
+    if (hash) {
+        // Wait for dynamic content to render
+        setTimeout(() => {
+            const target = document.querySelector(hash);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 300); // Small delay to ensure DOM is ready
+    }
+}
 
 // --- Animation Implementations ---
 
 function animatePixelate(element) {
     if (!element) return;
-    // Block reveal effect
+
     const text = element.innerText;
     const blocks = ['█', '▓', '▒', '░'];
+    const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
+    const slantRegex = /[lLI/\\\uFF3C]/;
+
+    // 1. Prepare Container
+    // We need to preserve the final text layout to measure it.
+    // Hide element content visually but keep it in layout for measurement.
+    element.style.visibility = 'hidden';
     element.innerHTML = '';
 
     const spans = [];
-    const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
 
+    // 2. Build DOM with FINAL text
     for (let i = 0; i < text.length; i++) {
-        const char = text[i];
+        let char = text[i];
 
         if (char === '\n') {
             element.appendChild(document.createTextNode('\n'));
             continue;
         }
 
-        const span = document.createElement('span');
-
-        // Check if CJK and apply class immediately to prevent size jump
-        if (cjkRegex.test(char)) {
-            span.className = 'cjk-char';
+        // Normalize slashes for Slant effect (match stylizeSlant behavior)
+        if (/[/\\\uFF3C]/.test(char)) {
+            char = '\\';
         }
 
-        span.innerText = blocks[0];
+        const span = document.createElement('span');
+        span.textContent = char; // Put final char first
         span.dataset.final = char;
-        span.style.color = 'var(--text-color)';
+
+        // Apply CJK class if needed
+        if (cjkRegex.test(char)) {
+            span.classList.add('cjk-char');
+        }
+
+        // Apply Slant class immediately for dynamic physics
+        if (slantRegex.test(char) || char === '\\') {
+            span.classList.add('slant-char');
+            if (char === '\\') {
+                span.classList.add('backslash');
+            }
+        }
 
         element.appendChild(span);
         spans.push(span);
     }
 
-    let steps = 12; // Slightly more steps
+    // 3. Measure and Lock Widths
+    // Force layout update is automatic when reading dimensions
+    spans.forEach(span => {
+        const rect = span.getBoundingClientRect();
+        span.style.width = `${rect.width}px`;
+        span.style.height = `${rect.height}px`; // Lock height too just in case
+        span.style.display = 'inline-block';
+        span.style.textAlign = 'center';
+        span.style.overflow = 'hidden'; // Clip the wide block
+        span.style.verticalAlign = 'bottom'; // Align baseline
+        span.style.lineHeight = '1'; // Ensure block doesn't expand line height
+
+        // Set initial block state
+        span.textContent = blocks[0];
+        span.style.color = 'var(--text-color)';
+    });
+
+    // 4. Reveal and Animate
+    element.style.visibility = 'visible';
+
+    let steps = 12;
     let currentStep = 0;
 
     const interval = setInterval(() => {
         spans.forEach(span => {
             // Randomly update some blocks
             if (Math.random() > 0.3) {
-                // Calculate progress
                 const progress = currentStep / steps;
 
                 if (progress >= 1) {
-                    span.innerText = span.dataset.final;
+                    span.textContent = span.dataset.final;
+                    // Optional: Unlock width here? 
+                    // Keeping it locked prevents final jump, but might affect kerning.
+                    // For this effect, stability is key.
                 } else {
-                    // Choose block based on progress
                     const blockIndex = Math.floor(progress * blocks.length);
-                    // Sometimes show final char early for "decoding" feel
                     if (Math.random() < progress * 0.5) {
-                        span.innerText = span.dataset.final;
+                        span.textContent = span.dataset.final;
                     } else {
-                        span.innerText = blocks[Math.min(blockIndex, blocks.length - 1)];
+                        span.textContent = blocks[Math.min(blockIndex, blocks.length - 1)];
                     }
                 }
             }
         });
 
         currentStep++;
-        if (currentStep > steps + 5) { // Give a bit of buffer for randomness
+        if (currentStep > steps + 5) {
             clearInterval(interval);
-            // Ensure all are final
-            spans.forEach(s => s.innerText = s.dataset.final);
-            // Re-apply global styles to catch any missed things (like Slant)
-            // But CJK size should be stable now
+
+            // Final Cleanup: Restore natural text flow
+            // This ensures text selection and kerning work normally after animation
+            spans.forEach(s => {
+                s.textContent = s.dataset.final;
+                s.style.width = '';
+                s.style.height = '';
+                s.style.display = '';
+                s.style.textAlign = '';
+                s.style.overflow = '';
+                s.style.verticalAlign = '';
+                s.style.lineHeight = '';
+            });
+
             applyGlobalStyles(element);
         }
     }, 80);
 }
 
-let currentLang = 'en'; // Default Language
+let currentLang = localStorage.getItem('lang') || 'en'; // Load saved lang
 
 function initLanguageToggle() {
     // Check if toggle already exists
@@ -108,8 +182,16 @@ function initLanguageToggle() {
 
     btn.addEventListener('click', () => {
         currentLang = currentLang === 'en' ? 'cn' : 'en';
+        localStorage.setItem('lang', currentLang); // Save preference
         btn.textContent = currentLang === 'en' ? '中' : 'EN';
         updateContent();
+
+        // Trigger Animation on switch
+        const bioEl = document.querySelector('.bio-intro');
+        if (bioEl) {
+            const target = bioEl.querySelector(currentLang === 'en' ? '.bio-en' : '.bio-cn');
+            if (target) animatePixelate(target);
+        }
     });
 
     // Append to Header Controls

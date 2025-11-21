@@ -390,6 +390,15 @@ header {
         gap: 1rem;
         margin-top: 0.5rem;
     }
+
+    /* Mobile Typography Adjustments */
+    .bio-en,
+    .bio-cn {
+        font-size: 22px;
+        /* Reduced from 32px for better mobile fit */
+        line-height: 1.4;
+        /* Slightly looser line height for small screens */
+    }
 }
 
 @keyframes glitch-anim {
