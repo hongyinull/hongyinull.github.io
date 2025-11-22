@@ -21,11 +21,11 @@ siteData.projects.forEach(project => {
     let html = template;
 
     // Prepare data
-    const title = project.title;
-    const description = project.description || '';
+    const title = project.title_en || project.title;
+    const description = project.description_en || project.description || '';
     const category = project.category || '';
     const year = project.year || '';
-    const content = project.content || `<p>${description}</p>`;
+    const content = project.content_en || project.content || `<p>${description}</p>`;
     const url = `https://hongyinull.github.io/projects/${project.id}.html`;
 
     // JSON-LD

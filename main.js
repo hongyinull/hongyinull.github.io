@@ -2,6 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if siteData exists
     if (!window.siteData) {
         console.error("Site data not loaded");
+        // Display Error to User
+        document.body.innerHTML = `
+            <div style="height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; font-family: monospace; background: #f0f0f0; color: #333; padding: 2rem;">
+                <h2 style="color: #e74c3c; margin-bottom: 1rem;">⚠️ Data Loading Error</h2>
+                <p style="max-width: 600px; line-height: 1.6;">
+                    The website content could not be loaded. This is usually caused by a syntax error in <strong>data.js</strong> (e.g., a missing comma, quote, or bracket).
+                </p>
+                <p style="margin-top: 1rem; font-size: 0.9rem; color: #666;">
+                    Please check the console (F12) for specific error details.
+                </p>
+            </div>
+        `;
         return;
     }
 
@@ -68,13 +80,12 @@ function animatePixelate(element) {
     // Ensure white-space is handled correctly for newlines
     element.style.whiteSpace = 'pre-wrap';
 
-    // Hide element content visually but keep it in layout for measurement.
-    element.style.visibility = 'hidden';
+    // Clear content but keep visibility (we will hide individual chars)
     element.innerHTML = '';
 
-    const spans = [];
+    const wrappers = [];
 
-    // 2. Build DOM with FINAL text
+    // 2. Build DOM: Wrappers with Invisible Real Char + Absolute Block
     for (let i = 0; i < text.length; i++) {
         let char = text[i];
 
@@ -88,49 +99,56 @@ function animatePixelate(element) {
             char = '\\';
         }
 
-        const span = document.createElement('span');
-        span.textContent = char; // Put final char first
-        span.dataset.final = char;
+        // Create Wrapper
+        const wrapper = document.createElement('span');
+        wrapper.dataset.final = char;
+        wrapper.style.position = 'relative';
+        wrapper.style.display = 'inline'; // Default to inline to preserve kerning
 
-        // Apply CJK class if needed
+        // Apply Classes
+        let isSpecial = false;
         if (cjkRegex.test(char)) {
-            span.classList.add('cjk-char');
+            wrapper.classList.add('cjk-char');
+            // cjk-char might need inline-block in CSS, but here we let CSS handle it
+            // If CSS says inline-block, wrapper becomes inline-block.
+            isSpecial = true;
         }
-
-        // Apply Slant class immediately
         if (slantRegex.test(char) || char === '\\') {
-            span.classList.add('slant-char');
+            wrapper.classList.add('slant-char');
             if (char === '\\') {
-                span.classList.add('backslash');
+                wrapper.classList.add('backslash');
             }
+            // .slant-char is inline-block in CSS, so this wrapper will be inline-block
+            isSpecial = true;
+        }
+        wrapper.dataset.isSpecial = isSpecial;
+
+        // 1. Real Char (Invisible placeholder for layout)
+        const realChar = document.createElement('span');
+        realChar.textContent = char;
+        realChar.style.opacity = '0'; // Invisible but takes up space
+        wrapper.appendChild(realChar);
+
+        // 2. Block Overlay (Visible animation)
+        // Skip blocks for spaces
+        let block = null;
+        if (char !== ' ') {
+            block = document.createElement('span');
+            block.textContent = blocks[0];
+            block.style.position = 'absolute';
+            block.style.left = '0';
+            block.style.bottom = '0'; // Align to baseline
+            block.style.color = 'var(--text-color)';
+            block.style.pointerEvents = 'none'; // Don't block interaction
+            block.style.whiteSpace = 'nowrap'; // Prevent wrapping
+            // Note: We don't clip width here, allowing "glitch" bleed effect
+            // which is better than layout shift.
+            wrapper.appendChild(block);
         }
 
-        element.appendChild(span);
-        spans.push(span);
+        element.appendChild(wrapper);
+        wrappers.push({ wrapper, realChar, block, char });
     }
-
-    // 3. Measure and Lock Widths
-    spans.forEach(span => {
-        const rect = span.getBoundingClientRect();
-        // Fallback if width is 0 (e.g. hidden parent), though visibility:hidden should work.
-        // If 0, let it be auto (don't lock) to prevent invisible text.
-        if (rect.width > 0) {
-            span.style.width = `${rect.width}px`;
-        }
-        span.style.height = `${rect.height}px`;
-        span.style.display = 'inline-block';
-        span.style.textAlign = 'center';
-        span.style.overflow = 'hidden';
-        span.style.verticalAlign = 'bottom';
-        span.style.lineHeight = '1';
-
-        // Set initial block state
-        span.textContent = blocks[0];
-        span.style.color = 'var(--text-color)';
-    });
-
-    // 4. Reveal and Animate
-    element.style.visibility = 'visible';
 
     let steps = 12;
     let currentStep = 0;
@@ -145,40 +163,56 @@ function animatePixelate(element) {
             element.dataset.animInterval = '';
         }
 
-        // Restore natural text flow
-        spans.forEach(s => {
-            s.textContent = s.dataset.final;
-            s.style.width = '';
-            s.style.height = '';
-            s.style.display = '';
-            s.style.textAlign = '';
-            s.style.overflow = '';
-            s.style.verticalAlign = '';
-            s.style.lineHeight = '';
+        // Restore DOM to clean state
+        wrappers.forEach(item => {
+            const { wrapper, char } = item;
+
+            // If special (CJK/Slant), keep the wrapper (it has the class)
+            // but remove the inner spans (realChar/block) and just set text
+            if (wrapper.dataset.isSpecial === 'true') {
+                wrapper.innerHTML = '';
+                wrapper.textContent = char;
+                wrapper.style.position = '';
+                wrapper.style.display = '';
+            } else {
+                // If normal char, replace wrapper with simple text node
+                // This restores perfect original DOM structure (no extra spans)
+                const textNode = document.createTextNode(char);
+                wrapper.parentNode.replaceChild(textNode, wrapper);
+            }
         });
 
-        // Re-apply global styles safely
+        // Re-apply global styles safely (just in case, though structure should be correct)
+        // Actually, since we manually reconstructed the structure with classes,
+        // we might not need this, but it's safe to run for any missed listeners.
         try {
-            applyGlobalStyles(element);
-        } catch (e) {
-            console.error("Error applying global styles:", e);
-        }
+            // applyGlobalStyles(element); // Skipped to prevent any jump
+        } catch (e) { }
     };
 
     const interval = setInterval(() => {
         try {
-            spans.forEach(span => {
+            wrappers.forEach(item => {
+                const { wrapper, realChar, block, char } = item;
+
+                // Skip spaces or already revealed
+                if (!block || wrapper.dataset.revealed === 'true') return;
+
                 if (Math.random() > 0.3) {
                     const progress = currentStep / steps;
 
                     if (progress >= 1) {
-                        span.textContent = span.dataset.final;
+                        // Reveal
+                        realChar.style.opacity = '1';
+                        if (block) block.style.display = 'none';
+                        wrapper.dataset.revealed = 'true';
                     } else {
                         const blockIndex = Math.floor(progress * blocks.length);
                         if (Math.random() < progress * 0.5) {
-                            span.textContent = span.dataset.final;
+                            // Flash real char
+                            block.textContent = char;
                         } else {
-                            span.textContent = blocks[Math.min(blockIndex, blocks.length - 1)];
+                            block.textContent = blocks[Math.min(blockIndex, blocks.length - 1)];
                         }
                     }
                 }
@@ -190,14 +224,14 @@ function animatePixelate(element) {
             }
         } catch (e) {
             console.error("Animation error:", e);
-            cleanup(); // Force cleanup on error
+            cleanup();
         }
     }, 80);
 
-    // Store interval ID to allow cancellation
+    // Store interval ID
     element.dataset.animInterval = interval;
 
-    // Safety Timeout: Force cleanup if interval hangs or logic fails
+    // Safety Timeout
     setTimeout(cleanup, (steps + 10) * 80 + 500);
 }
 
