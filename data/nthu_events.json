@@ -1,5 +1,29 @@
 [
   {
+    "title": "資工演算法大師 Stein教授帶你看AI與演算法的未來!",
+    "description": "12/11(四)11:00-12:00 地點：旺宏館國際會議廳",
+    "date_info": null,
+    "location": "地點：旺宏館國際會議廳",
+    "href": "https://ocw.nthu.edu.tw/ocw/index.php?page=newsContent&id=853",
+    "image": "https://www.nthu.edu.tw/images/event_176395738033.jpg"
+  },
+  {
+    "title": "2025 MATLAB® 機器人校園研討會-清大場",
+    "description": "11/26下午1:30-4:20 地點：學習資源中心(旺宏館) 3F 遠距教室B",
+    "date_info": null,
+    "location": "地點：學習資源中心(旺宏館) 3F 遠距教室B",
+    "href": "https://learning.site.nthu.edu.tw/p/406-1319-298835,r240.php",
+    "image": "https://www.nthu.edu.tw/images/event_176395709787.jpg"
+  },
+  {
+    "title": "清華文學流光：詩詞、劇作與音樂的共譜",
+    "description": "12/10下午2-4點在合勤演藝廳 請填寫線上報名表單，額滿將提前截止",
+    "date_info": null,
+    "location": null,
+    "href": "https://cl.site.nthu.edu.tw/p/406-1401-299159,r11.php",
+    "image": "https://www.nthu.edu.tw/images/event_176395687351.jpg"
+  },
+  {
     "title": "【棲坔】多寶藝術學員聯展",
     "description": "展期：10/24 - 11/24 展覽地點：教育館113 藝術創意空間",
     "date_info": null,
@@ -38,29 +62,5 @@
     "location": null,
     "href": "https://cge.site.nthu.edu.tw/p/406-1573-294879,r10094.php",
     "image": "https://www.nthu.edu.tw/images/event_175799649086.png"
-  },
-  {
-    "title": "2025科管院【孫運璿科技講座】",
-    "description": "最強講者陣容：唐鳳、施振榮、鄒開蓮、李家維、鄧振中 立即報名，與大師面對面！",
-    "date_info": null,
-    "location": null,
-    "href": "https://www.ctm.nthu.edu.tw/tw/article/1186-2025-sia-ban-nian-du-sun-yun-syun",
-    "image": "https://www.nthu.edu.tw/images/event_175799496610.jpg"
-  },
-  {
-    "title": "「捷英 蒔光-文物館從藍圖到新章」特展",
-    "description": "即日起至11/26(六)在旺宏館一樓文物館展覽廳 一起回顧文物館的經典展覽與最受歡迎的文物吧!!",
-    "date_info": null,
-    "location": null,
-    "href": "https://nthumuseum.wixsite.com/jieyingtakingroots",
-    "image": "https://www.nthu.edu.tw/images/event_175567642777.jpg"
-  },
-  {
-    "title": "【圖書館】穹頂映像：清大天文社攝影展",
-    "description": "6/13-12/8 在總圖書館4F-6F藝想空間 邀請您一同感受那份「初見繁星」的悸動",
-    "date_info": null,
-    "location": null,
-    "href": "https://www.lib.nthu.edu.tw/news/default.html#rss_news.xml!1617",
-    "image": "https://www.nthu.edu.tw/images/event_174979939984.jpg"
   }
 ]
