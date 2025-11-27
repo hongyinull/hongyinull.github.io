@@ -17,6 +17,11 @@ const template = fs.readFileSync(templatePath, 'utf8');
 
 console.log('Starting build process...');
 
+const sitemapUrls = [
+    { loc: 'https://hongyinull.github.io/', priority: '1.0', changefreq: 'weekly' },
+    { loc: 'https://hongyinull.github.io/links.html', priority: '0.8', changefreq: 'monthly' }
+];
+
 siteData.projects.forEach(project => {
     let html = template;
 
@@ -27,6 +32,13 @@ siteData.projects.forEach(project => {
     const year = project.year || '';
     const content = project.content_en || project.content || `<p>${description}</p>`;
     const url = `https://hongyinull.github.io/projects/${project.id}.html`;
+
+    // Add to sitemap
+    sitemapUrls.push({
+        loc: url,
+        priority: '0.9',
+        changefreq: 'monthly'
+    });
 
     // JSON-LD
     const schema = {
@@ -59,4 +71,18 @@ siteData.projects.forEach(project => {
     console.log(`Generated: projects/${project.id}.html`);
 });
 
-console.log('Build complete! Static files are ready in /projects folder.');
+// Generate Sitemap XML
+const sitemapXml = `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${sitemapUrls.map(url => `    <url>
+        <loc>${url.loc}</loc>
+        <lastmod>${new Date().toISOString().split('T')[0]}</lastmod>
+        <changefreq>${url.changefreq}</changefreq>
+        <priority>${url.priority}</priority>
+    </url>`).join('\n')}
+</urlset>`;
+
+fs.writeFileSync(path.join(__dirname, 'sitemap.xml'), sitemapXml);
+console.log('Generated: sitemap.xml');
+
+console.log('Build complete! Static files and sitemap are ready.');
