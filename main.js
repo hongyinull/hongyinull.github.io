@@ -35,6 +35,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Default Animation (Pixelate) is now triggered by renderHeader()
     // Removed redundant setTimeout call here to prevent double-triggering bug.
 
+    // Apply Global Typography Styles (Slance, CJK) ONE TIME after all initial rendering
+    // This catches everything (Projects, Menus, Footer, Headers)
+    applyGlobalStyles(document.body);
+
     // Handle Deep Linking (Hash Scroll)
     handleHashScroll();
 });
@@ -74,7 +78,7 @@ function animatePixelate(element) {
 
     const blocks = ['█', '▓', '▒', '░'];
     const cjkRegex = /[\u4E00-\u9FFF\u3000-\u303F\uFF00-\uFFEF]/;
-    const slantRegex = /[lLI/\\\uFF3C]/;
+    const slantRegex = /[ilLI1/\\\uFF3C]/;
 
     // 1. Prepare Container
     // Ensure white-space is handled correctly for newlines
@@ -351,8 +355,8 @@ function stylizeSlant(root) {
     const nodesToReplace = [];
     let node;
     while (node = walker.nextNode()) {
-        // Process if contains l, L, I, /, \, or ＼ (Fullwidth Backslash)
-        if ((/[lLI/\\\uFF3C]/.test(node.nodeValue)) &&
+        // Process if contains i, l, I, L, 1, /, \, or ＼ (Fullwidth Backslash)
+        if ((/[ilLI1/\\\uFF3C]/.test(node.nodeValue)) &&
             node.parentElement.tagName !== 'SCRIPT' &&
             node.parentElement.tagName !== 'STYLE' &&
             !node.parentElement.classList.contains('slant-char')) {
@@ -365,8 +369,8 @@ function stylizeSlant(root) {
         const text = node.nodeValue;
         let lastIndex = 0;
 
-        // Regex to find l, L, I, /, \, or ＼
-        const regex = /[lLI/\\\uFF3C]/g;
+        // Regex to find i, l, I, L, 1, /, \, or ＼
+        const regex = /[ilLI1/\\\uFF3C]/g;
         let match;
 
         while ((match = regex.exec(text)) !== null) {

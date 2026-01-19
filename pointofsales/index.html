@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>銷售數據儀表板 | Sales Dashboard</title>
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Serif+TC:wght@300;400;500;600&family=Zen+Old+Mincho:wght@400;500;600&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-0.20.1/package/dist/xlsx.full.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="site-title">
+                <span>銷售數據儀表板</span>
+                <div class="header-controls">
+                    <button class="control-btn theme-toggle" aria-label="Toggle Dark Mode"></button>
+                </div>
+            </div>
+            <p class="subtitle">Sales Data Dashboard</p>
+        </header>
+
+        <!-- File Upload Section -->
+        <section class="upload-section">
+            <div class="section-title">上傳檔案 / Upload File</div>
+            <div class="upload-area" id="uploadZone">
+                <div class="upload-icon">📂</div>
+                <div class="upload-text">拖放 iChef Excel 檔案至此</div>
+                <div class="upload-subtext">或點擊選擇檔案</div>
+                <input type="file" id="fileInput" accept=".csv, .xlsx, .xls" multiple hidden>
+                <button class="upload-btn" id="uploadBtn">選擇檔案</button>
+            </div>
+            <div class="file-info" id="fileInfo" style="display: none;">
+                <span class="file-name" id="fileName"></span>
+                <span class="file-stats" id="fileStats"></span>
+            </div>
+        </section>
+
+        <!-- Filter Controls -->
+        <section class="filters-section">
+            <div class="section-title">篩選條件 / Filters</div>
+
+            <div class="filter-grid">
+                <!-- Date Range -->
+                <div class="filter-group">
+                    <label>日期區間 / Date Range</label>
+                    <div class="date-inputs">
+                        <input type="date" id="startDate" class="date-input">
+                        <span class="date-separator">—</span>
+                        <input type="date" id="endDate" class="date-input">
+                    </div>
+                </div>
+
+                <!-- Quick Date Presets -->
+                <div class="filter-group">
+                    <label>快速選擇 / Quick Select</label>
+                    <div class="preset-buttons">
+                        <button class="preset-btn" data-preset="7days">近7天</button>
+                        <button class="preset-btn" data-preset="30days">近30天</button>
+                        <button class="preset-btn" data-preset="thisMonth">本月</button>
+                        <button class="preset-btn" data-preset="lastMonth">上月</button>
+                    </div>
+                </div>
+
+                <!-- Weekday Filter -->
+                <div class="filter-group">
+                    <label>星期篩選 / Weekday Filter</label>
+                    <div class="weekday-buttons">
+                        <button class="weekday-btn active" data-day="0">日</button>
+                        <button class="weekday-btn active" data-day="1">一</button>
+                        <button class="weekday-btn active" data-day="2">二</button>
+                        <button class="weekday-btn active" data-day="3">三</button>
+                        <button class="weekday-btn active" data-day="4">四</button>
+                        <button class="weekday-btn active" data-day="5">五</button>
+                        <button class="weekday-btn active" data-day="6">六</button>
+                    </div>
+                </div>
+
+                <!-- Weekend Toggle -->
+                <div class="filter-group">
+                    <label>特殊篩選</label>
+                    <div class="toggle-group">
+                        <button class="toggle-btn" id="weekendOnly">僅假日</button>
+                        <button class="toggle-btn" id="weekdayOnly">僅平日</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visualization Controls -->
+        <section class="viz-section">
+            <div class="section-title">視覺化類型</div>
+
+
+
+            <div class="viz-buttons">
+                <button class="viz-btn active" data-viz="heatmap">熱力圖</button>
+                <button class="viz-btn" data-viz="bar">柱狀圖</button>
+                <button class="viz-btn" data-viz="line">趨勢圖</button>
+                <button class="viz-btn" data-viz="hourly">時段分析</button>
+                <button class="viz-btn" data-viz="stats">統計摘要 / Statistics</button>
+                <button class="viz-btn" data-viz="compare">比較分析 / Compare</button>
+            </div>
+
+            <!-- Custom Chart Builder -->
+            <div id="customBuilder" class="custom-builder" style="display: none;">
+                <div class="builder-section">
+                    <div class="section-header">
+                        <h3>圖表設定 / Chart Settings</h3>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="setting-group">
+                            <label>X軸模式 / X-Axis Mode</label>
+                            <select id="xAxisMode" class="builder-select">
+                                <option value="absolute">絕對時間 (Absolute Date)</option>
+                                <option value="relative">相對天數 (Relative Day)</option>
+                                <option value="hourly">小時 (Hourly 0-23)</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>圖表類型 / Chart Type</label>
+                            <select id="chartType" class="builder-select">
+                                <option value="line">折線圖 (Line)</option>
+                                <option value="bar">柱狀圖 (Bar)</option>
+                            </select>
+                        </div>
+                        <div class="setting-group">
+                            <label>數據指標 / Metric</label>
+                            <div class="metric-toggle-group">
+                                <button class="metric-btn active" data-metric="sales">結帳筆數</button>
+                                <button class="metric-btn" data-metric="revenue">營收金額</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="builder-section">
+                    <div class="section-header">
+                        <h3>數據系列 / Data Series</h3>
+                        <button id="addSeriesBtn" class="add-btn">+ 新增系列 / Add Series</button>
+                    </div>
+                    <div id="seriesList" class="series-list">
+                        <!-- Series cards will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Chart Container -->
+        <section class="chart-section">
+            <div id="chartContainer">
+                <canvas id="mainChart"></canvas>
+            </div>
+            <div id="heatmapContainer" class="heatmap-grid"></div>
+            <div id="statsContainer" class="stats-grid"></div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <a href="../index.html" class="back-link">← 返回首頁 / Back to Home</a>
+        </footer>
+    </div>
+
+    <script src="sample-data.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+
+</html>
