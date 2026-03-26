@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>🧾 日結小幫手</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'PingFang TC', 'Helvetica Neue', sans-serif;
+      background: #f5f0eb;
+      color: #2d2d2d;
+      max-width: 480px;
+      margin: 0 auto;
+      padding: 16px;
+      padding-bottom: 80px;
+    }
+    h1 {
+      text-align: center;
+      font-size: 1.5rem;
+      color: #b85c38;
+      margin-bottom: 6px;
+      padding-top: 8px;
+    }
+    .date-line {
+      text-align: center;
+      font-size: 0.85rem;
+      color: #aaa;
+      margin-bottom: 16px;
+    }
+    .progress-bar {
+      background: #ddd;
+      border-radius: 10px;
+      height: 6px;
+      margin-bottom: 18px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      background: #b85c38;
+      height: 100%;
+      border-radius: 10px;
+      transition: width 0.4s;
+    }
+    .step {
+      background: white;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      padding: 16px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.07);
+      transition: opacity 0.3s;
+    }
+    .step.done { opacity: 0.45; }
+    .step-header {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+    }
+    .step-num {
+      background: #b85c38;
+      color: white;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.9rem;
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .step.done .step-num { background: #4caf50; }
+    .step-title {
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 1.5;
+      flex: 1;
+    }
+    .step-sub {
+      font-weight: 400;
+      font-size: 0.82rem;
+      color: #999;
+      display: block;
+      margin-top: 2px;
+    }
+    .check-btn {
+      background: none;
+      border: 2.5px solid #ddd;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+      flex-shrink: 0;
+      font-size: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+      transition: all 0.2s;
+    }
+    .check-btn:active { transform: scale(0.9); }
+    .step.done .check-btn { background: #4caf50; border-color: #4caf50; color: white; }
+
+    /* Calc areas */
+    .calc-area {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid #f0f0f0;
+    }
+    label {
+      display: block;
+      font-size: 0.82rem;
+      color: #777;
+      margin-bottom: 5px;
+      font-weight: 500;
+    }
+    input[type="number"] {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e0e0e0;
+      border-radius: 10px;
+      font-size: 1.15rem;
+      margin-bottom: 12px;
+      background: #fafafa;
+      -webkit-appearance: none;
+      appearance: none;
+    }
+    input[type="number"]:focus {
+      outline: none;
+      border-color: #b85c38;
+      background: white;
+    }
+
+    /* Result rows */
+    .result-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 9px 12px;
+      border-radius: 9px;
+      margin: 5px 0;
+      font-size: 0.95rem;
+    }
+    .result-row.info { background: #eef4ff; }
+    .result-label { color: #555; }
+    .result-value { font-weight: 700; font-size: 1.05rem; color: #222; }
+
+    /* Match badge */
+    .match-badge {
+      padding: 8px 14px;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      text-align: center;
+      margin-top: 6px;
+    }
+    .match-badge.ok { background: #e8f5e9; color: #2e7d32; border: 1.5px solid #a5d6a7; }
+    .match-badge.no { background: #fce4ec; color: #c62828; border: 1.5px solid #ef9a9a; }
+    .match-badge.pending { background: #f5f5f5; color: #bbb; border: 1.5px solid #e0e0e0; }
+
+    /* Coin grid */
+    .coin-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+      margin-bottom: 12px;
+    }
+    .coin-item {
+      background: #f9f7f5;
+      border-radius: 10px;
+      padding: 11px;
+    }
+    .coin-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: #444;
+      margin-bottom: 2px;
+    }
+    .coin-sub {
+      font-size: 0.75rem;
+      color: #aaa;
+      margin-bottom: 6px;
+    }
+    .coin-item input { margin-bottom: 4px; font-size: 1.1rem; }
+    .coin-subtotal {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #888;
+      font-weight: 500;
+    }
+
+    /* Balance display */
+    .balance-display {
+      text-align: center;
+      padding: 14px 10px 8px;
+    }
+    .balance-number {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+    .balance-number.ok { color: #2e7d32; }
+    .balance-number.no { color: #c62828; }
+    .balance-number.neutral { color: #999; }
+    .balance-hint {
+      font-size: 0.82rem;
+      margin-top: 4px;
+    }
+    .balance-hint.ok { color: #4caf50; }
+    .balance-hint.no { color: #f44336; }
+
+    /* Summary */
+    .summary-box {
+      background: #fff8f3;
+      border: 2px solid #e8a87c;
+      border-radius: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+    }
+    .summary-box h3 {
+      color: #b85c38;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 7px 0;
+      border-bottom: 1px dotted #f0e0d0;
+      font-size: 0.92rem;
+    }
+    .summary-row:last-child { border-bottom: none; }
+    .summary-row .val { font-weight: 700; font-size: 1rem; }
+
+    .hint-text {
+      font-size: 0.78rem;
+      color: #bbb;
+      text-align: center;
+      margin-top: 6px;
+    }
+
+    /* All done banner */
+    #done-banner {
+      display: none;
+      background: linear-gradient(135deg, #b85c38, #e8a87c);
+      color: white;
+      border-radius: 14px;
+      padding: 20px;
+      text-align: center;
+      margin-bottom: 16px;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.72rem;
+      color: #ccc;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>🧾 日結小幫手</h1>
+<div class="date-line" id="dateLine"></div>
+
+<div class="progress-bar">
+  <div class="progress-fill" id="progressFill" style="width:0%"></div>
+</div>
+
+<div id="done-banner">🎉 今天辛苦了！日結完成！</div>
+
+<!-- Step 1 -->
+<div class="step" id="step1">
+  <div class="step-header">
+    <div class="step-num">1</div>
+    <div class="step-title">拿出日結單和紅包袋</div>
+    <button class="check-btn" onclick="toggleStep('step1')">✓</button>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step" id="step2">
+  <div class="step-header">
+    <div class="step-num">2</div>
+    <div class="step-title">確認 iChef 畫面淨空</div>
+    <button class="check-btn" onclick="toggleStep('step2')">✓</button>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="step" id="step3">
+  <div class="step-header">
+    <div class="step-num">3</div>
+    <div class="step-title">
+      右下角 → 小結關賬 → 開始關賬
+    </div>
+    <button class="check-btn" onclick="toggleStep('step3')">✓</button>
+  </div>
+</div>
+
+<!-- Step 4: Credit card check -->
+<div class="step" id="step4">
+  <div class="step-header">
+    <div class="step-num">4</div>
+    <div class="step-title">
+      💳 信用卡對帳
+      <span class="step-sub">信用卡機 → 選單 → 3 → 1</span>
+    </div>
+  </div>
+  <div class="calc-area">
+    <label>iChef 信用卡金額</label>
+    <input type="number" id="cc_ichef" inputmode="numeric" placeholder="0" oninput="calcCC()">
+    <label>信用卡機顯示金額</label>
+    <input type="number" id="cc_machine" inputmode="numeric" placeholder="0" oninput="calcCC()">
+    <div id="cc_result" class="match-badge pending">輸入兩筆金額後比對</div>
+  </div>
+</div>
+
+<!-- Step 5 -->
+<div class="step" id="step5">
+  <div class="step-header">
+    <div class="step-num">5</div>
+    <div class="step-title">
+      信用卡機按 0 → 列印總結單
+      <span class="step-sub">與所有信用卡存根聯釘在一起</span>
+    </div>
+    <button class="check-btn" onclick="toggleStep('step5')">✓</button>
+  </div>
+</div>
+
+<!-- Step 6: Cash calculation -->
+<div class="step" id="step6">
+  <div class="step-header">
+    <div class="step-num">6</div>
+    <div class="step-title">💵 現金計算</div>
+  </div>
+  <div class="calc-area">
+    <label>iChef 小結頁面現金金額</label>
+    <input type="number" id="cash_ichef" inputmode="numeric" placeholder="0" oninput="calcCash()">
+    <label>收銀機左上角支出單總額（無則填 0）</label>
+    <input type="number" id="cash_expense" inputmode="numeric" placeholder="0" oninput="calcCash()">
+    <div class="result-row info">
+      <span class="result-label">應從收銀機取出</span>
+      <span class="result-value" id="cash_out">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- Step 7: Coin counting -->
+<div class="step" id="step7">
+  <div class="step-header">
+    <div class="step-num">7</div>
+    <div class="step-title">
+      🪙 清點收銀機餘額
+      <span class="step-sub">目標：剛好留 5,000 元</span>
+    </div>
+  </div>
+  <div class="calc-area">
+    <div class="coin-grid">
+      <div class="coin-item">
+        <div class="coin-label">50 元包</div>
+        <div class="coin-sub">每包 = 500 元</div>
+        <input type="number" id="c50" inputmode="numeric" placeholder="0" min="0" oninput="calcCoins()">
+        <div class="coin-subtotal" id="c50_t">＝ 0</div>
+      </div>
+      <div class="coin-item">
+        <div class="coin-label">10 元包</div>
+        <div class="coin-sub">每包 = 300 元</div>
+        <input type="number" id="c10" inputmode="numeric" placeholder="0" min="0" oninput="calcCoins()">
+        <div class="coin-subtotal" id="c10_t">＝ 0</div>
+      </div>
+      <div class="coin-item">
+        <div class="coin-label">5 元包</div>
+        <div class="coin-sub">每包 = 100 元</div>
+        <input type="number" id="c5" inputmode="numeric" placeholder="0" min="0" oninput="calcCoins()">
+        <div class="coin-subtotal" id="c5_t">＝ 0</div>
+      </div>
+      <div class="coin-item">
+        <div class="coin-label">1 元包</div>
+        <div class="coin-sub">每包 = 30 元</div>
+        <input type="number" id="c1" inputmode="numeric" placeholder="0" min="0" oninput="calcCoins()">
+        <div class="coin-subtotal" id="c1_t">＝ 0</div>
+      </div>
+    </div>
+
+    <label>鈔票＋散零（硬幣包以外）</label>
+    <input type="number" id="cash_bills" inputmode="numeric" placeholder="0" oninput="calcCoins()">
+
+    <div class="result-row info">
+      <span class="result-label">硬幣包小計</span>
+      <span class="result-value" id="coins_total">0</span>
+    </div>
+    <div class="result-row info">
+      <span class="result-label">收銀機總計</span>
+      <span class="result-value" id="register_total">0</span>
+    </div>
+
+    <div class="balance-display">
+      <div class="balance-number neutral" id="balance_num">—</div>
+      <div class="balance-hint" id="balance_hint"></div>
+    </div>
+    <div class="hint-text">各一包零錢包＝930元（50×1＋10×1＋5×1＋1×1）</div>
+  </div>
+</div>
+
+<!-- Step 8: Summary -->
+<div class="step" id="step8">
+  <div class="step-header">
+    <div class="step-num">8</div>
+    <div class="step-title">📋 抄寫日結單</div>
+    <button class="check-btn" onclick="toggleStep('step8')">✓</button>
+  </div>
+  <div class="summary-box">
+    <h3>今日數字</h3>
+    <div class="summary-row">
+      <span>💳 信用卡</span><span class="val" id="s_cc">—</span>
+    </div>
+    <div class="summary-row">
+      <span>💵 現金（iChef）</span><span class="val" id="s_cash">—</span>
+    </div>
+    <div class="summary-row">
+      <span>📄 支出單</span><span class="val" id="s_exp">—</span>
+    </div>
+    <div class="summary-row">
+      <span>💰 實收現金</span><span class="val" id="s_net">—</span>
+    </div>
+    <div class="summary-row">
+      <span>🏦 收銀機餘額</span><span class="val" id="s_reg">—</span>
+    </div>
+  </div>
+</div>
+
+<!-- Step 9 -->
+<div class="step" id="step9">
+  <div class="step-header">
+    <div class="step-num">9</div>
+    <div class="step-title">作廢當日發票</div>
+    <button class="check-btn" onclick="toggleStep('step9')">✓</button>
+  </div>
+</div>
+
+<!-- Step 10 -->
+<div class="step" id="step10">
+  <div class="step-header">
+    <div class="step-num">10</div>
+    <div class="step-title">
+      📦 全部放進紅包袋
+      <span class="step-sub">現金＋支出單＋信用卡收據＋日結單</span>
+    </div>
+    <button class="check-btn" onclick="toggleStep('step10')">✓</button>
+  </div>
+</div>
+
+<footer>日結小幫手 · 今天也辛苦了</footer>
+
+<script>
+  // Show today's date
+  const now = new Date();
+  document.getElementById('dateLine').textContent =
+    now.getFullYear() + ' / ' +
+    String(now.getMonth()+1).padStart(2,'0') + ' / ' +
+    String(now.getDate()).padStart(2,'0');
+
+  // Steps that have manual checkboxes
+  const CHECKABLE = new Set(['step1','step2','step3','step5','step8','step9','step10']);
+  const checked = new Set();
+  const TOTAL = 10;
+
+  function toggleStep(id) {
+    const el = document.getElementById(id);
+    if (checked.has(id)) {
+      checked.delete(id);
+      el.classList.remove('done');
+    } else {
+      checked.add(id);
+      el.classList.add('done');
+    }
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const pct = (checked.size / TOTAL) * 100;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('done-banner').style.display = checked.size === TOTAL ? 'block' : 'none';
+  }
+
+  function fmt(n) {
+    if (n === null || n === undefined || isNaN(n)) return '—';
+    return '$\u202f' + Math.round(n).toLocaleString('zh-TW');
+  }
+
+  function v(id) { return parseFloat(document.getElementById(id).value) || 0; }
+  function filled(id) { return document.getElementById(id).value.trim() !== ''; }
+
+  function calcCC() {
+    const a = v('cc_ichef'), b = v('cc_machine');
+    const el = document.getElementById('cc_result');
+    if (!filled('cc_ichef') || !filled('cc_machine')) {
+      el.textContent = '輸入兩筆金額後比對';
+      el.className = 'match-badge pending';
+    } else if (a === b) {
+      el.textContent = '✓ 金額相符　' + fmt(a);
+      el.className = 'match-badge ok';
+    } else {
+      el.textContent = '✗ 不符！差額 ' + fmt(Math.abs(a - b));
+      el.className = 'match-badge no';
+    }
+    updateSummary();
+  }
+
+  function calcCash() {
+    const ichef = v('cash_ichef'), exp = v('cash_expense');
+    const out = ichef - exp;
+    document.getElementById('cash_out').textContent = filled('cash_ichef') ? fmt(out) : '—';
+    updateSummary();
+  }
+
+  function calcCoins() {
+    const c50 = v('c50') * 500;
+    const c10 = v('c10') * 300;
+    const c5  = v('c5')  * 100;
+    const c1  = v('c1')  * 30;
+    const bills = v('cash_bills');
+
+    document.getElementById('c50_t').textContent = '＝ ' + c50.toLocaleString('zh-TW');
+    document.getElementById('c10_t').textContent = '＝ ' + c10.toLocaleString('zh-TW');
+    document.getElementById('c5_t').textContent  = '＝ ' + c5.toLocaleString('zh-TW');
+    document.getElementById('c1_t').textContent  = '＝ ' + c1.toLocaleString('zh-TW');
+
+    const coinsTotal = c50 + c10 + c5 + c1;
+    const regTotal = coinsTotal + bills;
+
+    document.getElementById('coins_total').textContent = fmt(coinsTotal);
+    document.getElementById('register_total').textContent = fmt(regTotal);
+
+    const numEl = document.getElementById('balance_num');
+    const hintEl = document.getElementById('balance_hint');
+    const diff = regTotal - 5000;
+
+    const anyInput = v('c50') || v('c10') || v('c5') || v('c1') || v('cash_bills');
+    if (!anyInput) {
+      numEl.textContent = '—';
+      numEl.className = 'balance-number neutral';
+      hintEl.textContent = '';
+    } else if (diff === 0) {
+      numEl.textContent = '✓ 剛好 5,000';
+      numEl.className = 'balance-number ok';
+      hintEl.textContent = '完美！';
+      hintEl.className = 'balance-hint ok';
+    } else if (diff > 0) {
+      numEl.textContent = '多 ' + fmt(diff);
+      numEl.className = 'balance-number no';
+      hintEl.textContent = '多了 ' + fmt(diff) + '，請取出放入紅包';
+      hintEl.className = 'balance-hint no';
+    } else {
+      numEl.textContent = '少 ' + fmt(Math.abs(diff));
+      numEl.className = 'balance-number no';
+      hintEl.textContent = '少了 ' + fmt(Math.abs(diff)) + '，請再確認';
+      hintEl.className = 'balance-hint no';
+    }
+    updateSummary();
+  }
+
+  function updateSummary() {
+    const cc   = filled('cc_ichef') ? fmt(v('cc_ichef')) : '—';
+    const cash = filled('cash_ichef') ? fmt(v('cash_ichef')) : '—';
+    const exp  = v('cash_expense');
+    const net  = filled('cash_ichef') ? fmt(v('cash_ichef') - exp) : '—';
+    const regTotal = v('c50')*500 + v('c10')*300 + v('c5')*100 + v('c1')*30 + v('cash_bills');
+
+    document.getElementById('s_cc').textContent   = cc;
+    document.getElementById('s_cash').textContent = cash;
+    document.getElementById('s_exp').textContent  = exp ? fmt(exp) : '無';
+    document.getElementById('s_net').textContent  = net;
+    document.getElementById('s_reg').textContent  = regTotal ? fmt(regTotal) : '—';
+  }
+</script>
+</body>
+</html>
