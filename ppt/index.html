@@ -1,0 +1,762 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>洪以諾 · 產品與技術分享</title>
+<style>
+:root {
+  --bg: #F5F0E8;
+  --ink: #1A1A1A;
+  --ink-mid: #4A4A4A;
+  --ink-light: #8A8A7A;
+  --accent: #C25B28;
+  --accent-soft: #E8D5C4;
+  --card-bg: #FFFDF8;
+  --slide-max: 960px;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: "Noto Sans TC", "PingFang TC", "Helvetica Neue", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── SLIDE SYSTEM ── */
+.slide {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 40px 80px;
+  scroll-snap-align: start;
+  position: relative;
+}
+
+.slide-inner {
+  max-width: var(--slide-max);
+  width: 100%;
+}
+
+/* ── NAV DOTS ── */
+.nav-dots {
+  position: fixed;
+  right: 24px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  z-index: 100;
+}
+.nav-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1.5px solid var(--ink-light);
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.nav-dot.active, .nav-dot:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  transform: scale(1.3);
+}
+
+/* ── SLIDE 1: COVER ── */
+.cover-label {
+  font-size: 11px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  margin-bottom: 20px;
+}
+.cover-title {
+  font-size: clamp(42px, 6vw, 72px);
+  font-weight: 300;
+  line-height: 1.15;
+  letter-spacing: -1px;
+  margin-bottom: 24px;
+}
+.cover-title strong {
+  font-weight: 600;
+  color: var(--accent);
+}
+.cover-sub {
+  font-size: 18px;
+  color: var(--ink-mid);
+  max-width: 520px;
+  margin-bottom: 40px;
+}
+.cover-meta {
+  display: flex;
+  gap: 32px;
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 0.5px;
+}
+.cover-meta span::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+/* ── SLIDE 2: ABOUT ── */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-left h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 24px;
+  line-height: 1.3;
+}
+.about-left h2 strong { font-weight: 600; }
+.timeline {
+  list-style: none;
+  border-left: 2px solid var(--accent-soft);
+  padding-left: 24px;
+}
+.timeline li {
+  position: relative;
+  margin-bottom: 20px;
+  font-size: 15px;
+  color: var(--ink-mid);
+}
+.timeline li::before {
+  content: '';
+  position: absolute;
+  left: -29px;
+  top: 8px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.timeline .year {
+  font-size: 12px;
+  color: var(--ink-light);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 2px;
+}
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 32px;
+}
+.skill-tag {
+  font-size: 12px;
+  padding: 5px 14px;
+  border: 1px solid var(--ink-light);
+  border-radius: 20px;
+  color: var(--ink-mid);
+  letter-spacing: 0.5px;
+}
+.cert-list {
+  list-style: none;
+  margin-top: 32px;
+}
+.cert-list li {
+  font-size: 14px;
+  color: var(--ink-mid);
+  padding: 8px 0;
+  border-bottom: 1px solid var(--accent-soft);
+}
+.cert-list li:last-child { border: none; }
+.cert-icon {
+  display: inline-block;
+  width: 18px;
+  text-align: center;
+  margin-right: 6px;
+}
+
+/* ── SLIDE 3: INSTAFILTER ── */
+.product-hero {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.product-badge {
+  display: inline-block;
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  padding: 4px 16px;
+  border-radius: 20px;
+  margin-bottom: 16px;
+}
+.product-hero h2 {
+  font-size: clamp(36px, 5vw, 56px);
+  font-weight: 300;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.product-hero h2 strong { font-weight: 600; }
+.product-hero p {
+  font-size: 17px;
+  color: var(--ink-mid);
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.stats-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-bottom: 48px;
+}
+.stat-card {
+  background: var(--card-bg);
+  padding: 28px;
+  text-align: center;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.stat-value {
+  font-size: 42px;
+  font-weight: 300;
+  color: var(--accent);
+  line-height: 1;
+  margin-bottom: 4px;
+}
+.stat-label {
+  font-size: 13px;
+  color: var(--ink-light);
+  letter-spacing: 1px;
+}
+
+.feature-cards {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+.feature-card {
+  background: var(--card-bg);
+  padding: 28px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.feature-card h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+
+/* ── SLIDE 4: TECH STACK ── */
+.tech-section h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 40px;
+}
+.tech-section h2 strong { font-weight: 600; }
+
+.tech-layers {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+.tech-layer {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 24px;
+  align-items: start;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--accent-soft);
+}
+.tech-layer:last-child { border: none; }
+.layer-label {
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--ink-light);
+  padding-top: 4px;
+}
+.layer-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.layer-item {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.08);
+  padding: 8px 18px;
+  font-size: 14px;
+  color: var(--ink-mid);
+}
+
+/* ── SLIDE 5: VISION ── */
+.vision-section h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+.vision-section h2 strong { font-weight: 600; }
+.vision-intro {
+  font-size: 16px;
+  color: var(--ink-mid);
+  max-width: 640px;
+  margin-bottom: 48px;
+}
+
+.roadmap {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+.roadmap-card {
+  background: var(--card-bg);
+  border: 1px solid rgba(0,0,0,0.06);
+  padding: 32px 28px;
+  position: relative;
+}
+.roadmap-card.current {
+  border-color: var(--accent);
+  border-width: 2px;
+}
+.roadmap-phase {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+.roadmap-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.roadmap-card p {
+  font-size: 14px;
+  color: var(--ink-mid);
+  line-height: 1.6;
+}
+.roadmap-card ul {
+  list-style: none;
+  margin-top: 12px;
+}
+.roadmap-card ul li {
+  font-size: 13px;
+  color: var(--ink-mid);
+  padding: 4px 0;
+  padding-left: 14px;
+  position: relative;
+}
+.roadmap-card ul li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+}
+
+/* ── SLIDE 6: TANUKI ── */
+.tanuki-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+.tanuki-left h2 {
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 20px;
+}
+.tanuki-left h2 strong { font-weight: 600; }
+.tanuki-left p {
+  font-size: 15px;
+  color: var(--ink-mid);
+  margin-bottom: 16px;
+  line-height: 1.7;
+}
+.tanuki-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.tanuki-stat {
+  background: var(--card-bg);
+  padding: 20px;
+  border: 1px solid rgba(0,0,0,0.06);
+}
+.tanuki-stat .stat-value { font-size: 28px; }
+.tanuki-stat .stat-label { font-size: 12px; }
+.tanuki-tools {
+  list-style: none;
+}
+.tanuki-tools li {
+  font-size: 14px;
+  color: var(--ink-mid);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--accent-soft);
+}
+.tanuki-tools li:last-child { border: none; }
+
+/* ── SLIDE 7: CLOSING ── */
+.closing { text-align: center; }
+.closing h2 {
+  font-size: clamp(36px, 5vw, 52px);
+  font-weight: 300;
+  margin-bottom: 16px;
+}
+.closing h2 strong { font-weight: 600; }
+.closing p {
+  font-size: 17px;
+  color: var(--ink-mid);
+  max-width: 480px;
+  margin: 0 auto 40px;
+}
+.closing-contact {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  font-size: 14px;
+  color: var(--ink-light);
+}
+
+/* ── SPEAKER NOTES (hidden in presentation, visible on print) ── */
+.speaker-notes {
+  display: none;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .slide { padding: 40px 24px 70px; }
+  .about-grid, .tanuki-grid { grid-template-columns: 1fr; gap: 32px; }
+  .stats-row { grid-template-columns: 1fr; }
+  .feature-cards { grid-template-columns: 1fr; }
+  .roadmap { grid-template-columns: 1fr; }
+  .tech-layer { grid-template-columns: 1fr; gap: 8px; }
+  .nav-dots { display: none; }
+  .cover-meta { flex-direction: column; gap: 8px; }
+}
+
+/* ── FADE IN ── */
+.fade-up {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-up.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
+</head>
+<body>
+
+<!-- NAV DOTS -->
+<nav class="nav-dots" aria-label="Slide navigation">
+  <div class="nav-dot active" data-slide="0" title="封面"></div>
+  <div class="nav-dot" data-slide="1" title="關於我"></div>
+  <div class="nav-dot" data-slide="2" title="InstaFilter"></div>
+  <div class="nav-dot" data-slide="3" title="發展方向"></div>
+  <div class="nav-dot" data-slide="4" title="技術棧"></div>
+  <div class="nav-dot" data-slide="5" title="交流"></div>
+</nav>
+
+<!-- SLIDE 1: COVER -->
+<section class="slide" id="slide-0">
+  <div class="slide-inner fade-up">
+    <div class="cover-label">Product & Tech Sharing</div>
+    <h1 class="cover-title">嗨，我是<strong>洪以諾</strong></h1>
+    <p class="cover-sub">從科技藝術到 iOS 開發，用跨領域的視角打造產品。目前專注經營 InstaFilter — 一款累計 69 萬次下載、2 萬月活的濾鏡探索工具。</p>
+    <div class="cover-meta">
+      <span>清華大學 · 科技藝術 × 工業工程</span>
+      <span>基隆</span>
+      <span>2026.05.08</span>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 2: ABOUT -->
+<section class="slide" id="slide-1">
+  <div class="slide-inner fade-up">
+    <div class="about-grid">
+      <div class="about-left">
+        <h2>我的<strong>背景</strong></h2>
+        <ul class="timeline">
+          <li>
+            <span class="year">2020–2025</span>
+            清華大學科技藝術學程 / 工業工程與工程管理雙專長
+          </li>
+          <li>
+            <span class="year">2022</span>
+            奧地利林茲電子藝術節 Ars Electronica — 參展藝術家
+          </li>
+          <li>
+            <span class="year">2021</span>
+            台北數位藝術節 — 參展藝術家
+          </li>
+          <li>
+            <span class="year">2026</span>
+            獨立開發 InstaFilter，累計 69 萬次下載
+          </li>
+        </ul>
+      </div>
+      <div class="about-right">
+        <div class="skill-tags">
+          <span class="skill-tag">iOS / Swift</span>
+          <span class="skill-tag">ARKit</span>
+          <span class="skill-tag">Metal</span>
+          <span class="skill-tag">MediaPipe</span>
+          <span class="skill-tag">Firebase</span>
+          <span class="skill-tag">UI/UX Design</span>
+          <span class="skill-tag">Figma</span>
+          <span class="skill-tag">Adobe Suite</span>
+          <span class="skill-tag">Arduino</span>
+          <span class="skill-tag">3D Printing</span>
+        </div>
+        <ul class="cert-list">
+          <li><span class="cert-icon">◆</span>Instagram 累積 30K 追蹤者</li>
+          <li><span class="cert-icon">◆</span>Threads 累積 10K 追蹤者</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 3: INSTAFILTER -->
+<section class="slide" id="slide-2">
+  <div class="slide-inner fade-up">
+    <div class="product-hero">
+      <span class="product-badge">主力產品</span>
+      <h2><strong>InstaFilter</strong></h2>
+      <p>Instagram 濾鏡探索與收藏工具。在 Meta 大量下架臉部濾鏡後，成為目前市場上唯一的獨立濾鏡搜尋產品，幾乎沒有直接競品。</p>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-value">690K</div>
+        <div class="stat-label">累計下載</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">20K</div>
+        <div class="stat-label">月活躍用戶</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">6 種</div>
+        <div class="stat-label">支援語言</div>
+      </div>
+    </div>
+
+    <div class="stats-row" style="margin-top: 0;">
+      <div class="stat-card">
+        <div class="stat-value">7K</div>
+        <div class="stat-label">每月新用戶</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">4.8★</div>
+        <div class="stat-label">台灣 App Store 評分</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-value">5,700+</div>
+        <div class="stat-label">全球 App Store 評分數</div>
+      </div>
+    </div>
+
+    <div class="feature-cards">
+      <div class="feature-card">
+        <h3>濾鏡搜尋引擎</h3>
+        <p>用戶可以搜尋、預覽、收藏各種 Instagram 臉部濾鏡，解決「濾鏡被下架找不到」的痛點。</p>
+      </div>
+      <div class="feature-card">
+        <h3>收藏清單管理</h3>
+        <p>建立個人濾鏡收藏清單，隨時快速取用，支援分類整理。</p>
+      </div>
+      <div class="feature-card">
+        <h3>即時預覽拍攝</h3>
+        <p>App 內直接預覽濾鏡效果並拍攝照片，不需跳轉到 Instagram。</p>
+      </div>
+      <div class="feature-card">
+        <h3>付費功能</h3>
+        <p>月訂閱 NT$90 / 年訂閱 NT$690 / 終生 NT$790。搭配 RevenueCat 追蹤訂閱數據，Trial→Paid 轉換率約 10.9%。</p>
+      </div>
+    </div>
+
+    <div style="margin-top: 32px; padding: 24px 28px; background: var(--card-bg); border: 1px solid rgba(0,0,0,0.06);">
+      <h3 style="font-size: 16px; font-weight: 600; margin-bottom: 12px;">📰 媒體報導</h3>
+      <div style="font-size: 14px; color: var(--ink-mid); line-height: 2;">
+        <span style="margin-right: 16px;">🇹🇼 瘋先生 (mrmad.com.tw)</span>
+        <span style="margin-right: 16px;">🇹🇼 電腦王阿達 (koc.com.tw)</span>
+        <span style="margin-right: 16px;">🇹🇼 傑昇通信</span><br>
+        <span style="margin-right: 16px;">🇹🇭 iPhoneMod (iphonemod.net)</span>
+        <span style="margin-right: 16px;">🇹🇭 iMod 官方 TikTok</span>
+      </div>
+      <div style="font-size: 13px; color: var(--ink-light); margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(0,0,0,0.06);">
+        用戶分布：台灣 40% · 泰國 35% · 中國 15% · 其他 10% ｜ App Store：台灣 4.8★ / 2,640+ 則 · 泰國 4.6★ / 3,100+ 則 ｜ 支援 6 種語言
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 4: VISION -->
+<section class="slide" id="slide-3">
+  <div class="slide-inner fade-up">
+    <div class="vision-section">
+      <h2>下一步<strong>發展方向</strong></h2>
+      <p class="vision-intro">從濾鏡收藏工具，走向臉部濾鏡創作平台，再延伸到 B2B 品牌 AR 行銷服務。</p>
+
+      <div class="roadmap">
+        <div class="roadmap-card current">
+          <div class="roadmap-phase">現在</div>
+          <h3>濾鏡探索工具</h3>
+          <p>穩定營運核心產品，優化付費轉換率</p>
+          <ul>
+            <li>IAP 買斷 + 訂閱模式</li>
+            <li>廣告收入優化</li>
+            <li>數據追蹤建設</li>
+          </ul>
+        </div>
+        <div class="roadmap-card">
+          <div class="roadmap-phase">近期</div>
+          <h3>UGC 濾鏡創作</h3>
+          <p>讓一般用戶也能自製臉部濾鏡並分享</p>
+          <ul>
+            <li>視覺化濾鏡編輯器</li>
+            <li>比 Meta Spark 更易上手</li>
+            <li>社群分享機制</li>
+          </ul>
+        </div>
+        <div class="roadmap-card">
+          <div class="roadmap-phase">中長期</div>
+          <h3>B2B AR 行銷服務</h3>
+          <p>為品牌客製化臉部 AR 濾鏡體驗</p>
+          <ul>
+            <li>活動 / 節慶限定濾鏡</li>
+            <li>美妝品牌虛擬試妝</li>
+            <li>內建分發管道</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 5: TECH STACK -->
+<section class="slide" id="slide-4">
+  <div class="slide-inner fade-up">
+    <div class="tech-section">
+      <h2>技術<strong>架構</strong></h2>
+      <div class="tech-layers">
+        <div class="tech-layer">
+          <div class="layer-label">前端 / App</div>
+          <div class="layer-items">
+            <span class="layer-item">Swift / UIKit</span>
+            <span class="layer-item">SwiftUI</span>
+            <span class="layer-item">ARKit</span>
+            <span class="layer-item">Metal</span>
+            <span class="layer-item">MediaPipe</span>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">後端 / 資料</div>
+          <div class="layer-items">
+            <span class="layer-item">Firebase Firestore</span>
+            <span class="layer-item">Cloudflare R2</span>
+            <span class="layer-item">RevenueCat</span>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">AR / 臉部追蹤</div>
+          <div class="layer-items">
+            <span class="layer-item">ARKit Face Tracking</span>
+            <span class="layer-item">Google MediaPipe</span>
+            <span class="layer-item">Metal Shader</span>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">設計工具</div>
+          <div class="layer-items">
+            <span class="layer-item">Figma</span>
+            <span class="layer-item">Illustrator</span>
+            <span class="layer-item">Photoshop</span>
+            <span class="layer-item">Canva</span>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">營運工具</div>
+          <div class="layer-items">
+            <span class="layer-item">App Store Connect</span>
+            <span class="layer-item">RevenueCat Dashboard</span>
+            <span class="layer-item">Firebase Analytics</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SLIDE 6: CLOSING -->
+<section class="slide" id="slide-5">
+  <div class="slide-inner fade-up">
+    <div class="closing">
+      <h2>期待<strong>交流合作</strong></h2>
+      <p>很高興認識酇侯資訊團隊，期待交流！</p>
+      <div class="closing-contact">
+        <span>ethanono83@gmail.com</span>
+        <span>基隆</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+// Intersection observer for fade-in
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+// Nav dots
+const dots = document.querySelectorAll('.nav-dot');
+const slides = document.querySelectorAll('.slide');
+
+const slideObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const idx = entry.target.id.split('-')[1];
+      dots.forEach(d => d.classList.remove('active'));
+      dots[idx].classList.add('active');
+    }
+  });
+}, { threshold: 0.5 });
+
+slides.forEach(s => slideObserver.observe(s));
+
+dots.forEach(dot => {
+  dot.addEventListener('click', () => {
+    const idx = dot.dataset.slide;
+    document.getElementById(`slide-${idx}`).scrollIntoView({ behavior: 'smooth' });
+  });
+});
+</script>
+</body>
+</html>
